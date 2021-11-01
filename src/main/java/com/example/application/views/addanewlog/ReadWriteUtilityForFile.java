@@ -1,5 +1,5 @@
 
-package com.example.application.views.addanewlog;
+/*package com.example.application.views.addanewlog;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;

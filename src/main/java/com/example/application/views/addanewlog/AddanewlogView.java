@@ -2,6 +2,7 @@ package com.example.application.views.addanewlog;
 
 import com.example.application.views.MainLayout;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -43,9 +44,8 @@ public class AddanewlogView extends VerticalLayout {
     public void Location() {
         HorizontalLayout uroven2 = new HorizontalLayout();
         TextField policko2 = new TextField();
-        TextField policko3 = new TextField();
         Button nextButton = new Button("Next");
-        uroven2.add(new H3("Location:"), policko2,policko3 ,nextButton);
+        uroven2.add(new H3("Location:"), policko2, nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
           // ReadWriteUtilityForFile.setdivesitedata = policko2.getValue();
             remove(uroven2);
@@ -89,7 +89,7 @@ public class AddanewlogView extends VerticalLayout {
         nextButton.addClickListener(buttonClickEvent -> {
             //class.setDivesite = startTime.getValue();
             remove(uroven5);
-            //dalsi metoda();
+            EndTime();
         });
         add(uroven5);
     }
@@ -134,6 +134,62 @@ public class AddanewlogView extends VerticalLayout {
     }
 
     public void TankIn(){
+        HorizontalLayout uroven9 = new HorizontalLayout();
+        TextField policko9 = new TextField();
+        Button nextButton = new Button("Next");
+        uroven9.add(new H3("Tank pressure IN:"), policko9, nextButton);
+        nextButton.addClickListener(buttonClickEvent -> {
+            //class.setDivesite = startTime.getValue();
+            remove(uroven9);
+            TankOut();
+        });
+        add(uroven9);
+    }
+
+    private void TankOut() {
+        HorizontalLayout uroven10 = new HorizontalLayout();
+        TextField policko10 = new TextField();
+        Button nextButton = new Button("Next");
+        uroven10.add(new H3("Tank pressure OUT:"), policko10, nextButton);
+        nextButton.addClickListener(buttonClickEvent -> {
+            //class.setDivesite = startTime.getValue();
+            remove(uroven10);
+            WaterConditions();
+        });
+        add(uroven10);
+    }
+
+    private void WaterConditions() {
+        HorizontalLayout uroven11 = new HorizontalLayout();
+        ComboBox<String> waterConditions = new ComboBox<>();
+        waterConditions.setItems("Waves", "Current");
+        waterConditions.setLabel("Pick one option");
+        Button nextButton = new Button("Next");
+        uroven11.add(new H3("Water conditions:"), waterConditions, nextButton);
+        nextButton.addClickListener(buttonClickEvent -> {
+            //class.setDivesite = startTime.getValue();
+            remove(uroven11);
+            TypeOfDive();
+        });
+        add(uroven11);
+    }
+
+    private void TypeOfDive() {
+        HorizontalLayout uroven12 = new HorizontalLayout();
+        ComboBox<String> typeOfDive = new ComboBox<>();
+        typeOfDive.setItems("Lake", "Sea", "River");
+        typeOfDive.setLabel("Pick one option");
+        Button nextButton = new Button("Next");
+        uroven12.add(new H3("Type of dive:"), typeOfDive, nextButton);
+        nextButton.addClickListener(buttonClickEvent -> {
+            //class.setDivesite = startTime.getValue();
+            remove(uroven12);
+            AirTemperature();
+        });
+        add(uroven12);
+    }
+
+    private void AirTemperature() {
 
     }
 
