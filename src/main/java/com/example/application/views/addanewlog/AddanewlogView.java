@@ -14,7 +14,7 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
 
- /*Binder<String> binder = new Bbinder<String>(AddanewlogView.class);
+ /*Binder<String> binder = new Bbbinder<Sefetring>(AddanewlogView.class);
         binder.forField(policko)
         .withValidator(min -> min.length() > 1, "Invalid value");
 */
