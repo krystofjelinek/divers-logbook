@@ -4,6 +4,7 @@ import com.example.application.views.MainLayout;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.datepicker.DatePicker;
+import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -13,6 +14,10 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
 
+ /*Binder<String> binder = new Binder<String>(AddanewlogView.class);
+        binder.forField(policko)
+        .withValidator(min -> min.length() > 1, "Invalid value");
+*/
 @PageTitle("Add a new dive")
 @Route(value = "add", layout = MainLayout.class)
 public class AddanewlogView extends VerticalLayout {
@@ -26,7 +31,9 @@ public class AddanewlogView extends VerticalLayout {
         getStyle().set("text-align", "center");
         DiveSite();
     }
-
+/**
+* Entry point of DiveSite
+ */
 
     public void DiveSite() {
         HorizontalLayout uroven1 = new HorizontalLayout();
@@ -44,14 +51,21 @@ public class AddanewlogView extends VerticalLayout {
     public void Location() {
         HorizontalLayout uroven2 = new HorizontalLayout();
         TextField policko2 = new TextField();
+        HorizontalLayout uroven21 = new HorizontalLayout();
+        Button previousButton = new Button("Previous");
         Button nextButton = new Button("Next");
-        uroven2.add(new H3("Location:"), policko2, nextButton);
+        uroven2.add(new H2("Location:"), policko2);
+        uroven21.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
           // ReadWriteUtilityForFile.setdivesitedata = policko2.getValue();
-            remove(uroven2);
+            remove(uroven2,uroven21);
             DateOfDive();
         });
-        add(uroven2);
+        previousButton.addClickListener(buttonClickEvent -> {
+            remove(uroven2,uroven21);
+            DiveSite();
+        });
+        add(uroven2,uroven21);
     }
 
     public void DateOfDive(){

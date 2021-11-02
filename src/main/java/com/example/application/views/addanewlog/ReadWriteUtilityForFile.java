@@ -1,55 +1,60 @@
+/*
 
-/*package com.example.application.views.addanewlog;
+package com.example.application.views.addanewlog;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 
-import java.io.BufferedWriter;
-import java.io.FileInputStream;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
-
 
 public class ReadWriteUtilityForFile {
 
     private static final String FileLocation = "/Users/appshah/Documents/data.txt";
     private static final Gson gson = new Gson();
 
-    // CrunchifyComapny Class with two fields
-    // - Employees
-    // - CompanyName
     private static class logdata {
         private String divesitedata;
         private String locationdata;
-        private String
+        private int dateofdivedata;
+        private int starttimedata;
+        private int bottomtimedata;
+        private int endtimedata;
+        private double maxdepthdata;
+        private double avgdepthdata;
+        private int tankindata;
+        private int tankoutdata;
+        private String waterconditionsdata;
+        private String typeofdivedata;
+        private int airtempdata;
+        private int watertempdata;
 
     }
 
     // Main Method
     public static void main(String[] args) {
         logdata data = new logdata();
-        logdata.("Crunchify.com");
-        logdata.setEmployees(4);
+       // logdata.("Crunchify.com");
+       // logdata.setEmployees(4);
 
         // Save data to file
-        crunchifyWriteToFile(gson.toJson(crunchify));
+        WriteToFile(gson.toJson());
 
         // Retrieve data from file
-        crunchifyReadFromFile();
+        ReadFromFile();
     }
 
     // Save to file Utility
-    private static void crunchifyWriteToFile(String myData) {
+    private static void WriteToFile(String myData) {
 
-        File crunchifyFile = new File(crunchifyFileLocation);
+        File dataFile = new File(FileLocation);
 
 
         // exists(): Tests whether the file or directory denoted by this abstract pathname exists.
-        if (!crunchifyFile.exists()) {
+        if (!dataFile.exists()) {
 
             try {
-                File directory = new File(crunchifyFile.getParent());
+                File directory = new File(dataFile.getParent());
                 if (!directory.exists()) {
 
                     // mkdirs(): Creates the directory named by this abstract pathname, including any necessary but nonexistent parent directories.
@@ -60,7 +65,7 @@ public class ReadWriteUtilityForFile {
                 // createNewFile(): Atomically creates a new, empty file named by this abstract pathname if and only if a file with this name does not yet exist.
                 // The check for the existence of the file and the creation of the file if it does not exist are a single operation
                 // that is atomic with respect to all other filesystem activities that might affect the file.
-                crunchifyFile.createNewFile();
+                dataFile.createNewFile();
             } catch (IOException e) {
                 crunchifyLog("Exception Occurred: " + e.toString());
             }
@@ -69,18 +74,18 @@ public class ReadWriteUtilityForFile {
         try {
 
             // Convenience class for writing character files
-            FileWriter crunchifyWriter;
-            crunchifyWriter = new FileWriter(crunchifyFile.getAbsoluteFile(), true);
+            FileWriter logWriter;
+            logWriter = new FileWriter(dataFile.getAbsoluteFile(), true);
 
             // Writes text to a character-output stream
-            BufferedWriter bufferWriter = new BufferedWriter(crunchifyWriter);
+            BufferedWriter bufferWriter = new BufferedWriter(dataWriter);
             bufferWriter.write(myData.toString());
             bufferWriter.close();
 
-            crunchifyLog("Company data saved at file location: " + crunchifyFileLocation + " Data: " + myData + "\n");
+            dataLog("Logbook data saved at file location: " + dataFile + " Data: " + myData + "\n");
         } catch (IOException e) {
 
-            crunchifyLog("Hmm.. Got an error while saving Company data to file " + e.toString());
+            dataLog("Hmm.. Got an error while saving Company data to file " + e.toString());
         }
     }
 
@@ -92,7 +97,7 @@ public class ReadWriteUtilityForFile {
         File crunchifyFile = new File(crunchifyFileLocation);
 
         if (!crunchifyFile.exists())
-            crunchifyLog("File doesn't exist");
+            dataLog("File doesn't exist");
 
         InputStreamReader isReader;
         try {
@@ -113,8 +118,9 @@ public class ReadWriteUtilityForFile {
 
     }
 
-    private static void crunchifyLog(String string) {
+    private static void dataLog(String string) {
         System.out.println(string);
     }
 
-}*/
+}
+*/
