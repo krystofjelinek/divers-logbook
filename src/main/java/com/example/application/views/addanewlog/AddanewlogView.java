@@ -39,7 +39,7 @@ public class AddanewlogView extends VerticalLayout {
 
     public void DiveSite() {
         HorizontalLayout uroven1 = new HorizontalLayout();
-        TextField policko = new TextField();
+        TextField policko = new TextField("e. g. Miami diving centre");
         Button nextButton = new Button("Next");
         uroven1.add(new Paragraph(new H2("Dive site:")), policko, nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
@@ -52,7 +52,7 @@ public class AddanewlogView extends VerticalLayout {
 
     public void Location() {
         HorizontalLayout uroven2 = new HorizontalLayout();
-        TextField policko2 = new TextField();
+        TextField policko2 = new TextField("e. g. Liberec/Czechia");
         HorizontalLayout uroven21 = new HorizontalLayout();
         Button previousButton = new Button("Previous");
         Button nextButton = new Button("Next");
@@ -72,7 +72,7 @@ public class AddanewlogView extends VerticalLayout {
 
     public void DateOfDive(){
         HorizontalLayout uroven3 = new HorizontalLayout();
-        DatePicker date = new DatePicker();
+        DatePicker date = new DatePicker("Select date");
         Button nextButton = new Button("Next");
         uroven3.add(new Paragraph(new H2("Date of dive:")), date, nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
@@ -86,7 +86,7 @@ public class AddanewlogView extends VerticalLayout {
 
     public void StartTime(){
         HorizontalLayout uroven4 = new HorizontalLayout();
-        TimePicker startTime = new TimePicker();
+        TimePicker startTime = new TimePicker("Select start time");
         Button nextButton = new Button("Next");
         uroven4.add(new Paragraph(new H2("Start time:")), startTime, nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
@@ -99,7 +99,7 @@ public class AddanewlogView extends VerticalLayout {
 
     public void BottomTime(){
         HorizontalLayout uroven5 = new HorizontalLayout();
-        TimePicker bottomTime = new TimePicker();
+        TimePicker bottomTime = new TimePicker("Select bottom time");
         Button nextButton = new Button("Next");
         uroven5.add(new Paragraph(new H2("Bottom time:")), bottomTime, nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
@@ -112,7 +112,7 @@ public class AddanewlogView extends VerticalLayout {
 
     public void EndTime(){
         HorizontalLayout uroven6 = new HorizontalLayout();
-        TimePicker endTime = new TimePicker();
+        TimePicker endTime = new TimePicker("Select end time");
         Button nextButton = new Button("Next");
         uroven6.add(new Paragraph(new H2("End time:")), endTime, nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
@@ -125,7 +125,7 @@ public class AddanewlogView extends VerticalLayout {
 
     public void MaximumDepth(){
         HorizontalLayout uroven7 = new HorizontalLayout();
-        TextField policko7 = new TextField();
+        TextField policko7 = new TextField("Depth in meters");
         Button nextButton = new Button("Next");
         uroven7.add(new Paragraph(new H2("Max depth:")), policko7, nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
@@ -138,7 +138,7 @@ public class AddanewlogView extends VerticalLayout {
 
     public void AverageDepth(){
         HorizontalLayout uroven8 = new HorizontalLayout();
-        TextField policko8 = new TextField();
+        TextField policko8 = new TextField("Depth in meters");
         Button nextButton = new Button("Next");
         uroven8.add(new Paragraph(new H2("Avg depth:")), policko8, nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
@@ -148,70 +148,97 @@ public class AddanewlogView extends VerticalLayout {
         });
         add(uroven8);
     }
-
+    /**
+     * Po tuto část není dodělaný previous button
+     */
     public void TankIn(){
         HorizontalLayout uroven9 = new HorizontalLayout();
-        TextField policko9 = new TextField();
+        HorizontalLayout uroven91 = new HorizontalLayout();
+        TextField policko9 = new TextField("Pressure in BAR");
         Button nextButton = new Button("Next");
-        uroven9.add(new Paragraph(new H2("Tank pressure IN:")), policko9, nextButton);
+        Button previousButton = new Button("Previous");
+        uroven9.add(new Paragraph(new H2("Tank pressure start:")), policko9);
+        uroven91.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
             //class.setDivesite = startTime.getValue();
-            remove(uroven9);
+            remove(uroven9,uroven91);
             TankOut();
         });
-        add(uroven9);
+        previousButton.addClickListener(buttonClickEvent -> {
+            remove(uroven9,uroven91);
+            AverageDepth();
+        });
+        add(uroven9,uroven91);
     }
 
     private void TankOut() {
         HorizontalLayout uroven10 = new HorizontalLayout();
-        TextField policko10 = new TextField();
+        HorizontalLayout uroven101 = new HorizontalLayout();
+        TextField policko10 = new TextField("Pressure in BAR");
         Button nextButton = new Button("Next");
-        uroven10.add(new Paragraph(new H2("Tank pressure OUT:")), policko10, nextButton);
+        Button previousButton = new Button("Previous");
+        uroven10.add(new Paragraph(new H2("Tank pressure end:")), policko10);
+        uroven101.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
             //class.setDivesite = startTime.getValue();
-            remove(uroven10);
+            remove(uroven10,uroven101);
             WaterConditions();
         });
-        add(uroven10);
+        previousButton.addClickListener(buttonClickEvent -> {
+            remove(uroven10,uroven101);
+            TankIn();
+        });
+        add(uroven10,uroven101);
     }
 
      private void WaterConditions() {
         HorizontalLayout uroven11 = new HorizontalLayout();
+        HorizontalLayout uroven111 = new HorizontalLayout();
         ComboBox<String> waterConditions = new ComboBox<>();
-        waterConditions.setItems("Waves", "Current");
-        waterConditions.setLabel("Pick one option");
+        waterConditions.setItems("Waves", "Current","None");
+        waterConditions.setLabel("Select one option");
         Button nextButton = new Button("Next");
-        uroven11.add(new Paragraph(new H2("Water conditions:")), waterConditions, nextButton);
+        Button previousButton = new Button("Previous");
+        uroven11.add(new Paragraph(new H2("Water conditions:")), waterConditions);
+        uroven111.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
             //class.setDivesite = startTime.getValue();
-            remove(uroven11);
+            remove(uroven11,uroven111);
             TypeOfDive();
         });
-        add(uroven11);
+        previousButton.addClickListener(buttonClickEvent -> {
+            remove(uroven11,uroven111);
+            TankOut();
+        });
+        add(uroven11,uroven111);
     }
 
     private void TypeOfDive() {
         HorizontalLayout uroven12 = new HorizontalLayout();
+        HorizontalLayout uroven121 = new HorizontalLayout();
         ComboBox<String> typeOfDive = new ComboBox<>("Select one option");
         typeOfDive.setItems("Lake", "Sea", "River");
         Button nextButton = new Button("Next");
-        uroven12.add(new Paragraph(new H2("Type of dive:")), typeOfDive, nextButton);
+        Button previousButton = new Button("Previous");
+        uroven12.add(new Paragraph(new H2("Type of dive:")), typeOfDive);
+        uroven121.add(previousButton, nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
             //class.setDivesite = startTime.getValue();
-            remove(uroven12);
+            remove(uroven12,uroven121);
             AirTemperature();
         });
-        add(uroven12);
+        previousButton.addClickListener(buttonClickEvent -> {
+            remove(uroven12,uroven121);
+            WaterConditions();
+        });
+        add(uroven12,uroven121);
     }
 
-     /**
-      * Po tuto část není dodělaný previous button
-      */
     private void AirTemperature() {
         HorizontalLayout uroven13 = new HorizontalLayout();
         HorizontalLayout uroven131 = new HorizontalLayout();
         TextField policko13 = new TextField();
-        policko13.setLabel(" °C");
+        policko13.setLabel("Enter temperature in °C");
         Button nextButton = new Button("Next");
         Button previousButton = new Button("Previous");
         uroven13.add(new Paragraph(new H2("Air temperature:")), policko13);
