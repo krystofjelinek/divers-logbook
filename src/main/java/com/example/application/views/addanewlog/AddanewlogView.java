@@ -33,21 +33,25 @@ public class AddanewlogView extends VerticalLayout {
         DiveSite();
 
     }
-/**
-* Log input starts here
- */
+
+    /**
+     * Dodělat transparent button pro DiveSite
+     * Stylizovat next button
+     */
 
     public void DiveSite() {
         HorizontalLayout uroven1 = new HorizontalLayout();
-        TextField policko = new TextField("e. g. Miami diving centre");
+        HorizontalLayout uroven11 = new HorizontalLayout();
+        TextField policko1 = new TextField("e. g. Miami diving centre");
         Button nextButton = new Button("Next");
-        uroven1.add(new Paragraph(new H2("Dive site:")), policko, nextButton);
+        uroven1.add(new Paragraph(new H2("Dive site:")), policko1);
+        uroven11.add(nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
             //class.setDivesite = policko.getValue();
-            remove(uroven1);
+            remove(uroven1,uroven11);
             Location();
         });
-        add(uroven1);
+        add(uroven1,uroven11);
     }
 
     public void Location() {
@@ -72,85 +76,125 @@ public class AddanewlogView extends VerticalLayout {
 
     public void DateOfDive(){
         HorizontalLayout uroven3 = new HorizontalLayout();
+        HorizontalLayout uroven31 = new HorizontalLayout();
         DatePicker date = new DatePicker("Select date");
         Button nextButton = new Button("Next");
-        uroven3.add(new Paragraph(new H2("Date of dive:")), date, nextButton);
+        Button previousButton = new Button("Previous");
+        uroven3.add(new Paragraph(new H2("Date of dive:")), date);
+        uroven31.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
             //class.setDivesite = date.getValue();
-            remove(uroven3);
+            remove(uroven3,uroven31);
             StartTime();
         });
-        add(uroven3);
+        previousButton.addClickListener(buttonClickEvent -> {
+            remove(uroven3,uroven31);
+            Location();
+        });
+        add(uroven3,uroven31);
 
     }
 
     public void StartTime(){
         HorizontalLayout uroven4 = new HorizontalLayout();
+        HorizontalLayout uroven41 = new HorizontalLayout();
         TimePicker startTime = new TimePicker("Select start time");
         Button nextButton = new Button("Next");
-        uroven4.add(new Paragraph(new H2("Start time:")), startTime, nextButton);
+        Button previousButton = new Button("Previous");
+        uroven4.add(new Paragraph(new H2("Start time:")), startTime);
+        uroven41.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
             //class.setDivesite = startTime.getValue();
-            remove(uroven4);
+            remove(uroven4,uroven41);
             BottomTime();
         });
-        add(uroven4);
+        previousButton.addClickListener(buttonClickEvent -> {
+            remove(uroven4,uroven41);
+            DateOfDive();
+        });
+        add(uroven4,uroven41);
     }
 
     public void BottomTime(){
         HorizontalLayout uroven5 = new HorizontalLayout();
+        HorizontalLayout uroven51 = new HorizontalLayout();
         TimePicker bottomTime = new TimePicker("Select bottom time");
         Button nextButton = new Button("Next");
-        uroven5.add(new Paragraph(new H2("Bottom time:")), bottomTime, nextButton);
+        Button previousButton = new Button("Previous");
+        uroven5.add(new Paragraph(new H2("Bottom time:")), bottomTime);
+        uroven51.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
             //class.setDivesite = startTime.getValue();
-            remove(uroven5);
+            remove(uroven5,uroven51);
             EndTime();
         });
-        add(uroven5);
+        previousButton.addClickListener(buttonClickEvent -> {
+            remove(uroven5,uroven51);
+            StartTime();
+        });
+        add(uroven5,uroven51);
     }
 
     public void EndTime(){
         HorizontalLayout uroven6 = new HorizontalLayout();
+        HorizontalLayout uroven61 = new HorizontalLayout();
         TimePicker endTime = new TimePicker("Select end time");
         Button nextButton = new Button("Next");
-        uroven6.add(new Paragraph(new H2("End time:")), endTime, nextButton);
+        Button previousButton = new Button("Previous");
+        uroven6.add(new Paragraph(new H2("End time:")), endTime);
+        uroven61.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
             //class.setDivesite = startTime.getValue();
-            remove(uroven6);
+            remove(uroven6,uroven61);
             MaximumDepth();
         });
-        add(uroven6);
+        previousButton.addClickListener(buttonClickEvent -> {
+            remove(uroven6,uroven61);
+            BottomTime();
+        });
+        add(uroven6,uroven61);
     }
 
     public void MaximumDepth(){
         HorizontalLayout uroven7 = new HorizontalLayout();
+        HorizontalLayout uroven71 = new HorizontalLayout();
         TextField policko7 = new TextField("Depth in meters");
         Button nextButton = new Button("Next");
-        uroven7.add(new Paragraph(new H2("Max depth:")), policko7, nextButton);
+        Button previousButton = new Button("Previous");
+        uroven7.add(new Paragraph(new H2("Maximum depth:")), policko7);
+        uroven71.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
             //class.setDivesite = startTime.getValue();
-            remove(uroven7);
+            remove(uroven7,uroven71);
             AverageDepth();
         });
-        add(uroven7);
+        previousButton.addClickListener(buttonClickEvent -> {
+            remove(uroven7,uroven71);
+            EndTime();
+        });
+        add(uroven7,uroven71);
     }
 
     public void AverageDepth(){
         HorizontalLayout uroven8 = new HorizontalLayout();
+        HorizontalLayout uroven81 = new HorizontalLayout();
         TextField policko8 = new TextField("Depth in meters");
         Button nextButton = new Button("Next");
-        uroven8.add(new Paragraph(new H2("Avg depth:")), policko8, nextButton);
+        Button previousButton = new Button("Previous");
+        uroven8.add(new Paragraph(new H2("Average depth:")), policko8);
+        uroven81.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
             //class.setDivesite = startTime.getValue();
-            remove(uroven8);
+            remove(uroven8,uroven81);
             TankIn();
         });
-        add(uroven8);
+        previousButton.addClickListener(buttonClickEvent -> {
+            remove(uroven8,uroven81);
+            MaximumDepth();
+        });
+        add(uroven8,uroven81);
     }
-    /**
-     * Po tuto část není dodělaný previous button
-     */
+
     public void TankIn(){
         HorizontalLayout uroven9 = new HorizontalLayout();
         HorizontalLayout uroven91 = new HorizontalLayout();
@@ -237,8 +281,7 @@ public class AddanewlogView extends VerticalLayout {
     private void AirTemperature() {
         HorizontalLayout uroven13 = new HorizontalLayout();
         HorizontalLayout uroven131 = new HorizontalLayout();
-        TextField policko13 = new TextField();
-        policko13.setLabel("Enter temperature in °C");
+        TextField policko13 = new TextField("Enter temperature in °C");
         Button nextButton = new Button("Next");
         Button previousButton = new Button("Previous");
         uroven13.add(new Paragraph(new H2("Air temperature:")), policko13);
@@ -259,8 +302,7 @@ public class AddanewlogView extends VerticalLayout {
     private void WaterTemperature() {
         HorizontalLayout uroven14 = new HorizontalLayout();
         HorizontalLayout uroven141 = new HorizontalLayout();
-        TextField policko14 = new TextField();
-        policko14.setLabel("Enter temperature in °C");
+        TextField policko14 = new TextField("Enter temperature in °C");
         Button nextButton = new Button("Next");
         Button previousButton = new Button("Previous");
         uroven14.add(new Paragraph(new H2("Water temperature:")), policko14);
@@ -282,9 +324,8 @@ public class AddanewlogView extends VerticalLayout {
         HorizontalLayout uroven151 = new HorizontalLayout();
         TextField policko14 = new TextField();
         policko14.setLabel("Amount of weights in kg");
-        ComboBox<String> comfort = new ComboBox<>();
+        ComboBox<String> comfort = new ComboBox<>("Select comfort level");
         comfort.setItems("Too heavy", "Good", "Too light");
-        comfort.setLabel("Select comfort level");
         Button nextButton = new Button("Next");
         Button previousButton = new Button("Previous");
         uroven15.add(new Paragraph(new H2("Weight comfort:")), policko14, comfort);
