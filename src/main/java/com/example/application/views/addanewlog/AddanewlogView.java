@@ -5,6 +5,7 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.html.H2;
+import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -37,61 +38,74 @@ public class AddanewlogView extends VerticalLayout {
     /**
      * Dodělat transparent button pro DiveSite
      * Stylizovat next button
+     * Ochránit vstupy
      */
 
     public void DiveSite() {
+        HorizontalLayout uroven01 = new HorizontalLayout();
         HorizontalLayout uroven1 = new HorizontalLayout();
         HorizontalLayout uroven11 = new HorizontalLayout();
+        Image img1 = new Image("images/DiveSite.jpg","Failed to load image");
+        img1.setHeight("350px");
         TextField policko1 = new TextField("e. g. Miami diving centre");
         Button nextButton = new Button("Next");
+        uroven01.add(img1);
         uroven1.add(new Paragraph(new H2("Dive site:")), policko1);
         uroven11.add(nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
             //class.setDivesite = policko.getValue();
-            remove(uroven1,uroven11);
+            remove(uroven01,uroven1,uroven11);
             Location();
         });
-        add(uroven1,uroven11);
+        add(uroven01,uroven1,uroven11);
     }
 
     public void Location() {
+        HorizontalLayout uroven02 = new HorizontalLayout();
         HorizontalLayout uroven2 = new HorizontalLayout();
-        TextField policko2 = new TextField("e. g. Liberec/Czechia");
         HorizontalLayout uroven21 = new HorizontalLayout();
+        Image img2 = new Image("images/Location.jpg","Failed to load image");
+        img2.setHeight("350px");
+        TextField policko2 = new TextField("e. g. Liberec/Czechia");
         Button previousButton = new Button("Previous");
         Button nextButton = new Button("Next");
         uroven2.add(new Paragraph(new H2("Location:")), policko2);
         uroven21.add(previousButton,nextButton);
+        uroven02.add(img2);
         nextButton.addClickListener(buttonClickEvent -> {
           // ReadWriteUtilityForFile.setdivesitedata = policko2.getValue();
-            remove(uroven2,uroven21);
+            remove(uroven2,uroven21,uroven02);
             DateOfDive();
         });
         previousButton.addClickListener(buttonClickEvent -> {
-            remove(uroven2,uroven21);
+            remove(uroven2,uroven21,uroven02);
             DiveSite();
         });
-        add(uroven2,uroven21);
+        add(uroven02,uroven2,uroven21);
     }
 
     public void DateOfDive(){
+        HorizontalLayout uroven03 = new HorizontalLayout();
         HorizontalLayout uroven3 = new HorizontalLayout();
         HorizontalLayout uroven31 = new HorizontalLayout();
+        Image img3 = new Image("images/DateOfDive.jpg", "Failed to load image");
+        img3.setHeight("350px");
         DatePicker date = new DatePicker("Select date");
         Button nextButton = new Button("Next");
         Button previousButton = new Button("Previous");
+        uroven03.add(img3);
         uroven3.add(new Paragraph(new H2("Date of dive:")), date);
         uroven31.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
             //class.setDivesite = date.getValue();
-            remove(uroven3,uroven31);
+            remove(uroven03,uroven3,uroven31);
             StartTime();
         });
         previousButton.addClickListener(buttonClickEvent -> {
-            remove(uroven3,uroven31);
+            remove(uroven03,uroven3,uroven31);
             Location();
         });
-        add(uroven3,uroven31);
+        add(uroven03,uroven3,uroven31);
 
     }
 
