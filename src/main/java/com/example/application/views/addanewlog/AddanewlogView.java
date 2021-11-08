@@ -16,11 +16,6 @@ import com.vaadin.flow.component.timepicker.TimePicker;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
-
-/*Binder<String> binder = new Bbbinder<Sefetring>(AddanewlogView.class);
-       binder.forField(policko)
-       .withValidator(min -> min.length() > 1, "Invalid value");
-*/
 @PageTitle("Add a new dive")
 @Route(value = "add", layout = MainLayout.class)
 public class AddanewlogView extends VerticalLayout {
@@ -39,8 +34,11 @@ public class AddanewlogView extends VerticalLayout {
 
     /**
      * Dodělat transparent button pro DiveSite
-     * Stylizovat next button
-     * Ochránit vstupy
+     * Stylizovat next button (CSS)
+     * Ochránit vstupy (Binder)
+     * obrazky: Edu, WeightComfort, HeatComfort
+     * progress bar a cislovani kroku
+     * Edu (Instructor, DiveClub)
      */
 
     public void DiveSite() {
@@ -451,6 +449,61 @@ public class AddanewlogView extends VerticalLayout {
     }
 
     private void Buddy() {
+        HorizontalLayout uroven018 = new HorizontalLayout();
+        HorizontalLayout uroven18 = new HorizontalLayout();
+        HorizontalLayout uroven181 = new HorizontalLayout();
+        Image img18 = new Image("images/Buddy.jpg","Failed to load image");
+        img18.setHeight("350px");
+        TextField policko18 = new TextField("Name");
+        Button nextButton = new Button("Next");
+        Button previousButton = new Button("Previous");
+        uroven018.add(img18);
+        uroven18.add(new Paragraph(new H2("Dive buddy:")),policko18);
+        uroven181.add(previousButton,nextButton);
+        nextButton.addClickListener(buttonClickEvent -> {
+            //class.setDivesite = startTime.getValue();
+            remove(uroven018,uroven181,uroven18);
+            Edu();
+        });
+        previousButton.addClickListener(buttonClickEvent -> {
+            remove(uroven18,uroven181,uroven018);
+            Notes();
+        });
+        add(uroven018,uroven18,uroven181);
+    }
+
+    private void Edu() {
+        HorizontalLayout uroven019 = new HorizontalLayout();
+        HorizontalLayout uroven19 = new HorizontalLayout();
+        HorizontalLayout uroven191 = new HorizontalLayout();
+        Image img19 = new Image("images/Edu.jpg","Failed to load image");
+        img19.setHeight("350px");
+        Button previousButton = new Button("Previous");
+        Button yesButton = new Button("Yes");
+        Button noButton = new Button("No");
+        uroven019.add(img19);
+        uroven19.add(new Paragraph(new H2("Was this educational dive?")));
+        uroven191.add(previousButton,yesButton,noButton);
+        yesButton.addClickListener(buttonClickEvent -> {
+            //class.setDivesite = startTime.getValue();
+            remove(uroven019,uroven191,uroven19);
+            Instructor();
+        });
+        noButton.addClickListener(buttonClickEvent -> {
+            remove(uroven19,uroven191,uroven019);
+            Feeling();
+        });
+        previousButton.addClickListener(buttonClickEvent -> {
+            remove(uroven19,uroven191,uroven019);
+            Buddy();
+        });
+        add(uroven019,uroven19,uroven191);
+    }
+
+    private void Feeling() {
+    }
+
+    private void Instructor() {
     }
 
 }
