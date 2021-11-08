@@ -110,63 +110,75 @@ public class AddanewlogView extends VerticalLayout {
     }
 
     public void StartTime(){
+        HorizontalLayout uroven04 = new HorizontalLayout();
         HorizontalLayout uroven4 = new HorizontalLayout();
         HorizontalLayout uroven41 = new HorizontalLayout();
+        Image img4 = new Image("images/StartTime.jpg","Failed to load image");
+        img4.setHeight("350px");
         TimePicker startTime = new TimePicker("Select start time");
         Button nextButton = new Button("Next");
         Button previousButton = new Button("Previous");
+        uroven04.add(img4);
         uroven4.add(new Paragraph(new H2("Start time:")), startTime);
         uroven41.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
             //class.setDivesite = startTime.getValue();
-            remove(uroven4,uroven41);
+            remove(uroven4,uroven41,uroven04);
             BottomTime();
         });
         previousButton.addClickListener(buttonClickEvent -> {
-            remove(uroven4,uroven41);
+            remove(uroven4,uroven41,uroven04);
             DateOfDive();
         });
-        add(uroven4,uroven41);
+        add(uroven04,uroven4,uroven41);
     }
 
     public void BottomTime(){
+        HorizontalLayout uroven05 = new HorizontalLayout();
         HorizontalLayout uroven5 = new HorizontalLayout();
         HorizontalLayout uroven51 = new HorizontalLayout();
+        Image img5 = new Image("images/BottomTime.jpg","Failed to load image");
+        img5.setHeight("350px");
         TimePicker bottomTime = new TimePicker("Select bottom time");
         Button nextButton = new Button("Next");
         Button previousButton = new Button("Previous");
+        uroven05.add(img5);
         uroven5.add(new Paragraph(new H2("Bottom time:")), bottomTime);
         uroven51.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
             //class.setDivesite = startTime.getValue();
-            remove(uroven5,uroven51);
+            remove(uroven5,uroven51,uroven05);
             EndTime();
         });
         previousButton.addClickListener(buttonClickEvent -> {
-            remove(uroven5,uroven51);
+            remove(uroven5,uroven51,uroven05);
             StartTime();
         });
-        add(uroven5,uroven51);
+        add(uroven05,uroven5,uroven51);
     }
 
     public void EndTime(){
+        HorizontalLayout uroven06 = new HorizontalLayout();
         HorizontalLayout uroven6 = new HorizontalLayout();
         HorizontalLayout uroven61 = new HorizontalLayout();
+        Image img6 = new Image("images/EndTime.jpg","Failed to load image");
+        img6.setHeight("350px");
         TimePicker endTime = new TimePicker("Select end time");
         Button nextButton = new Button("Next");
         Button previousButton = new Button("Previous");
+        uroven06.add(img6);
         uroven6.add(new Paragraph(new H2("End time:")), endTime);
         uroven61.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
             //class.setDivesite = startTime.getValue();
-            remove(uroven6,uroven61);
+            remove(uroven6,uroven61,uroven06);
             MaximumDepth();
         });
         previousButton.addClickListener(buttonClickEvent -> {
-            remove(uroven6,uroven61);
+            remove(uroven6,uroven61,uroven06);
             BottomTime();
         });
-        add(uroven6,uroven61);
+        add(uroven06,uroven6,uroven61);
     }
 
     public void MaximumDepth(){
