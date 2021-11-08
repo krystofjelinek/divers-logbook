@@ -9,6 +9,7 @@ import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.textfield.NumberField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.timepicker.TimePicker;
 import com.vaadin.flow.router.PageTitle;
@@ -182,93 +183,113 @@ public class AddanewlogView extends VerticalLayout {
     }
 
     public void MaximumDepth(){
+        HorizontalLayout uroven07 = new HorizontalLayout();
         HorizontalLayout uroven7 = new HorizontalLayout();
         HorizontalLayout uroven71 = new HorizontalLayout();
-        TextField policko7 = new TextField("Depth in meters");
+        Image img7 = new Image("images/MaxDepth.jpg","Failed to load image");
+        img7.setHeight("350px");
+        NumberField policko7 = new NumberField("Depth in meters");
         Button nextButton = new Button("Next");
         Button previousButton = new Button("Previous");
+        uroven07.add(img7);
         uroven7.add(new Paragraph(new H2("Maximum depth:")), policko7);
         uroven71.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
             //class.setDivesite = startTime.getValue();
-            remove(uroven7,uroven71);
+            remove(uroven7,uroven71,uroven07);
             AverageDepth();
         });
         previousButton.addClickListener(buttonClickEvent -> {
-            remove(uroven7,uroven71);
+            remove(uroven7,uroven71,uroven07);
             EndTime();
         });
-        add(uroven7,uroven71);
+        add(uroven07,uroven7,uroven71);
     }
 
     public void AverageDepth(){
+        HorizontalLayout uroven08 = new HorizontalLayout();
         HorizontalLayout uroven8 = new HorizontalLayout();
         HorizontalLayout uroven81 = new HorizontalLayout();
-        TextField policko8 = new TextField("Depth in meters");
+        Image img8 = new Image("images/AvgDepth.jpg","Failed to load image");
+        img8.setHeight("350px");
+        NumberField policko8 = new NumberField("Depth in meters");
         Button nextButton = new Button("Next");
         Button previousButton = new Button("Previous");
+        uroven08.add(img8);
         uroven8.add(new Paragraph(new H2("Average depth:")), policko8);
         uroven81.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
             //class.setDivesite = startTime.getValue();
-            remove(uroven8,uroven81);
+            remove(uroven8,uroven81,uroven08);
             TankIn();
         });
         previousButton.addClickListener(buttonClickEvent -> {
-            remove(uroven8,uroven81);
+            remove(uroven8,uroven81,uroven08);
             MaximumDepth();
         });
-        add(uroven8,uroven81);
+        add(uroven08,uroven8,uroven81);
     }
 
     public void TankIn(){
+        HorizontalLayout uroven09 = new HorizontalLayout();
         HorizontalLayout uroven9 = new HorizontalLayout();
         HorizontalLayout uroven91 = new HorizontalLayout();
-        TextField policko9 = new TextField("Pressure in BAR");
+        Image img9 = new Image("images/TankIn.jpg","Failed to load image");
+        img9.setHeight("350px");
+        NumberField policko9 = new NumberField("Pressure in BAR");
         Button nextButton = new Button("Next");
         Button previousButton = new Button("Previous");
+        uroven09.add(img9);
         uroven9.add(new Paragraph(new H2("Tank pressure start:")), policko9);
         uroven91.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
             //class.setDivesite = startTime.getValue();
-            remove(uroven9,uroven91);
+            remove(uroven9,uroven91,uroven09);
             TankOut();
         });
         previousButton.addClickListener(buttonClickEvent -> {
-            remove(uroven9,uroven91);
+            remove(uroven9,uroven91,uroven09);
             AverageDepth();
         });
-        add(uroven9,uroven91);
+        add(uroven09,uroven9,uroven91);
     }
 
     private void TankOut() {
+        HorizontalLayout uroven010 = new HorizontalLayout();
         HorizontalLayout uroven10 = new HorizontalLayout();
         HorizontalLayout uroven101 = new HorizontalLayout();
-        TextField policko10 = new TextField("Pressure in BAR");
+        Image img10 = new Image("images/TankOut.jpg","Failed to load image");
+        img10.setHeight("350px");
+        NumberField policko10 = new NumberField("Pressure in BAR");
         Button nextButton = new Button("Next");
         Button previousButton = new Button("Previous");
+        uroven010.add(img10);
         uroven10.add(new Paragraph(new H2("Tank pressure end:")), policko10);
         uroven101.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
             //class.setDivesite = startTime.getValue();
-            remove(uroven10,uroven101);
+            remove(uroven10,uroven101,uroven010);
             WaterConditions();
         });
         previousButton.addClickListener(buttonClickEvent -> {
-            remove(uroven10,uroven101);
+            remove(uroven10,uroven101,uroven010);
             TankIn();
         });
-        add(uroven10,uroven101);
+        add(uroven010,uroven10,uroven101);
     }
 
      private void WaterConditions() {
+        HorizontalLayout uroven011 = new HorizontalLayout();
         HorizontalLayout uroven11 = new HorizontalLayout();
         HorizontalLayout uroven111 = new HorizontalLayout();
+        Image img11 = new Image("images/WaterConditions.jpg","Failed to load image");
+        img11.setHeight("350px");
         ComboBox<String> waterConditions = new ComboBox<>();
         waterConditions.setItems("Waves", "Current","None");
         waterConditions.setLabel("Select one option");
         Button nextButton = new Button("Next");
         Button previousButton = new Button("Previous");
+        uroven011.add(img11);
         uroven11.add(new Paragraph(new H2("Water conditions:")), waterConditions);
         uroven111.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
@@ -307,7 +328,7 @@ public class AddanewlogView extends VerticalLayout {
     private void AirTemperature() {
         HorizontalLayout uroven13 = new HorizontalLayout();
         HorizontalLayout uroven131 = new HorizontalLayout();
-        TextField policko13 = new TextField("Enter temperature in °C");
+        NumberField policko13 = new NumberField("Enter temperature in °C");
         Button nextButton = new Button("Next");
         Button previousButton = new Button("Previous");
         uroven13.add(new Paragraph(new H2("Air temperature:")), policko13);
@@ -328,7 +349,7 @@ public class AddanewlogView extends VerticalLayout {
     private void WaterTemperature() {
         HorizontalLayout uroven14 = new HorizontalLayout();
         HorizontalLayout uroven141 = new HorizontalLayout();
-        TextField policko14 = new TextField("Enter temperature in °C");
+        NumberField policko14 = new NumberField("Enter temperature in °C");
         Button nextButton = new Button("Next");
         Button previousButton = new Button("Previous");
         uroven14.add(new Paragraph(new H2("Water temperature:")), policko14);
@@ -348,8 +369,7 @@ public class AddanewlogView extends VerticalLayout {
     private void WeightComfort() {
         HorizontalLayout uroven15 = new HorizontalLayout();
         HorizontalLayout uroven151 = new HorizontalLayout();
-        TextField policko14 = new TextField();
-        policko14.setLabel("Amount of weights in kg");
+        NumberField policko14 = new NumberField("Amount of weights in kg");
         ComboBox<String> comfort = new ComboBox<>("Select comfort level");
         comfort.setItems("Too heavy", "Good", "Too light");
         Button nextButton = new Button("Next");
