@@ -294,35 +294,39 @@ public class AddanewlogView extends VerticalLayout {
         uroven111.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
             //class.setDivesite = startTime.getValue();
-            remove(uroven11,uroven111);
+            remove(uroven11,uroven111,uroven011);
             TypeOfDive();
         });
         previousButton.addClickListener(buttonClickEvent -> {
-            remove(uroven11,uroven111);
+            remove(uroven11,uroven111,uroven011);
             TankOut();
         });
-        add(uroven11,uroven111);
+        add(uroven011,uroven11,uroven111);
     }
 
     private void TypeOfDive() {
+        HorizontalLayout uroven012 = new HorizontalLayout();
         HorizontalLayout uroven12 = new HorizontalLayout();
         HorizontalLayout uroven121 = new HorizontalLayout();
+        Image img12 = new Image("images/TypeOfDive.jpg","Failed to load image");
+        img12.setHeight("350px");
         ComboBox<String> typeOfDive = new ComboBox<>("Select one option");
         typeOfDive.setItems("Lake", "Sea", "River");
         Button nextButton = new Button("Next");
         Button previousButton = new Button("Previous");
+        uroven012.add(img12);
         uroven12.add(new Paragraph(new H2("Type of dive:")), typeOfDive);
         uroven121.add(previousButton, nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
             //class.setDivesite = startTime.getValue();
-            remove(uroven12,uroven121);
+            remove(uroven12,uroven121,uroven012);
             AirTemperature();
         });
         previousButton.addClickListener(buttonClickEvent -> {
-            remove(uroven12,uroven121);
+            remove(uroven12,uroven121,uroven012);
             WaterConditions();
         });
-        add(uroven12,uroven121);
+        add(uroven012,uroven12,uroven121);
     }
 
     private void AirTemperature() {
