@@ -10,6 +10,7 @@ import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.NumberField;
+import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.timepicker.TimePicker;
 import com.vaadin.flow.router.PageTitle;
@@ -330,44 +331,52 @@ public class AddanewlogView extends VerticalLayout {
     }
 
     private void AirTemperature() {
+        HorizontalLayout uroven013 = new HorizontalLayout();
         HorizontalLayout uroven13 = new HorizontalLayout();
         HorizontalLayout uroven131 = new HorizontalLayout();
+        Image img13 = new Image("images/AirTemperature.jpg","Failed to load image");
+        img13.setHeight("350px");
         NumberField policko13 = new NumberField("Enter temperature in °C");
         Button nextButton = new Button("Next");
         Button previousButton = new Button("Previous");
+        uroven013.add(img13);
         uroven13.add(new Paragraph(new H2("Air temperature:")), policko13);
         uroven131.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
             //class.setDivesite = startTime.getValue();
-            remove(uroven13,uroven131);
+            remove(uroven13,uroven131,uroven013);
             WaterTemperature();
         });
         previousButton.addClickListener(buttonClickEvent -> {
-            remove(uroven13,uroven131);
+            remove(uroven13,uroven131,uroven013);
             TypeOfDive();
         });
-        add(uroven13,uroven131);
+        add(uroven013,uroven13,uroven131);
 
     }
 
     private void WaterTemperature() {
+        HorizontalLayout uroven014 = new HorizontalLayout();
         HorizontalLayout uroven14 = new HorizontalLayout();
         HorizontalLayout uroven141 = new HorizontalLayout();
+        Image img14 = new Image("images/WaterTemperature.jpg","Failed to load image");
+        img14.setHeight("350px");
         NumberField policko14 = new NumberField("Enter temperature in °C");
         Button nextButton = new Button("Next");
         Button previousButton = new Button("Previous");
+        uroven014.add(img14);
         uroven14.add(new Paragraph(new H2("Water temperature:")), policko14);
         uroven141.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
             //class.setDivesite = startTime.getValue();
-            remove(uroven14,uroven141);
+            remove(uroven14,uroven141,uroven014);
             WeightComfort();
         });
         previousButton.addClickListener(buttonClickEvent -> {
-            remove(uroven14,uroven141);
+            remove(uroven14,uroven141,uroven014);
             AirTemperature();
         });
-        add(uroven14,uroven141);
+        add(uroven014,uroven14,uroven141);
     }
 
     private void WeightComfort() {
@@ -417,6 +426,31 @@ public class AddanewlogView extends VerticalLayout {
     }
 
     private void Notes() {
+        HorizontalLayout uroven017 = new HorizontalLayout();
+        HorizontalLayout uroven17 = new HorizontalLayout();
+        HorizontalLayout uroven171 = new HorizontalLayout();
+        Image img17 = new Image("images/Notes.jpg","Failed to load image");
+        img17.setHeight("350px");
+        TextArea policko17 = new TextArea("Max. 400 characters");
+        Button nextButton = new Button("Next");
+        Button previousButton = new Button("Previous");
+        uroven017.add(img17);
+        uroven17.add(new Paragraph(new H2("Notes:")),policko17);
+        uroven171.add(previousButton,nextButton);
+        nextButton.addClickListener(buttonClickEvent -> {
+            //class.setDivesite = startTime.getValue();
+            remove(uroven017,uroven171,uroven17);
+            Buddy();
+        });
+        previousButton.addClickListener(buttonClickEvent -> {
+            remove(uroven17,uroven171,uroven017);
+            HeatComfort();
+        });
+        add(uroven017,uroven17,uroven171);
+
+    }
+
+    private void Buddy() {
     }
 
 }
