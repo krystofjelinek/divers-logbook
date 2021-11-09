@@ -39,6 +39,8 @@ public class AddanewlogView extends VerticalLayout {
      * obrazky: Edu, WeightComfort, HeatComfort
      * progress bar a cislovani kroku
      * Edu (Instructor, DiveClub)
+     * Enter key (addKeyPressListener)
+     * stylizovat Feeling buttons
      */
 
     public void DiveSite() {
@@ -435,6 +437,11 @@ public class AddanewlogView extends VerticalLayout {
         uroven017.add(img17);
         uroven17.add(new Paragraph(new H2("Notes:")),policko17);
         uroven171.add(previousButton,nextButton);
+        /** policko17.addKeyPressListener(Key.ENTER, e ->{
+        *    remove(uroven017,uroven171,uroven17);
+         *   Buddy();
+       * });
+        */
         nextButton.addClickListener(buttonClickEvent -> {
             //class.setDivesite = startTime.getValue();
             remove(uroven017,uroven171,uroven17);
@@ -501,9 +508,115 @@ public class AddanewlogView extends VerticalLayout {
     }
 
     private void Feeling() {
+        HorizontalLayout uroven020 = new HorizontalLayout();
+        HorizontalLayout uroven20 = new HorizontalLayout();
+        HorizontalLayout uroven201 = new HorizontalLayout();
+        Button previousButton = new Button("Previous");
+        Button saveButton = new Button("Save");
+        Button goodButton = new Button("Good");
+        Button okButton = new Button("Ok");
+        Button badButton = new Button("Bad");
+        uroven020.add(new Paragraph(new H2("How did you feel during this dive?")));
+        uroven20.add(goodButton,okButton,badButton);
+        uroven201.add(previousButton,saveButton);
+        goodButton.addClickListener(buttonClickEvent -> {
+            //class.setDivesite = startTime.getValue();
+        });
+        okButton.addClickListener(buttonClickEvent -> {
+            //class.setDivesite = startTime.getValue();
+        });
+        badButton.addClickListener(buttonClickEvent -> {
+            //class.setDivesite = startTime.getValue();
+        });
+        previousButton.addClickListener(buttonClickEvent -> {
+            remove(uroven20,uroven201,uroven020);
+            Edu();
+        });
+        saveButton.addClickListener(buttonClickEvent -> {
+            //class.setDivesite = startTime.setValue();
+            //Logbook.mainView();
+        });
+        add(uroven020,uroven20,uroven201);
     }
 
     private void Instructor() {
+        HorizontalLayout uroven021 = new HorizontalLayout();
+        HorizontalLayout uroven21s = new HorizontalLayout();
+        HorizontalLayout uroven211 = new HorizontalLayout();
+        Image img21 = new Image("images/Buddy.jpg","Failed to load image");
+        img21.setHeight("350px");
+        TextField policko21 = new TextField("Name");
+        Button nextButton = new Button("Next");
+        Button previousButton = new Button("Previous");
+        uroven021.add(img21);
+        uroven21s.add(new Paragraph(new H2("Dive instructor:")),policko21);
+        uroven211.add(previousButton,nextButton);
+        nextButton.addClickListener(buttonClickEvent -> {
+            //class.setDivesite = startTime.getValue();
+            remove(uroven021,uroven21s,uroven211);
+            DiveClub();
+        });
+        previousButton.addClickListener(buttonClickEvent -> {
+            remove(uroven021,uroven21s,uroven211);
+            Edu();
+        });
+        add(uroven021,uroven21s,uroven211);
+    }
+
+    private void DiveClub() {
+        HorizontalLayout uroven022 = new HorizontalLayout();
+        HorizontalLayout uroven22 = new HorizontalLayout();
+        HorizontalLayout uroven221 = new HorizontalLayout();
+        Image img22 = new Image("images/DiveClub.jpg","Failed to load image");
+        img22.setHeight("350px");
+        TextField policko22 = new TextField("Name");
+        Button nextButton = new Button("Next");
+        Button previousButton = new Button("Previous");
+        uroven022.add(img22);
+        uroven22.add(new Paragraph(new H2("Dive club:")),policko22);
+        uroven221.add(previousButton,nextButton);
+        nextButton.addClickListener(buttonClickEvent -> {
+            //class.setDivesite = startTime.getValue();
+            remove(uroven022,uroven22,uroven221);
+            FeelingEnd();
+        });
+        previousButton.addClickListener(buttonClickEvent -> {
+            remove(uroven022,uroven22,uroven221);
+            Instructor();
+        });
+        add(uroven022,uroven22,uroven221);
+    }
+
+    private void FeelingEnd() {
+        HorizontalLayout uroven023 = new HorizontalLayout();
+        HorizontalLayout uroven23 = new HorizontalLayout();
+        HorizontalLayout uroven231 = new HorizontalLayout();
+        Button previousButton = new Button("Previous");
+        Button saveButton = new Button("Save");
+        Button goodButton = new Button("Good");
+        Button okButton = new Button("Ok");
+        Button badButton = new Button("Bad");
+        uroven023.add(new Paragraph(new H2("How did you feel during this dive?")));
+        uroven23.add(goodButton,okButton,badButton);
+        uroven231.add(previousButton,saveButton);
+        goodButton.addClickListener(buttonClickEvent -> {
+            //class.setDivesite = startTime.getValue();
+        });
+        okButton.addClickListener(buttonClickEvent -> {
+            //class.setDivesite = startTime.getValue();
+        });
+        badButton.addClickListener(buttonClickEvent -> {
+            //class.setDivesite = startTime.getValue();
+        });
+        previousButton.addClickListener(buttonClickEvent -> {
+            remove(uroven23,uroven231,uroven023);
+            Edu();
+        });
+        saveButton.addClickListener(buttonClickEvent -> {
+            //class.setDivesite = startTime.setValue();
+            //Logbook.mainView();
+        });
+        add(uroven023,uroven23,uroven231);
     }
 
 }
