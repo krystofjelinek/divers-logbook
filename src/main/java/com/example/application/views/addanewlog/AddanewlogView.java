@@ -1,6 +1,7 @@
 package com.example.application.views.addanewlog;
 
 import com.example.application.views.MainLayout;
+import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.datepicker.DatePicker;
@@ -20,7 +21,6 @@ import com.vaadin.flow.router.Route;
 @Route(value = "add", layout = MainLayout.class)
 public class AddanewlogView extends VerticalLayout {
 
-
     public AddanewlogView() {
         setSpacing(false);
         setMargin(false);
@@ -36,11 +36,8 @@ public class AddanewlogView extends VerticalLayout {
      * Dodělat transparent button pro DiveSite
      * Stylizovat next button (CSS)
      * Ochránit vstupy (Binder)
-     * obrazky: Edu, WeightComfort, HeatComfort
      * progress bar a cislovani kroku
-     * Edu (Instructor, DiveClub)
-     * Enter key (addKeyPressListener)
-     * stylizovat Feeling buttons
+     * stylizovat Feeling buttons/Feeling.jpg
      */
 
     public void DiveSite() {
@@ -50,6 +47,11 @@ public class AddanewlogView extends VerticalLayout {
         Image img1 = new Image("images/DiveSite.jpg","Failed to load image");
         img1.setHeight("350px");
         TextField policko1 = new TextField("e. g. Miami diving centre");
+        policko1.addKeyPressListener(Key.ENTER, e->{
+            remove(uroven1,uroven11,uroven01);
+            //class.setDivesite = startTime.getValue();
+            Location();
+        });
         Button nextButton = new Button("Next");
         uroven01.add(img1);
         uroven1.add(new Paragraph(new H2("Dive site:")), policko1);
@@ -69,6 +71,11 @@ public class AddanewlogView extends VerticalLayout {
         Image img2 = new Image("images/Location.jpg","Failed to load image");
         img2.setHeight("350px");
         TextField policko2 = new TextField("e. g. Liberec/Czechia");
+        policko2.addKeyPressListener(Key.ENTER, e->{
+            remove(uroven2,uroven21,uroven02);
+            //class.setDivesite = startTime.getValue();
+            DateOfDive();
+        });
         Button previousButton = new Button("Previous");
         Button nextButton = new Button("Next");
         uroven2.add(new Paragraph(new H2("Location:")), policko2);
@@ -190,6 +197,11 @@ public class AddanewlogView extends VerticalLayout {
         Image img7 = new Image("images/MaxDepth.jpg","Failed to load image");
         img7.setHeight("350px");
         NumberField policko7 = new NumberField("Depth in meters");
+        policko7.addKeyPressListener(Key.ENTER, e->{
+            remove(uroven7,uroven71,uroven07);
+            //class.setDivesite = startTime.getValue();
+            AverageDepth();
+        });
         Button nextButton = new Button("Next");
         Button previousButton = new Button("Previous");
         uroven07.add(img7);
@@ -214,6 +226,11 @@ public class AddanewlogView extends VerticalLayout {
         Image img8 = new Image("images/AvgDepth.jpg","Failed to load image");
         img8.setHeight("350px");
         NumberField policko8 = new NumberField("Depth in meters");
+        policko8.addKeyPressListener(Key.ENTER, e->{
+            remove(uroven8,uroven81,uroven08);
+            //class.setDivesite = startTime.getValue();
+            TankIn();
+        });
         Button nextButton = new Button("Next");
         Button previousButton = new Button("Previous");
         uroven08.add(img8);
@@ -238,6 +255,11 @@ public class AddanewlogView extends VerticalLayout {
         Image img9 = new Image("images/TankIn.jpg","Failed to load image");
         img9.setHeight("350px");
         NumberField policko9 = new NumberField("Pressure in BAR");
+        policko9.addKeyPressListener(Key.ENTER, e->{
+            remove(uroven9,uroven91,uroven09);
+            //class.setDivesite = startTime.getValue();
+            TankOut();
+        });
         Button nextButton = new Button("Next");
         Button previousButton = new Button("Previous");
         uroven09.add(img9);
@@ -262,6 +284,11 @@ public class AddanewlogView extends VerticalLayout {
         Image img10 = new Image("images/TankOut.jpg","Failed to load image");
         img10.setHeight("350px");
         NumberField policko10 = new NumberField("Pressure in BAR");
+        policko10.addKeyPressListener(Key.ENTER, e->{
+            remove(uroven10,uroven101,uroven010);
+            //class.setDivesite = startTime.getValue();
+            WaterConditions();
+        });
         Button nextButton = new Button("Next");
         Button previousButton = new Button("Previous");
         uroven010.add(img10);
@@ -337,6 +364,11 @@ public class AddanewlogView extends VerticalLayout {
         Image img13 = new Image("images/AirTemperature.jpg","Failed to load image");
         img13.setHeight("350px");
         NumberField policko13 = new NumberField("Enter temperature in °C");
+        policko13.addKeyPressListener(Key.ENTER, e->{
+            remove(uroven13,uroven131,uroven013);
+            //class.setDivesite = startTime.getValue();
+            WaterTemperature();
+        });
         Button nextButton = new Button("Next");
         Button previousButton = new Button("Previous");
         uroven013.add(img13);
@@ -362,6 +394,11 @@ public class AddanewlogView extends VerticalLayout {
         Image img14 = new Image("images/WaterTemperature.jpg","Failed to load image");
         img14.setHeight("350px");
         NumberField policko14 = new NumberField("Enter temperature in °C");
+        policko14.addKeyPressListener(Key.ENTER, e->{
+            remove(uroven14,uroven141,uroven014);
+            //class.setDivesite = startTime.getValue();
+            WeightComfort();
+        });
         Button nextButton = new Button("Next");
         Button previousButton = new Button("Previous");
         uroven014.add(img14);
@@ -380,49 +417,57 @@ public class AddanewlogView extends VerticalLayout {
     }
 
     private void WeightComfort() {
+        HorizontalLayout uroven015 = new HorizontalLayout();
         HorizontalLayout uroven15 = new HorizontalLayout();
         HorizontalLayout uroven151 = new HorizontalLayout();
+        Image img15 = new Image("images/WeightComfort.jpg","Failed to load image");
+        img15.setHeight("350px");
         NumberField policko14 = new NumberField("Amount of weights in kg");
         ComboBox<String> comfort = new ComboBox<>("Select comfort level");
         comfort.setItems("Too heavy", "Good", "Too light");
         Button nextButton = new Button("Next");
         Button previousButton = new Button("Previous");
+        uroven015.add(img15);
         uroven15.add(new Paragraph(new H2("Weight comfort:")), policko14, comfort);
         uroven151.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
             //class.setDivesite = startTime.getValue();
-            remove(uroven15,uroven151);
+            remove(uroven15,uroven151,uroven015);
             HeatComfort();
         });
         previousButton.addClickListener(buttonClickEvent -> {
-            remove(uroven15,uroven151);
+            remove(uroven15,uroven151,uroven015);
             WaterTemperature();
         });
-        add(uroven15,uroven151);
+        add(uroven015,uroven15,uroven151);
 
     }
 
     private void HeatComfort() {
+        HorizontalLayout uroven016 = new HorizontalLayout();
         HorizontalLayout uroven16 = new HorizontalLayout();
         HorizontalLayout uroven161 = new HorizontalLayout();
+        Image img16 = new Image("images/HeatComfort.jpg","Failed to load image");
+        img16.setHeight("350px");
         ComboBox<String> thickness = new ComboBox<>("Select suit thickness");
         thickness.setItems("3 mm", "5 mm", "7 mm", "Drysuit");
         ComboBox<String> comfort = new ComboBox<>("Select comfort level");
         comfort.setItems("Too hot", "Good", "Too cold");
         Button nextButton = new Button("Next");
         Button previousButton = new Button("Previous");
+        uroven016.add(img16);
         uroven16.add(new Paragraph(new H2("Heat comfort:")), thickness, comfort);
         uroven161.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
             //class.setDivesite = startTime.getValue();
-            remove(uroven16,uroven161);
+            remove(uroven16,uroven161,uroven016);
             Notes();
         });
         previousButton.addClickListener(buttonClickEvent -> {
-            remove(uroven16,uroven161);
+            remove(uroven16,uroven161,uroven016);
             WeightComfort();
         });
-        add(uroven16,uroven161);
+        add(uroven016,uroven16,uroven161);
     }
 
     private void Notes() {
@@ -432,16 +477,16 @@ public class AddanewlogView extends VerticalLayout {
         Image img17 = new Image("images/Notes.jpg","Failed to load image");
         img17.setHeight("350px");
         TextArea policko17 = new TextArea("Max. 400 characters");
+        policko17.addKeyPressListener(Key.ENTER, e ->{
+            remove(uroven017,uroven171,uroven17);
+            //class.setDivesite = startTime.getValue();
+            Buddy();
+        });
         Button nextButton = new Button("Next");
         Button previousButton = new Button("Previous");
         uroven017.add(img17);
         uroven17.add(new Paragraph(new H2("Notes:")),policko17);
         uroven171.add(previousButton,nextButton);
-        /** policko17.addKeyPressListener(Key.ENTER, e ->{
-        *    remove(uroven017,uroven171,uroven17);
-         *   Buddy();
-       * });
-        */
         nextButton.addClickListener(buttonClickEvent -> {
             //class.setDivesite = startTime.getValue();
             remove(uroven017,uroven171,uroven17);
@@ -462,6 +507,11 @@ public class AddanewlogView extends VerticalLayout {
         Image img18 = new Image("images/Buddy.jpg","Failed to load image");
         img18.setHeight("350px");
         TextField policko18 = new TextField("Name");
+        policko18.addKeyPressListener(Key.ENTER, e->{
+            remove(uroven18,uroven181,uroven018);
+            //class.setDivesite = startTime.getValue();
+            Edu();
+        });
         Button nextButton = new Button("Next");
         Button previousButton = new Button("Previous");
         uroven018.add(img18);
@@ -546,6 +596,11 @@ public class AddanewlogView extends VerticalLayout {
         Image img21 = new Image("images/Buddy.jpg","Failed to load image");
         img21.setHeight("350px");
         TextField policko21 = new TextField("Name");
+        policko21.addKeyPressListener(Key.ENTER,e->{
+            remove(uroven21s,uroven021,uroven211);
+            //class.setDivesite = startTime.getValue();
+            DiveClub();
+        });
         Button nextButton = new Button("Next");
         Button previousButton = new Button("Previous");
         uroven021.add(img21);
@@ -570,6 +625,11 @@ public class AddanewlogView extends VerticalLayout {
         Image img22 = new Image("images/DiveClub.jpg","Failed to load image");
         img22.setHeight("350px");
         TextField policko22 = new TextField("Name");
+        policko22.addKeyPressListener(Key.ENTER,e->{
+            remove(uroven022,uroven22,uroven221);
+            //class.setDivesite = startTime.getValue();
+            FeelingEnd();
+        });
         Button nextButton = new Button("Next");
         Button previousButton = new Button("Previous");
         uroven022.add(img22);
@@ -610,7 +670,7 @@ public class AddanewlogView extends VerticalLayout {
         });
         previousButton.addClickListener(buttonClickEvent -> {
             remove(uroven23,uroven231,uroven023);
-            Edu();
+            DiveClub();
         });
         saveButton.addClickListener(buttonClickEvent -> {
             //class.setDivesite = startTime.setValue();
