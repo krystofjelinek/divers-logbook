@@ -28,7 +28,208 @@ public class ReadWriteUtilityForFile {
         private String typeofdivedata;
         private int airtempdata;
         private int watertempdata;
+        private int weightsdata;
+        private String weightcomfortdata;
+        private String heatdata;
+        private String heatcomfortdata;
+        private String notesdata;
+        private String buddydata;
+        private String Edudata;
+        private String diveclubdata;
+        private String instructordata;
+        private String feelingdata;
 
+        public String getDivesitedata() {
+            return divesitedata;
+        }
+
+        public void setDivesitedata(String divesitedata) {
+            this.divesitedata = divesitedata;
+        }
+
+        public String getLocationdata() {
+            return locationdata;
+        }
+
+        public void setLocationdata(String locationdata) {
+            this.locationdata = locationdata;
+        }
+
+        public int getDateofdivedata() {
+            return dateofdivedata;
+        }
+
+        public void setDateofdivedata(int dateofdivedata) {
+            this.dateofdivedata = dateofdivedata;
+        }
+
+        public int getStarttimedata() {
+            return starttimedata;
+        }
+
+        public void setStarttimedata(int starttimedata) {
+            this.starttimedata = starttimedata;
+        }
+
+        public int getBottomtimedata() {
+            return bottomtimedata;
+        }
+
+        public void setBottomtimedata(int bottomtimedata) {
+            this.bottomtimedata = bottomtimedata;
+        }
+
+        public int getEndtimedata() {
+            return endtimedata;
+        }
+
+        public void setEndtimedata(int endtimedata) {
+            this.endtimedata = endtimedata;
+        }
+
+        public double getMaxdepthdata() {
+            return maxdepthdata;
+        }
+
+        public void setMaxdepthdata(double maxdepthdata) {
+            this.maxdepthdata = maxdepthdata;
+        }
+
+        public double getAvgdepthdata() {
+            return avgdepthdata;
+        }
+
+        public void setAvgdepthdata(double avgdepthdata) {
+            this.avgdepthdata = avgdepthdata;
+        }
+
+        public int getTankindata() {
+            return tankindata;
+        }
+
+        public void setTankindata(int tankindata) {
+            this.tankindata = tankindata;
+        }
+
+        public int getTankoutdata() {
+            return tankoutdata;
+        }
+
+        public void setTankoutdata(int tankoutdata) {
+            this.tankoutdata = tankoutdata;
+        }
+
+        public String getWaterconditionsdata() {
+            return waterconditionsdata;
+        }
+
+        public void setWaterconditionsdata(String waterconditionsdata) {
+            this.waterconditionsdata = waterconditionsdata;
+        }
+
+        public String getTypeofdivedata() {
+            return typeofdivedata;
+        }
+
+        public void setTypeofdivedata(String typeofdivedata) {
+            this.typeofdivedata = typeofdivedata;
+        }
+
+        public int getAirtempdata() {
+            return airtempdata;
+        }
+
+        public void setAirtempdata(int airtempdata) {
+            this.airtempdata = airtempdata;
+        }
+
+        public int getWatertempdata() {
+            return watertempdata;
+        }
+
+        public void setWatertempdata(int watertempdata) {
+            this.watertempdata = watertempdata;
+        }
+
+        public int getWeightsdata() {
+            return weightsdata;
+        }
+
+        public void setWeightsdata(int weightsdata) {
+            this.weightsdata = weightsdata;
+        }
+
+        public String getWeightcomfortdata() {
+            return weightcomfortdata;
+        }
+
+        public void setWeightcomfortdata(String weightcomfortdata) {
+            this.weightcomfortdata = weightcomfortdata;
+        }
+
+        public String getHeatdata() {
+            return heatdata;
+        }
+
+        public void setHeatdata(String heatdata) {
+            this.heatdata = heatdata;
+        }
+
+        public String getHeatcomfortdata() {
+            return heatcomfortdata;
+        }
+
+        public void setHeatcomfortdata(String heatcomfortdata) {
+            this.heatcomfortdata = heatcomfortdata;
+        }
+
+        public String getNotesdata() {
+            return notesdata;
+        }
+
+        public void setNotesdata(String notesdata) {
+            this.notesdata = notesdata;
+        }
+
+        public String getBuddydata() {
+            return buddydata;
+        }
+
+        public void setBuddydata(String buddydata) {
+            this.buddydata = buddydata;
+        }
+
+        public String getEdudata() {
+            return Edudata;
+        }
+
+        public void setEdudata(String edudata) {
+            Edudata = edudata;
+        }
+
+        public String getDiveclubdata() {
+            return diveclubdata;
+        }
+
+        public void setDiveclubdata(String diveclubdata) {
+            this.diveclubdata = diveclubdata;
+        }
+
+        public String getInstructordata() {
+            return instructordata;
+        }
+
+        public void setInstructordata(String instructordata) {
+            this.instructordata = instructordata;
+        }
+
+        public String getFeelingdata() {
+            return feelingdata;
+        }
+
+        public void setFeelingdata(String feelingdata) {
+            this.feelingdata = feelingdata;
+        }
     }
 
     // Main Method
@@ -90,24 +291,24 @@ public class ReadWriteUtilityForFile {
     }
 
     // Read From File Utility
-    public static void crunchifyReadFromFile() {
+    public static void ReadFromFile() {
 
         // File: An abstract representation of file and directory pathnames.
         // User interfaces and operating systems use system-dependent pathname strings to name files and directories.
-        File crunchifyFile = new File(crunchifyFileLocation);
+        File dataFile = new File(FileLocation);
 
-        if (!crunchifyFile.exists())
+        if (!dataFile.exists())
             dataLog("File doesn't exist");
 
         InputStreamReader isReader;
         try {
-            isReader = new InputStreamReader(new FileInputStream(crunchifyFile), StandardCharsets.UTF_8);
+            isReader = new InputStreamReader(new FileInputStream(dataFile), StandardCharsets.UTF_8);
 
             JsonReader myReader = new JsonReader(isReader);
             ReadWriteUtilityForFile  = gson.fromJson(myReader, CrunchifyCompany.class);
 
-            crunchifyLog("Company Name: " + company.getCompanyName());
-            int employee = company.getEmployees();
+            dataLog("Company Name: " + company.getCompanyName());
+            int employee = logdata.getEmployees();
             crunchifyLog("# of Employees: " + Integer.toString(employee));
 
         } catch (Exception e) {

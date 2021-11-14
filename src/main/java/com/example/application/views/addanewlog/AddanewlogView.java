@@ -10,6 +10,7 @@ import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.progressbar.ProgressBar;
 import com.vaadin.flow.component.textfield.NumberField;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
@@ -38,41 +39,49 @@ public class AddanewlogView extends VerticalLayout {
      * Ochránit vstupy (Binder)
      * progress bar a cislovani kroku
      * stylizovat Feeling buttons/Feeling.jpg
+     * xml reader suunto DM5
      */
 
     public void DiveSite() {
         HorizontalLayout uroven01 = new HorizontalLayout();
         HorizontalLayout uroven1 = new HorizontalLayout();
         HorizontalLayout uroven11 = new HorizontalLayout();
+        ProgressBar progressBar = new ProgressBar();
+        progressBar.setValue(0.05);
+        progressBar.setWidth("200px");
         Image img1 = new Image("images/DiveSite.jpg","Failed to load image");
         img1.setHeight("350px");
         TextField policko1 = new TextField("e. g. Miami diving centre");
         policko1.addKeyPressListener(Key.ENTER, e->{
-            remove(uroven1,uroven11,uroven01);
+            remove(uroven1,uroven11,uroven01,progressBar);
             //class.setDivesite = startTime.getValue();
             Location();
         });
         Button nextButton = new Button("Next");
+        Button invisibleButton = new Button("");
         uroven01.add(img1);
         uroven1.add(new Paragraph(new H2("Dive site:")), policko1);
-        uroven11.add(nextButton);
+        uroven11.add(invisibleButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
             //class.setDivesite = policko.getValue();
-            remove(uroven01,uroven1,uroven11);
+            remove(uroven01,uroven1,uroven11,progressBar);
             Location();
         });
-        add(uroven01,uroven1,uroven11);
+        add(progressBar,uroven01,uroven1,uroven11);
     }
 
     public void Location() {
         HorizontalLayout uroven02 = new HorizontalLayout();
         HorizontalLayout uroven2 = new HorizontalLayout();
         HorizontalLayout uroven21 = new HorizontalLayout();
+        ProgressBar progressBar = new ProgressBar();
+        progressBar.setValue(0.10);
+        progressBar.setWidth("200px");
         Image img2 = new Image("images/Location.jpg","Failed to load image");
         img2.setHeight("350px");
         TextField policko2 = new TextField("e. g. Liberec/Czechia");
         policko2.addKeyPressListener(Key.ENTER, e->{
-            remove(uroven2,uroven21,uroven02);
+            remove(uroven2,uroven21,uroven02,progressBar);
             //class.setDivesite = startTime.getValue();
             DateOfDive();
         });
@@ -83,20 +92,21 @@ public class AddanewlogView extends VerticalLayout {
         uroven02.add(img2);
         nextButton.addClickListener(buttonClickEvent -> {
           // ReadWriteUtilityForFile.setdivesitedata = policko2.getValue();
-            remove(uroven2,uroven21,uroven02);
+            remove(uroven2,uroven21,uroven02,progressBar);
             DateOfDive();
         });
         previousButton.addClickListener(buttonClickEvent -> {
-            remove(uroven2,uroven21,uroven02);
+            remove(uroven2,uroven21,uroven02,progressBar);
             DiveSite();
         });
-        add(uroven02,uroven2,uroven21);
+        add(progressBar,uroven02,uroven2,uroven21);
     }
 
     public void DateOfDive(){
         HorizontalLayout uroven03 = new HorizontalLayout();
         HorizontalLayout uroven3 = new HorizontalLayout();
         HorizontalLayout uroven31 = new HorizontalLayout();
+
         Image img3 = new Image("images/DateOfDive.jpg", "Failed to load image");
         img3.setHeight("350px");
         DatePicker date = new DatePicker("Select date");
