@@ -1,5 +1,4 @@
 /*
-
 package com.example.application.views.addanewlog;
 
 import com.google.gson.Gson;
@@ -234,10 +233,6 @@ public class ReadWriteUtilityForFile {
 
     // Main Method
     public static void main(String[] args) {
-        logdata data = new logdata();
-       // logdata.("Crunchify.com");
-       // logdata.setEmployees(4);
-
         // Save data to file
         WriteToFile(gson.toJson());
 
@@ -268,7 +263,7 @@ public class ReadWriteUtilityForFile {
                 // that is atomic with respect to all other filesystem activities that might affect the file.
                 dataFile.createNewFile();
             } catch (IOException e) {
-                crunchifyLog("Exception Occurred: " + e.toString());
+                dataLog("Exception Occurred: " + e.toString());
             }
         }
 
@@ -279,7 +274,7 @@ public class ReadWriteUtilityForFile {
             logWriter = new FileWriter(dataFile.getAbsoluteFile(), true);
 
             // Writes text to a character-output stream
-            BufferedWriter bufferWriter = new BufferedWriter(dataWriter);
+            BufferedWriter bufferWriter = new BufferedWriter(logWriter);
             bufferWriter.write(myData.toString());
             bufferWriter.close();
 
@@ -305,7 +300,7 @@ public class ReadWriteUtilityForFile {
             isReader = new InputStreamReader(new FileInputStream(dataFile), StandardCharsets.UTF_8);
 
             JsonReader myReader = new JsonReader(isReader);
-            ReadWriteUtilityForFile  = gson.fromJson(myReader, CrunchifyCompany.class);
+            ReadWriteUtilityForFile logdata  = gson.fromJson(myReader, ReadWriteUtilityForFile.class);
 
             dataLog("Company Name: " + company.getCompanyName());
             int employee = logdata.getEmployees();

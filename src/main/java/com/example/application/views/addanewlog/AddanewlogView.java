@@ -34,12 +34,11 @@ public class AddanewlogView extends VerticalLayout {
     }
 
     /**
-     * Dodělat transparent button pro DiveSite
-     * Stylizovat next button (CSS)
+     * Stylizovat next button a transparent button (CSS)
      * Ochránit vstupy (Binder)
-     * progress bar a cislovani kroku
      * stylizovat Feeling buttons/Feeling.jpg
-     * xml reader suunto DM5
+     * Xml reader suunto DM5
+     * Stylizovat polícka aby měla stejnou velikost
      */
 
     public void DiveSite() {
@@ -106,7 +105,9 @@ public class AddanewlogView extends VerticalLayout {
         HorizontalLayout uroven03 = new HorizontalLayout();
         HorizontalLayout uroven3 = new HorizontalLayout();
         HorizontalLayout uroven31 = new HorizontalLayout();
-
+        ProgressBar progressBar = new ProgressBar();
+        progressBar.setValue(0.15);
+        progressBar.setWidth("200px");
         Image img3 = new Image("images/DateOfDive.jpg", "Failed to load image");
         img3.setHeight("350px");
         DatePicker date = new DatePicker("Select date");
@@ -117,14 +118,14 @@ public class AddanewlogView extends VerticalLayout {
         uroven31.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
             //class.setDivesite = date.getValue();
-            remove(uroven03,uroven3,uroven31);
+            remove(progressBar,uroven03,uroven3,uroven31);
             StartTime();
         });
         previousButton.addClickListener(buttonClickEvent -> {
-            remove(uroven03,uroven3,uroven31);
+            remove(progressBar,uroven03,uroven3,uroven31);
             Location();
         });
-        add(uroven03,uroven3,uroven31);
+        add(progressBar,uroven03,uroven3,uroven31);
 
     }
 
@@ -132,6 +133,9 @@ public class AddanewlogView extends VerticalLayout {
         HorizontalLayout uroven04 = new HorizontalLayout();
         HorizontalLayout uroven4 = new HorizontalLayout();
         HorizontalLayout uroven41 = new HorizontalLayout();
+        ProgressBar progressBar = new ProgressBar();
+        progressBar.setValue(0.20);
+        progressBar.setWidth("200px");
         Image img4 = new Image("images/StartTime.jpg","Failed to load image");
         img4.setHeight("350px");
         TimePicker startTime = new TimePicker("Select start time");
@@ -142,20 +146,23 @@ public class AddanewlogView extends VerticalLayout {
         uroven41.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
             //class.setDivesite = startTime.getValue();
-            remove(uroven4,uroven41,uroven04);
+            remove(uroven4,uroven41,uroven04,progressBar);
             BottomTime();
         });
         previousButton.addClickListener(buttonClickEvent -> {
-            remove(uroven4,uroven41,uroven04);
+            remove(uroven4,uroven41,uroven04,progressBar);
             DateOfDive();
         });
-        add(uroven04,uroven4,uroven41);
+        add(progressBar,uroven04,uroven4,uroven41);
     }
 
     public void BottomTime(){
         HorizontalLayout uroven05 = new HorizontalLayout();
         HorizontalLayout uroven5 = new HorizontalLayout();
         HorizontalLayout uroven51 = new HorizontalLayout();
+        ProgressBar progressBar = new ProgressBar();
+        progressBar.setValue(0.25);
+        progressBar.setWidth("200px");
         Image img5 = new Image("images/BottomTime.jpg","Failed to load image");
         img5.setHeight("350px");
         TimePicker bottomTime = new TimePicker("Select bottom time");
@@ -166,20 +173,23 @@ public class AddanewlogView extends VerticalLayout {
         uroven51.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
             //class.setDivesite = startTime.getValue();
-            remove(uroven5,uroven51,uroven05);
+            remove(uroven5,uroven51,uroven05,progressBar);
             EndTime();
         });
         previousButton.addClickListener(buttonClickEvent -> {
-            remove(uroven5,uroven51,uroven05);
+            remove(uroven5,uroven51,uroven05,progressBar);
             StartTime();
         });
-        add(uroven05,uroven5,uroven51);
+        add(progressBar,uroven05,uroven5,uroven51);
     }
 
     public void EndTime(){
         HorizontalLayout uroven06 = new HorizontalLayout();
         HorizontalLayout uroven6 = new HorizontalLayout();
         HorizontalLayout uroven61 = new HorizontalLayout();
+        ProgressBar progressBar = new ProgressBar();
+        progressBar.setValue(0.30);
+        progressBar.setWidth("200px");
         Image img6 = new Image("images/EndTime.jpg","Failed to load image");
         img6.setHeight("350px");
         TimePicker endTime = new TimePicker("Select end time");
@@ -190,25 +200,28 @@ public class AddanewlogView extends VerticalLayout {
         uroven61.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
             //class.setDivesite = startTime.getValue();
-            remove(uroven6,uroven61,uroven06);
+            remove(uroven6,uroven61,uroven06,progressBar);
             MaximumDepth();
         });
         previousButton.addClickListener(buttonClickEvent -> {
-            remove(uroven6,uroven61,uroven06);
+            remove(uroven6,uroven61,uroven06,progressBar);
             BottomTime();
         });
-        add(uroven06,uroven6,uroven61);
+        add(progressBar,uroven06,uroven6,uroven61);
     }
 
     public void MaximumDepth(){
         HorizontalLayout uroven07 = new HorizontalLayout();
         HorizontalLayout uroven7 = new HorizontalLayout();
         HorizontalLayout uroven71 = new HorizontalLayout();
+        ProgressBar progressBar = new ProgressBar();
+        progressBar.setValue(0.35);
+        progressBar.setWidth("200px");
         Image img7 = new Image("images/MaxDepth.jpg","Failed to load image");
         img7.setHeight("350px");
         NumberField policko7 = new NumberField("Depth in meters");
         policko7.addKeyPressListener(Key.ENTER, e->{
-            remove(uroven7,uroven71,uroven07);
+            remove(uroven7,uroven71,uroven07,progressBar);
             //class.setDivesite = startTime.getValue();
             AverageDepth();
         });
@@ -219,25 +232,28 @@ public class AddanewlogView extends VerticalLayout {
         uroven71.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
             //class.setDivesite = startTime.getValue();
-            remove(uroven7,uroven71,uroven07);
+            remove(uroven7,uroven71,uroven07,progressBar);
             AverageDepth();
         });
         previousButton.addClickListener(buttonClickEvent -> {
-            remove(uroven7,uroven71,uroven07);
+            remove(uroven7,uroven71,uroven07,progressBar);
             EndTime();
         });
-        add(uroven07,uroven7,uroven71);
+        add(progressBar,uroven07,uroven7,uroven71);
     }
 
     public void AverageDepth(){
         HorizontalLayout uroven08 = new HorizontalLayout();
         HorizontalLayout uroven8 = new HorizontalLayout();
         HorizontalLayout uroven81 = new HorizontalLayout();
+        ProgressBar progressBar = new ProgressBar();
+        progressBar.setValue(0.40);
+        progressBar.setWidth("200px");
         Image img8 = new Image("images/AvgDepth.jpg","Failed to load image");
         img8.setHeight("350px");
         NumberField policko8 = new NumberField("Depth in meters");
         policko8.addKeyPressListener(Key.ENTER, e->{
-            remove(uroven8,uroven81,uroven08);
+            remove(uroven8,uroven81,uroven08,progressBar);
             //class.setDivesite = startTime.getValue();
             TankIn();
         });
@@ -248,25 +264,28 @@ public class AddanewlogView extends VerticalLayout {
         uroven81.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
             //class.setDivesite = startTime.getValue();
-            remove(uroven8,uroven81,uroven08);
+            remove(uroven8,uroven81,uroven08,progressBar);
             TankIn();
         });
         previousButton.addClickListener(buttonClickEvent -> {
-            remove(uroven8,uroven81,uroven08);
+            remove(uroven8,uroven81,uroven08,progressBar);
             MaximumDepth();
         });
-        add(uroven08,uroven8,uroven81);
+        add(progressBar,uroven08,uroven8,uroven81);
     }
 
     public void TankIn(){
         HorizontalLayout uroven09 = new HorizontalLayout();
         HorizontalLayout uroven9 = new HorizontalLayout();
         HorizontalLayout uroven91 = new HorizontalLayout();
+        ProgressBar progressBar = new ProgressBar();
+        progressBar.setValue(0.45);
+        progressBar.setWidth("200px");
         Image img9 = new Image("images/TankIn.jpg","Failed to load image");
         img9.setHeight("350px");
         NumberField policko9 = new NumberField("Pressure in BAR");
         policko9.addKeyPressListener(Key.ENTER, e->{
-            remove(uroven9,uroven91,uroven09);
+            remove(uroven9,uroven91,uroven09,progressBar);
             //class.setDivesite = startTime.getValue();
             TankOut();
         });
@@ -277,25 +296,28 @@ public class AddanewlogView extends VerticalLayout {
         uroven91.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
             //class.setDivesite = startTime.getValue();
-            remove(uroven9,uroven91,uroven09);
+            remove(uroven9,uroven91,uroven09,progressBar);
             TankOut();
         });
         previousButton.addClickListener(buttonClickEvent -> {
-            remove(uroven9,uroven91,uroven09);
+            remove(uroven9,uroven91,uroven09,progressBar);
             AverageDepth();
         });
-        add(uroven09,uroven9,uroven91);
+        add(progressBar,uroven09,uroven9,uroven91);
     }
 
     private void TankOut() {
         HorizontalLayout uroven010 = new HorizontalLayout();
         HorizontalLayout uroven10 = new HorizontalLayout();
         HorizontalLayout uroven101 = new HorizontalLayout();
+        ProgressBar progressBar = new ProgressBar();
+        progressBar.setValue(0.50);
+        progressBar.setWidth("200px");
         Image img10 = new Image("images/TankOut.jpg","Failed to load image");
         img10.setHeight("350px");
         NumberField policko10 = new NumberField("Pressure in BAR");
         policko10.addKeyPressListener(Key.ENTER, e->{
-            remove(uroven10,uroven101,uroven010);
+            remove(uroven10,uroven101,uroven010,progressBar);
             //class.setDivesite = startTime.getValue();
             WaterConditions();
         });
@@ -306,20 +328,23 @@ public class AddanewlogView extends VerticalLayout {
         uroven101.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
             //class.setDivesite = startTime.getValue();
-            remove(uroven10,uroven101,uroven010);
+            remove(uroven10,uroven101,uroven010,progressBar);
             WaterConditions();
         });
         previousButton.addClickListener(buttonClickEvent -> {
-            remove(uroven10,uroven101,uroven010);
+            remove(uroven10,uroven101,uroven010,progressBar);
             TankIn();
         });
-        add(uroven010,uroven10,uroven101);
+        add(progressBar,uroven010,uroven10,uroven101);
     }
 
      private void WaterConditions() {
         HorizontalLayout uroven011 = new HorizontalLayout();
         HorizontalLayout uroven11 = new HorizontalLayout();
         HorizontalLayout uroven111 = new HorizontalLayout();
+        ProgressBar progressBar = new ProgressBar();
+        progressBar.setValue(0.55);
+        progressBar.setWidth("200px");
         Image img11 = new Image("images/WaterConditions.jpg","Failed to load image");
         img11.setHeight("350px");
         ComboBox<String> waterConditions = new ComboBox<>();
@@ -332,20 +357,23 @@ public class AddanewlogView extends VerticalLayout {
         uroven111.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
             //class.setDivesite = startTime.getValue();
-            remove(uroven11,uroven111,uroven011);
+            remove(uroven11,uroven111,uroven011,progressBar);
             TypeOfDive();
         });
         previousButton.addClickListener(buttonClickEvent -> {
-            remove(uroven11,uroven111,uroven011);
+            remove(uroven11,uroven111,uroven011,progressBar);
             TankOut();
         });
-        add(uroven011,uroven11,uroven111);
+        add(progressBar,uroven011,uroven11,uroven111);
     }
 
     private void TypeOfDive() {
         HorizontalLayout uroven012 = new HorizontalLayout();
         HorizontalLayout uroven12 = new HorizontalLayout();
         HorizontalLayout uroven121 = new HorizontalLayout();
+        ProgressBar progressBar = new ProgressBar();
+        progressBar.setValue(0.60);
+        progressBar.setWidth("200px");
         Image img12 = new Image("images/TypeOfDive.jpg","Failed to load image");
         img12.setHeight("350px");
         ComboBox<String> typeOfDive = new ComboBox<>("Select one option");
@@ -357,25 +385,28 @@ public class AddanewlogView extends VerticalLayout {
         uroven121.add(previousButton, nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
             //class.setDivesite = startTime.getValue();
-            remove(uroven12,uroven121,uroven012);
+            remove(uroven12,uroven121,uroven012,progressBar);
             AirTemperature();
         });
         previousButton.addClickListener(buttonClickEvent -> {
-            remove(uroven12,uroven121,uroven012);
+            remove(uroven12,uroven121,uroven012,progressBar);
             WaterConditions();
         });
-        add(uroven012,uroven12,uroven121);
+        add(progressBar,uroven012,uroven12,uroven121);
     }
 
     private void AirTemperature() {
         HorizontalLayout uroven013 = new HorizontalLayout();
         HorizontalLayout uroven13 = new HorizontalLayout();
         HorizontalLayout uroven131 = new HorizontalLayout();
+        ProgressBar progressBar = new ProgressBar();
+        progressBar.setValue(0.65);
+        progressBar.setWidth("200px");
         Image img13 = new Image("images/AirTemperature.jpg","Failed to load image");
         img13.setHeight("350px");
         NumberField policko13 = new NumberField("Enter temperature in °C");
         policko13.addKeyPressListener(Key.ENTER, e->{
-            remove(uroven13,uroven131,uroven013);
+            remove(uroven13,uroven131,uroven013,progressBar);
             //class.setDivesite = startTime.getValue();
             WaterTemperature();
         });
@@ -386,14 +417,14 @@ public class AddanewlogView extends VerticalLayout {
         uroven131.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
             //class.setDivesite = startTime.getValue();
-            remove(uroven13,uroven131,uroven013);
+            remove(uroven13,uroven131,uroven013,progressBar);
             WaterTemperature();
         });
         previousButton.addClickListener(buttonClickEvent -> {
-            remove(uroven13,uroven131,uroven013);
+            remove(uroven13,uroven131,uroven013,progressBar);
             TypeOfDive();
         });
-        add(uroven013,uroven13,uroven131);
+        add(progressBar,uroven013,uroven13,uroven131);
 
     }
 
@@ -401,11 +432,14 @@ public class AddanewlogView extends VerticalLayout {
         HorizontalLayout uroven014 = new HorizontalLayout();
         HorizontalLayout uroven14 = new HorizontalLayout();
         HorizontalLayout uroven141 = new HorizontalLayout();
+        ProgressBar progressBar = new ProgressBar();
+        progressBar.setValue(0.70);
+        progressBar.setWidth("200px");
         Image img14 = new Image("images/WaterTemperature.jpg","Failed to load image");
         img14.setHeight("350px");
         NumberField policko14 = new NumberField("Enter temperature in °C");
         policko14.addKeyPressListener(Key.ENTER, e->{
-            remove(uroven14,uroven141,uroven014);
+            remove(uroven14,uroven141,uroven014,progressBar);
             //class.setDivesite = startTime.getValue();
             WeightComfort();
         });
@@ -416,20 +450,23 @@ public class AddanewlogView extends VerticalLayout {
         uroven141.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
             //class.setDivesite = startTime.getValue();
-            remove(uroven14,uroven141,uroven014);
+            remove(uroven14,uroven141,uroven014,progressBar);
             WeightComfort();
         });
         previousButton.addClickListener(buttonClickEvent -> {
-            remove(uroven14,uroven141,uroven014);
+            remove(uroven14,uroven141,uroven014,progressBar);
             AirTemperature();
         });
-        add(uroven014,uroven14,uroven141);
+        add(progressBar,uroven014,uroven14,uroven141);
     }
 
     private void WeightComfort() {
         HorizontalLayout uroven015 = new HorizontalLayout();
         HorizontalLayout uroven15 = new HorizontalLayout();
         HorizontalLayout uroven151 = new HorizontalLayout();
+        ProgressBar progressBar = new ProgressBar();
+        progressBar.setValue(0.75);
+        progressBar.setWidth("200px");
         Image img15 = new Image("images/WeightComfort.jpg","Failed to load image");
         img15.setHeight("350px");
         NumberField policko14 = new NumberField("Amount of weights in kg");
@@ -442,14 +479,14 @@ public class AddanewlogView extends VerticalLayout {
         uroven151.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
             //class.setDivesite = startTime.getValue();
-            remove(uroven15,uroven151,uroven015);
+            remove(uroven15,uroven151,uroven015,progressBar);
             HeatComfort();
         });
         previousButton.addClickListener(buttonClickEvent -> {
-            remove(uroven15,uroven151,uroven015);
+            remove(uroven15,uroven151,uroven015,progressBar);
             WaterTemperature();
         });
-        add(uroven015,uroven15,uroven151);
+        add(progressBar,uroven015,uroven15,uroven151);
 
     }
 
@@ -457,6 +494,9 @@ public class AddanewlogView extends VerticalLayout {
         HorizontalLayout uroven016 = new HorizontalLayout();
         HorizontalLayout uroven16 = new HorizontalLayout();
         HorizontalLayout uroven161 = new HorizontalLayout();
+        ProgressBar progressBar = new ProgressBar();
+        progressBar.setValue(0.80);
+        progressBar.setWidth("200px");
         Image img16 = new Image("images/HeatComfort.jpg","Failed to load image");
         img16.setHeight("350px");
         ComboBox<String> thickness = new ComboBox<>("Select suit thickness");
@@ -470,25 +510,28 @@ public class AddanewlogView extends VerticalLayout {
         uroven161.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
             //class.setDivesite = startTime.getValue();
-            remove(uroven16,uroven161,uroven016);
+            remove(uroven16,uroven161,uroven016,progressBar);
             Notes();
         });
         previousButton.addClickListener(buttonClickEvent -> {
-            remove(uroven16,uroven161,uroven016);
+            remove(uroven16,uroven161,uroven016,progressBar);
             WeightComfort();
         });
-        add(uroven016,uroven16,uroven161);
+        add(progressBar,uroven016,uroven16,uroven161);
     }
 
     private void Notes() {
         HorizontalLayout uroven017 = new HorizontalLayout();
         HorizontalLayout uroven17 = new HorizontalLayout();
         HorizontalLayout uroven171 = new HorizontalLayout();
+        ProgressBar progressBar = new ProgressBar();
+        progressBar.setValue(0.85);
+        progressBar.setWidth("200px");
         Image img17 = new Image("images/Notes.jpg","Failed to load image");
         img17.setHeight("350px");
         TextArea policko17 = new TextArea("Max. 400 characters");
         policko17.addKeyPressListener(Key.ENTER, e ->{
-            remove(uroven017,uroven171,uroven17);
+            remove(uroven017,uroven171,uroven17,progressBar);
             //class.setDivesite = startTime.getValue();
             Buddy();
         });
@@ -499,14 +542,14 @@ public class AddanewlogView extends VerticalLayout {
         uroven171.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
             //class.setDivesite = startTime.getValue();
-            remove(uroven017,uroven171,uroven17);
+            remove(uroven017,uroven171,uroven17,progressBar);
             Buddy();
         });
         previousButton.addClickListener(buttonClickEvent -> {
-            remove(uroven17,uroven171,uroven017);
+            remove(uroven17,uroven171,uroven017,progressBar);
             HeatComfort();
         });
-        add(uroven017,uroven17,uroven171);
+        add(progressBar,uroven017,uroven17,uroven171);
 
     }
 
@@ -514,11 +557,14 @@ public class AddanewlogView extends VerticalLayout {
         HorizontalLayout uroven018 = new HorizontalLayout();
         HorizontalLayout uroven18 = new HorizontalLayout();
         HorizontalLayout uroven181 = new HorizontalLayout();
+        ProgressBar progressBar = new ProgressBar();
+        progressBar.setValue(0.90);
+        progressBar.setWidth("200px");
         Image img18 = new Image("images/Buddy.jpg","Failed to load image");
         img18.setHeight("350px");
         TextField policko18 = new TextField("Name");
         policko18.addKeyPressListener(Key.ENTER, e->{
-            remove(uroven18,uroven181,uroven018);
+            remove(uroven18,uroven181,uroven018,progressBar);
             //class.setDivesite = startTime.getValue();
             Edu();
         });
@@ -529,20 +575,23 @@ public class AddanewlogView extends VerticalLayout {
         uroven181.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
             //class.setDivesite = startTime.getValue();
-            remove(uroven018,uroven181,uroven18);
+            remove(uroven018,uroven181,uroven18,progressBar);
             Edu();
         });
         previousButton.addClickListener(buttonClickEvent -> {
-            remove(uroven18,uroven181,uroven018);
+            remove(uroven18,uroven181,uroven018,progressBar);
             Notes();
         });
-        add(uroven018,uroven18,uroven181);
+        add(progressBar,uroven018,uroven18,uroven181);
     }
 
     private void Edu() {
         HorizontalLayout uroven019 = new HorizontalLayout();
         HorizontalLayout uroven19 = new HorizontalLayout();
         HorizontalLayout uroven191 = new HorizontalLayout();
+        ProgressBar progressBar = new ProgressBar();
+        progressBar.setValue(0.95);
+        progressBar.setWidth("200px");
         Image img19 = new Image("images/Edu.jpg","Failed to load image");
         img19.setHeight("350px");
         Button previousButton = new Button("Previous");
@@ -553,29 +602,36 @@ public class AddanewlogView extends VerticalLayout {
         uroven191.add(previousButton,yesButton,noButton);
         yesButton.addClickListener(buttonClickEvent -> {
             //class.setDivesite = startTime.getValue();
-            remove(uroven019,uroven191,uroven19);
+            remove(uroven019,uroven191,uroven19,progressBar);
             Instructor();
         });
         noButton.addClickListener(buttonClickEvent -> {
-            remove(uroven19,uroven191,uroven019);
+            remove(uroven19,uroven191,uroven019,progressBar);
             Feeling();
         });
         previousButton.addClickListener(buttonClickEvent -> {
-            remove(uroven19,uroven191,uroven019);
+            remove(uroven19,uroven191,uroven019,progressBar);
             Buddy();
         });
-        add(uroven019,uroven19,uroven191);
+        add(progressBar,uroven019,uroven19,uroven191);
     }
 
     private void Feeling() {
+        HorizontalLayout uroven0020 = new HorizontalLayout();
         HorizontalLayout uroven020 = new HorizontalLayout();
         HorizontalLayout uroven20 = new HorizontalLayout();
         HorizontalLayout uroven201 = new HorizontalLayout();
+        ProgressBar progressBar = new ProgressBar();
+        progressBar.setValue(1.00);
+        progressBar.setWidth("200px");
+        Image img20 = new Image("images/Feeling.jpg","Failed to load image");
+        img20.setHeight("350px");
         Button previousButton = new Button("Previous");
         Button saveButton = new Button("Save");
         Button goodButton = new Button("Good");
         Button okButton = new Button("Ok");
         Button badButton = new Button("Bad");
+        uroven0020.add(img20);
         uroven020.add(new Paragraph(new H2("How did you feel during this dive?")));
         uroven20.add(goodButton,okButton,badButton);
         uroven201.add(previousButton,saveButton);
@@ -589,25 +645,28 @@ public class AddanewlogView extends VerticalLayout {
             //class.setDivesite = startTime.getValue();
         });
         previousButton.addClickListener(buttonClickEvent -> {
-            remove(uroven20,uroven201,uroven020);
+            remove(uroven0020,uroven20,uroven201,uroven020,progressBar);
             Edu();
         });
         saveButton.addClickListener(buttonClickEvent -> {
             //class.setDivesite = startTime.setValue();
             //Logbook.mainView();
         });
-        add(uroven020,uroven20,uroven201);
+        add(progressBar,uroven0020,uroven020,uroven20,uroven201);
     }
 
     private void Instructor() {
         HorizontalLayout uroven021 = new HorizontalLayout();
         HorizontalLayout uroven21s = new HorizontalLayout();
         HorizontalLayout uroven211 = new HorizontalLayout();
+        ProgressBar progressBar = new ProgressBar();
+        progressBar.setValue(0.909);
+        progressBar.setWidth("200px");
         Image img21 = new Image("images/Buddy.jpg","Failed to load image");
         img21.setHeight("350px");
         TextField policko21 = new TextField("Name");
         policko21.addKeyPressListener(Key.ENTER,e->{
-            remove(uroven21s,uroven021,uroven211);
+            remove(uroven21s,uroven021,uroven211,progressBar);
             //class.setDivesite = startTime.getValue();
             DiveClub();
         });
@@ -618,25 +677,28 @@ public class AddanewlogView extends VerticalLayout {
         uroven211.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
             //class.setDivesite = startTime.getValue();
-            remove(uroven021,uroven21s,uroven211);
+            remove(uroven021,uroven21s,uroven211,progressBar);
             DiveClub();
         });
         previousButton.addClickListener(buttonClickEvent -> {
-            remove(uroven021,uroven21s,uroven211);
+            remove(uroven021,uroven21s,uroven211,progressBar);
             Edu();
         });
-        add(uroven021,uroven21s,uroven211);
+        add(progressBar,uroven021,uroven21s,uroven211);
     }
 
     private void DiveClub() {
         HorizontalLayout uroven022 = new HorizontalLayout();
         HorizontalLayout uroven22 = new HorizontalLayout();
         HorizontalLayout uroven221 = new HorizontalLayout();
+        ProgressBar progressBar = new ProgressBar();
+        progressBar.setValue(0.9545);
+        progressBar.setWidth("200px");
         Image img22 = new Image("images/DiveClub.jpg","Failed to load image");
         img22.setHeight("350px");
         TextField policko22 = new TextField("Name");
         policko22.addKeyPressListener(Key.ENTER,e->{
-            remove(uroven022,uroven22,uroven221);
+            remove(uroven022,uroven22,uroven221,progressBar);
             //class.setDivesite = startTime.getValue();
             FeelingEnd();
         });
@@ -647,25 +709,32 @@ public class AddanewlogView extends VerticalLayout {
         uroven221.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
             //class.setDivesite = startTime.getValue();
-            remove(uroven022,uroven22,uroven221);
+            remove(uroven022,uroven22,uroven221,progressBar);
             FeelingEnd();
         });
         previousButton.addClickListener(buttonClickEvent -> {
-            remove(uroven022,uroven22,uroven221);
+            remove(uroven022,uroven22,uroven221,progressBar);
             Instructor();
         });
-        add(uroven022,uroven22,uroven221);
+        add(progressBar,uroven022,uroven22,uroven221);
     }
 
     private void FeelingEnd() {
+        HorizontalLayout uroven0023 = new HorizontalLayout();
         HorizontalLayout uroven023 = new HorizontalLayout();
         HorizontalLayout uroven23 = new HorizontalLayout();
         HorizontalLayout uroven231 = new HorizontalLayout();
+        ProgressBar progressBar = new ProgressBar();
+        progressBar.setValue(1.00);
+        progressBar.setWidth("200px");
+        Image img23 = new Image("images/Feeling.jpg","Failed to load image");
+        img23.setHeight("350px");
         Button previousButton = new Button("Previous");
         Button saveButton = new Button("Save");
         Button goodButton = new Button("Good");
         Button okButton = new Button("Ok");
         Button badButton = new Button("Bad");
+        uroven0023.add(img23);
         uroven023.add(new Paragraph(new H2("How did you feel during this dive?")));
         uroven23.add(goodButton,okButton,badButton);
         uroven231.add(previousButton,saveButton);
@@ -679,14 +748,14 @@ public class AddanewlogView extends VerticalLayout {
             //class.setDivesite = startTime.getValue();
         });
         previousButton.addClickListener(buttonClickEvent -> {
-            remove(uroven23,uroven231,uroven023);
+            remove(uroven23,uroven231,uroven023,progressBar,uroven0023);
             DiveClub();
         });
         saveButton.addClickListener(buttonClickEvent -> {
             //class.setDivesite = startTime.setValue();
             //Logbook.mainView();
         });
-        add(uroven023,uroven23,uroven231);
+        add(progressBar,uroven0023,uroven023,uroven23,uroven231);
     }
 
 }
