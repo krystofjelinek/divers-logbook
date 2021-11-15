@@ -1,33 +1,32 @@
-/*
+
 package com.example.application.views.addanewlog;
 
 import com.google.gson.Gson;
-import com.google.gson.stream.JsonReader;
 
-import java.io.*;
-import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class ReadWriteUtilityForFile {
 
     private static final String FileLocation = "/Users/appshah/Documents/data.txt";
     private static final Gson gson = new Gson();
 
-    private static class logdata {
+    public static class logdata {
         private String divesitedata;
         private String locationdata;
-        private int dateofdivedata;
-        private int starttimedata;
-        private int bottomtimedata;
-        private int endtimedata;
+        private LocalDate dateofdivedata;
+        private LocalTime starttimedata;
+        private LocalTime bottomtimedata;
+        private LocalTime endtimedata;
         private double maxdepthdata;
         private double avgdepthdata;
-        private int tankindata;
-        private int tankoutdata;
+        private Double tankindata;
+        private Double tankoutdata;
         private String waterconditionsdata;
         private String typeofdivedata;
-        private int airtempdata;
-        private int watertempdata;
-        private int weightsdata;
+        private Double airtempdata;
+        private Double watertempdata;
+        private Double weightsdata;
         private String weightcomfortdata;
         private String heatdata;
         private String heatcomfortdata;
@@ -54,35 +53,35 @@ public class ReadWriteUtilityForFile {
             this.locationdata = locationdata;
         }
 
-        public int getDateofdivedata() {
+        public LocalDate getDateofdivedata() {
             return dateofdivedata;
         }
 
-        public void setDateofdivedata(int dateofdivedata) {
+        public void setDateofdivedata(LocalDate dateofdivedata) {
             this.dateofdivedata = dateofdivedata;
         }
 
-        public int getStarttimedata() {
+        public LocalTime getStarttimedata() {
             return starttimedata;
         }
 
-        public void setStarttimedata(int starttimedata) {
+        public void setStarttimedata(LocalTime starttimedata) {
             this.starttimedata = starttimedata;
         }
 
-        public int getBottomtimedata() {
+        public LocalTime getBottomtimedata() {
             return bottomtimedata;
         }
 
-        public void setBottomtimedata(int bottomtimedata) {
+        public void setBottomtimedata(LocalTime bottomtimedata) {
             this.bottomtimedata = bottomtimedata;
         }
 
-        public int getEndtimedata() {
+        public LocalTime getEndtimedata() {
             return endtimedata;
         }
 
-        public void setEndtimedata(int endtimedata) {
+        public void setEndtimedata(LocalTime endtimedata) {
             this.endtimedata = endtimedata;
         }
 
@@ -102,19 +101,19 @@ public class ReadWriteUtilityForFile {
             this.avgdepthdata = avgdepthdata;
         }
 
-        public int getTankindata() {
+        public Double getTankindata() {
             return tankindata;
         }
 
-        public void setTankindata(int tankindata) {
+        public void setTankindata(Double tankindata) {
             this.tankindata = tankindata;
         }
 
-        public int getTankoutdata() {
+        public Double getTankoutdata() {
             return tankoutdata;
         }
 
-        public void setTankoutdata(int tankoutdata) {
+        public void setTankoutdata(Double tankoutdata) {
             this.tankoutdata = tankoutdata;
         }
 
@@ -134,27 +133,27 @@ public class ReadWriteUtilityForFile {
             this.typeofdivedata = typeofdivedata;
         }
 
-        public int getAirtempdata() {
+        public Double getAirtempdata() {
             return airtempdata;
         }
 
-        public void setAirtempdata(int airtempdata) {
+        public void setAirtempdata(Double airtempdata) {
             this.airtempdata = airtempdata;
         }
 
-        public int getWatertempdata() {
+        public Double getWatertempdata() {
             return watertempdata;
         }
 
-        public void setWatertempdata(int watertempdata) {
+        public void setWatertempdata(Double watertempdata) {
             this.watertempdata = watertempdata;
         }
 
-        public int getWeightsdata() {
+        public Double getWeightsdata() {
             return weightsdata;
         }
 
-        public void setWeightsdata(int weightsdata) {
+        public void setWeightsdata(Double weightsdata) {
             this.weightsdata = weightsdata;
         }
 
@@ -230,7 +229,8 @@ public class ReadWriteUtilityForFile {
             this.feelingdata = feelingdata;
         }
     }
-
+}
+/*
     // Main Method
     public static void main(String[] args) {
         // Save data to file
@@ -281,7 +281,7 @@ public class ReadWriteUtilityForFile {
             dataLog("Logbook data saved at file location: " + dataFile + " Data: " + myData + "\n");
         } catch (IOException e) {
 
-            dataLog("Hmm.. Got an error while saving Company data to file " + e.toString());
+            dataLog("Hmm.. Got an error while saving logbook data to file " + e.toString());
         }
     }
 
@@ -304,7 +304,7 @@ public class ReadWriteUtilityForFile {
 
             dataLog("Company Name: " + company.getCompanyName());
             int employee = logdata.getEmployees();
-            crunchifyLog("# of Employees: " + Integer.toString(employee));
+            dataLog("# of Employees: " + Integer.toString(employee));
 
         } catch (Exception e) {
             crunchifyLog("error load cache from file " + e.toString());
