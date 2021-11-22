@@ -8,6 +8,7 @@ import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.html.*;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.server.PWA;
@@ -67,8 +68,10 @@ public class MainLayout extends AppLayout {
 
         viewTitle = new H1();
         viewTitle.addClassNames("m-0", "text-l");
-
-        Header header = new Header(toggle, viewTitle);
+        Anchor logout = new Anchor("/logout","Log out");
+        logout.addClassName("logout");
+        HorizontalLayout uroven = new HorizontalLayout(new DrawerToggle(),viewTitle,logout);
+        Header header = new Header(toggle, viewTitle,logout);
         header.addClassNames("bg-base", "border-b", "border-contrast-10", "box-border", "flex", "h-xl", "items-center",
                 "w-full");
         return header;

@@ -6,6 +6,7 @@ import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.datepicker.DatePicker;
+import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Paragraph;
@@ -21,6 +22,7 @@ import com.vaadin.flow.router.Route;
 
 @PageTitle("Add a new dive")
 @Route(value = "add", layout = MainLayout.class)
+@StyleSheet("styles.css")
 public class AddanewlogView extends VerticalLayout {
 
     public AddanewlogView() {
@@ -35,12 +37,12 @@ public class AddanewlogView extends VerticalLayout {
     ReadWriteUtilityForFile.logdata id = new ReadWriteUtilityForFile.logdata();
     LogbookView ad = new LogbookView();
     /**
-     * Stylizovat next button a transparent button (CSS)
      * Ochránit vstupy (Binder)(prázné pole apod.)
      * stylizovat Feeling buttons/Feeling.jpg
      * Xml reader suunto DM5
      * Stylizovat polícka aby měla stejnou velikost
      * save button -> LogbookView
+     * Login pro více uživatelů(user, userpass
      */
 
     public void DiveSite() {
@@ -59,7 +61,8 @@ public class AddanewlogView extends VerticalLayout {
             Location();
         });
         Button nextButton = new Button("Next");
-        Button invisibleButton = new Button("");
+        Button invisibleButton = new Button("Previous");
+        invisibleButton.addClassName("invisible-button");
         uroven01.add(img1);
         uroven1.add(new Paragraph(new H2("Dive site:")), policko1);
         uroven11.add(invisibleButton,nextButton);

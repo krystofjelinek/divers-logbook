@@ -12,32 +12,32 @@ public class ReadWriteUtilityForFile {
     private static final Gson gson = new Gson();
 
     public static class logdata {
-        private String divesitedata;
-        private String locationdata;
-        private LocalDate dateofdivedata;
-        private LocalTime starttimedata;
-        private LocalTime bottomtimedata;
-        private LocalTime endtimedata;
-        private double maxdepthdata;
-        private double avgdepthdata;
-        private Double tankindata;
-        private Double tankoutdata;
-        private String waterconditionsdata;
-        private String typeofdivedata;
-        private Double airtempdata;
-        private Double watertempdata;
-        private Double weightsdata;
-        private String weightcomfortdata;
-        private String heatdata;
-        private String heatcomfortdata;
-        private String notesdata;
-        private String buddydata;
-        private String Edudata;
-        private String diveclubdata;
-        private String instructordata;
-        private String feelingdata;
+        private static String divesitedata;
+        private static String locationdata;
+        private static LocalDate dateofdivedata;
+        private static LocalTime starttimedata;
+        private static LocalTime bottomtimedata;
+        private static LocalTime endtimedata;
+        private static double maxdepthdata;
+        private static double avgdepthdata;
+        private static Double tankindata;
+        private static Double tankoutdata;
+        private static String waterconditionsdata;
+        private static String typeofdivedata;
+        private static Double airtempdata;
+        private static Double watertempdata;
+        private static Double weightsdata;
+        private static String weightcomfortdata;
+        private static String heatdata;
+        private static String heatcomfortdata;
+        private static String notesdata;
+        private static String buddydata;
+        private static String Edudata;
+        private static String diveclubdata;
+        private static String instructordata;
+        private static String feelingdata;
 
-        public String getDivesitedata() {
+        public static String getDivesitedata() {
             return divesitedata;
         }
 
@@ -45,7 +45,7 @@ public class ReadWriteUtilityForFile {
             this.divesitedata = divesitedata;
         }
 
-        public String getLocationdata() {
+        public static String getLocationdata() {
             return locationdata;
         }
 
