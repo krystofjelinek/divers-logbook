@@ -42,7 +42,8 @@ public class AddanewlogView extends VerticalLayout {
      * Xml reader suunto DM5
      * Stylizovat polícka aby měla stejnou velikost
      * save button -> LogbookView
-     * Login pro více uživatelů(user, userpass
+     * Login pro více uživatelů(user, userpass)
+     * Forgotten password
      */
 
     public void DiveSite() {
@@ -653,7 +654,7 @@ public class AddanewlogView extends VerticalLayout {
             Edu();
         });
         saveButton.addClickListener(buttonClickEvent -> {
-            ad.Header();
+           //prejit na logbookView
         });
         add(progressBar,uroven0020,uroven020,uroven20,uroven201);
     }
@@ -755,7 +756,7 @@ public class AddanewlogView extends VerticalLayout {
             DiveClub();
         });
         saveButton.addClickListener(buttonClickEvent -> {
-            ad.Header();
+            //prejit na logbookView
         });
         add(progressBar,uroven0023,uroven023,uroven23,uroven231);
     }
