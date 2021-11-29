@@ -2,6 +2,7 @@ package com.example.application.views.logbook;
 
 import com.example.application.views.MainLayout;
 import com.example.application.views.addanewlog.ReadWriteUtilityForFile;
+import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
@@ -9,8 +10,8 @@ import com.vaadin.flow.router.Route;
 
 @PageTitle("logbook")
 @Route(value = "", layout = MainLayout.class)
+@StyleSheet("./styles.css")
 public class LogbookView extends VerticalLayout {
-
     Grid<ReadWriteUtilityForFile.logdata> logdataGrid = new Grid<>(ReadWriteUtilityForFile.logdata.class);
 
     public LogbookView() {
@@ -22,6 +23,7 @@ public class LogbookView extends VerticalLayout {
         configureGrid();
         add(logdataGrid);
     }
+
 
     private void configureGrid() {
         logdataGrid.addClassName("grid");
@@ -42,22 +44,22 @@ public class LogbookView extends VerticalLayout {
         logdataGrid.removeColumnByKey("waterconditionsdata");
         logdataGrid.removeColumnByKey("weightcomfortdata");
         logdataGrid.removeColumnByKey("weightsdata");
-        //logdataGrid.removeColumnByKey("dateofdivedata");
-        logdataGrid.removeColumnByKey("buddydata");
         logdataGrid.removeColumnByKey("avgdepthdata");
-        logdataGrid.removeColumnByKey("maxdepthdata");
-        logdataGrid.removeColumnByKey("bottomtimedata");
-        logdataGrid.removeColumnByKey("edudata");
 
-        Grid.Column<ReadWriteUtilityForFile.logdata> dateColumn = logdataGrid.addColumn(ReadWriteUtilityForFile.logdata::getDateofdivedata)
-                .setHeader("Date").setWidth("70px");
-        
+        logdataGrid.getColumns().forEach(logdataColumn -> logdataColumn.setAutoWidth(true));
+        logdataGrid.setColumns("dateofdivedata", "locationdata", "divesitedata", "maxdepthdata","bottomtimedata","buddydata","edudata");
 
-       /* Grid.Column<ReadWriteUtilityForFile.logdata> locationColumn = logdataGrid.addColumn(ReadWriteUtilityForFile.logdata::getLocationdata)
-                .setHeader("Location").setWidth("100px");
+        logdataGrid.getColumnByKey("dateofdivedata").setHeader("Date");
+        logdataGrid.getColumnByKey("bottomtimedata").setHeader("Bottom time");
+        logdataGrid.getColumnByKey("buddydata").setHeader("Buddy");
+        logdataGrid.getColumnByKey("maxdepthdata").setHeader("Max. depth");
+        logdataGrid.getColumnByKey("edudata").setHeader("Edu");
+        logdataGrid.getColumnByKey("locationdata").setHeader("Location");
+        logdataGrid.getColumnByKey("divesitedata").setHeader("Dive site");
 
-        Grid.Column<ReadWriteUtilityForFile.logdata> divesiteColumn = logdataGrid.addColumn(ReadWriteUtilityForFile.logdata::getDivesitedata)
-                .setHeader("Dive site").setWidth("100px");*/
+
+
+
     }
 
    /* public void Header() {
