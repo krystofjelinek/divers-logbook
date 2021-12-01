@@ -20,7 +20,7 @@ public class ReadWriteUtilityForFile {
         private static LocalTime endtimedata;
         private static double maxdepthdata;
         private static double avgdepthdata;
-        private static double tankindata;
+        private static Double tankindata;
         private static Double tankoutdata;
         private static String waterconditionsdata;
         private static String typeofdivedata;
@@ -37,7 +37,7 @@ public class ReadWriteUtilityForFile {
         private static String instructordata;
         private static String feelingdata;
 
-        public String getDivesitedata() {
+        public static String getDivesitedata() {
             return divesitedata;
         }
 
@@ -45,7 +45,7 @@ public class ReadWriteUtilityForFile {
             this.divesitedata = divesitedata;
         }
 
-        public String getLocationdata() {
+        public static String getLocationdata() {
             return locationdata;
         }
 

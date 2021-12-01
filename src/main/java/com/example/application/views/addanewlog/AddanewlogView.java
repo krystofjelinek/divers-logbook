@@ -22,7 +22,7 @@ import com.vaadin.flow.router.Route;
 
 @PageTitle("Add a new dive")
 @Route(value = "add", layout = MainLayout.class)
-@StyleSheet("./styles.css")
+@StyleSheet("styles.css")
 public class AddanewlogView extends VerticalLayout {
 
     public AddanewlogView() {
@@ -756,7 +756,7 @@ public class AddanewlogView extends VerticalLayout {
             DiveClub();
         });
         saveButton.addClickListener(buttonClickEvent -> {
-
+            //prejit na logbookView
         });
         add(progressBar,uroven0023,uroven023,uroven23,uroven231);
     }
