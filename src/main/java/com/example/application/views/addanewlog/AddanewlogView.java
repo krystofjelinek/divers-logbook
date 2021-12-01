@@ -22,7 +22,7 @@ import com.vaadin.flow.router.Route;
 
 @PageTitle("Add a new dive")
 @Route(value = "add", layout = MainLayout.class)
-@StyleSheet("styles.css")
+@StyleSheet("./styles.css")
 public class AddanewlogView extends VerticalLayout {
 
     public AddanewlogView() {

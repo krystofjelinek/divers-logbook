@@ -37,7 +37,7 @@ public class ReadWriteUtilityForFile {
         private static String instructordata;
         private static String feelingdata;
 
-        public static String getDivesitedata() {
+        public String getDivesitedata() {
             return divesitedata;
         }
 
@@ -45,7 +45,7 @@ public class ReadWriteUtilityForFile {
             this.divesitedata = divesitedata;
         }
 
-        public static String getLocationdata() {
+        public String getLocationdata() {
             return locationdata;
         }
 
