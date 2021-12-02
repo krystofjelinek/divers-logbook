@@ -18,15 +18,15 @@ public class ReadWriteUtilityForFile {
         private static LocalTime starttimedata;
         private static LocalTime bottomtimedata;
         private static LocalTime endtimedata;
-        private static double maxdepthdata;
-        private static double avgdepthdata;
-        private static Double tankindata;
-        private static Double tankoutdata;
+        private static String maxdepthdata;
+        private static String avgdepthdata;
+        private static String tankindata;
+        private static String tankoutdata;
         private static String waterconditionsdata;
         private static String typeofdivedata;
-        private static Double airtempdata;
-        private static Double watertempdata;
-        private static Double weightsdata;
+        private static String airtempdata;
+        private static String watertempdata;
+        private static String weightsdata;
         private static String weightcomfortdata;
         private static String heatdata;
         private static String heatcomfortdata;
@@ -36,6 +36,17 @@ public class ReadWriteUtilityForFile {
         private static String diveclubdata;
         private static String instructordata;
         private static String feelingdata;
+
+        public logdata(String divesitedata, String locationdata, LocalDate dateofdivedata, LocalTime starttimedata,
+                 LocalTime bottomtimedata, LocalTime endtimedata, String maxdepthdata, String avgdepthdata,
+                 String tankindata, String tankoutdata, String waterconditionsdata, String typeofdivedata, String airtempdata,
+                String watertempdata, String weightsdata, String weightcomfortdata, String heatdata, String heatcomfortdata,
+                String notesdata, String buddydata, String Edudata, String diveclubdata, String instructordata, String feelingdata) {
+        }
+
+        public logdata() {
+
+        }
 
         public String getDivesitedata() {
             return divesitedata;
@@ -85,35 +96,35 @@ public class ReadWriteUtilityForFile {
             this.endtimedata = endtimedata;
         }
 
-        public double getMaxdepthdata() {
+        public String getMaxdepthdata() {
             return maxdepthdata;
         }
 
-        public void setMaxdepthdata(double maxdepthdata) {
+        public void setMaxdepthdata(String maxdepthdata) {
             this.maxdepthdata = maxdepthdata;
         }
 
-        public double getAvgdepthdata() {
+        public String getAvgdepthdata() {
             return avgdepthdata;
         }
 
-        public void setAvgdepthdata(double avgdepthdata) {
+        public void setAvgdepthdata(String avgdepthdata) {
             this.avgdepthdata = avgdepthdata;
         }
 
-        public Double getTankindata() {
+        public String getTankindata() {
             return tankindata;
         }
 
-        public void setTankindata(Double tankindata) {
+        public void setTankindata(String tankindata) {
             this.tankindata = tankindata;
         }
 
-        public Double getTankoutdata() {
+        public String getTankoutdata() {
             return tankoutdata;
         }
 
-        public void setTankoutdata(Double tankoutdata) {
+        public void setTankoutdata(String tankoutdata) {
             this.tankoutdata = tankoutdata;
         }
 
@@ -133,27 +144,27 @@ public class ReadWriteUtilityForFile {
             this.typeofdivedata = typeofdivedata;
         }
 
-        public Double getAirtempdata() {
+        public String getAirtempdata() {
             return airtempdata;
         }
 
-        public void setAirtempdata(Double airtempdata) {
+        public void setAirtempdata(String airtempdata) {
             this.airtempdata = airtempdata;
         }
 
-        public Double getWatertempdata() {
+        public String getWatertempdata() {
             return watertempdata;
         }
 
-        public void setWatertempdata(Double watertempdata) {
+        public void setWatertempdata(String watertempdata) {
             this.watertempdata = watertempdata;
         }
 
-        public Double getWeightsdata() {
+        public String getWeightsdata() {
             return weightsdata;
         }
 
-        public void setWeightsdata(Double weightsdata) {
+        public void setWeightsdata(String weightsdata) {
             this.weightsdata = weightsdata;
         }
 
@@ -227,6 +238,14 @@ public class ReadWriteUtilityForFile {
 
         public void setFeelingdata(String feelingdata) {
             this.feelingdata = feelingdata;
+        }
+
+        public String getDivesitedata(logdata logdata) {
+            return logdata.toString();
+        }
+
+        public String setDivesitedata(logdata logdata, String s) {
+            return logdata.toString();
         }
     }
 }

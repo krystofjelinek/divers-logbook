@@ -1,30 +1,33 @@
 package com.example.application.views.addanewlog;
 
 import com.example.application.views.MainLayout;
-import com.example.application.views.logbook.LogbookView;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.dependency.StyleSheet;
+import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.progressbar.ProgressBar;
-import com.vaadin.flow.component.textfield.NumberField;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.timepicker.TimePicker;
+import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+
+import java.util.Arrays;
+import java.util.List;
 
 @PageTitle("Add a new dive")
 @Route(value = "add", layout = MainLayout.class)
 @StyleSheet("./styles.css")
 public class AddanewlogView extends VerticalLayout {
-
+Binder<ReadWriteUtilityForFile.logdata> binder = new Binder<>(ReadWriteUtilityForFile.logdata.class);
     public AddanewlogView() {
         setSpacing(false);
         setMargin(false);
@@ -35,7 +38,13 @@ public class AddanewlogView extends VerticalLayout {
         DiveSite();
     }
     ReadWriteUtilityForFile.logdata id = new ReadWriteUtilityForFile.logdata();
-    LogbookView ad = new LogbookView();
+ /*  List<ReadWriteUtilityForFile.logdata> logdataList = Arrays.asList(
+            new ReadWriteUtilityForFile.logdata(id.getDivesitedata(),id.getLocationdata(),id.getDateofdivedata(),id.getStarttimedata(),
+                    id.getBottomtimedata(),id.getEndtimedata(),id.getMaxdepthdata(),id.getAvgdepthdata(),id.getTankindata(),id.getTankoutdata(),id.getWaterconditionsdata(),
+                    id.getTypeofdivedata(),id.getAirtempdata(),id.getWatertempdata(),id.getWeightsdata(),id.getWeightcomfortdata(),
+                    id.getHeatdata(),id.getHeatcomfortdata(),id.getNotesdata(),id.getBuddydata(),id.getEdudata(),id.getDiveclubdata(),
+                    id.getInstructordata(),id.getFeelingdata()));*/
+
     /**
      * Ochránit vstupy (Binder)(prázné pole apod.)
      * stylizovat Feeling buttons/Feeling.jpg
@@ -57,9 +66,13 @@ public class AddanewlogView extends VerticalLayout {
         img1.setHeight("350px");
         TextField policko1 = new TextField("e. g. Miami diving centre");
         policko1.addKeyPressListener(Key.ENTER, e->{
+            if (policko1.getValue().length() > 0){
             remove(uroven1,uroven11,uroven01,progressBar);
             id.setDivesitedata(policko1.getValue());
-            Location();
+            Location();}
+            else {
+                policko1.setErrorMessage("invalid");
+            }
         });
         Button nextButton = new Button("Next");
         Button invisibleButton = new Button("Previous");
@@ -224,7 +237,7 @@ public class AddanewlogView extends VerticalLayout {
         progressBar.setWidth("200px");
         Image img7 = new Image("images/MaxDepth.jpg","Failed to load image");
         img7.setHeight("350px");
-        NumberField policko7 = new NumberField("Depth in meters");
+        TextField policko7 = new TextField("Depth in meters");
         policko7.addKeyPressListener(Key.ENTER, e->{
             remove(uroven7,uroven71,uroven07,progressBar);
             id.setMaxdepthdata(policko7.getValue());
@@ -256,7 +269,7 @@ public class AddanewlogView extends VerticalLayout {
         progressBar.setWidth("200px");
         Image img8 = new Image("images/AvgDepth.jpg","Failed to load image");
         img8.setHeight("350px");
-        NumberField policko8 = new NumberField("Depth in meters");
+        TextField policko8 = new TextField("Depth in meters");
         policko8.addKeyPressListener(Key.ENTER, e->{
             remove(uroven8,uroven81,uroven08,progressBar);
             id.setAvgdepthdata(policko8.getValue());
@@ -288,7 +301,7 @@ public class AddanewlogView extends VerticalLayout {
         progressBar.setWidth("200px");
         Image img9 = new Image("images/TankIn.jpg","Failed to load image");
         img9.setHeight("350px");
-        NumberField policko9 = new NumberField("Pressure in BAR");
+        TextField policko9 = new TextField("Pressure in BAR");
         policko9.addKeyPressListener(Key.ENTER, e->{
             remove(uroven9,uroven91,uroven09,progressBar);
             id.setTankindata(policko9.getValue());
@@ -320,7 +333,7 @@ public class AddanewlogView extends VerticalLayout {
         progressBar.setWidth("200px");
         Image img10 = new Image("images/TankOut.jpg","Failed to load image");
         img10.setHeight("350px");
-        NumberField policko10 = new NumberField("Pressure in BAR");
+        TextField policko10 = new TextField("Pressure in BAR");
         policko10.addKeyPressListener(Key.ENTER, e->{
             remove(uroven10,uroven101,uroven010,progressBar);
             id.setTankoutdata(policko10.getValue());
@@ -409,7 +422,7 @@ public class AddanewlogView extends VerticalLayout {
         progressBar.setWidth("200px");
         Image img13 = new Image("images/AirTemperature.jpg","Failed to load image");
         img13.setHeight("350px");
-        NumberField policko13 = new NumberField("Enter temperature in °C");
+        TextField policko13 = new TextField("Enter temperature in °C");
         policko13.addKeyPressListener(Key.ENTER, e->{
             remove(uroven13,uroven131,uroven013,progressBar);
             id.setAirtempdata(policko13.getValue());
@@ -441,7 +454,7 @@ public class AddanewlogView extends VerticalLayout {
         progressBar.setWidth("200px");
         Image img14 = new Image("images/WaterTemperature.jpg","Failed to load image");
         img14.setHeight("350px");
-        NumberField policko14 = new NumberField("Enter temperature in °C");
+        TextField policko14 = new TextField("Enter temperature in °C");
         policko14.addKeyPressListener(Key.ENTER, e->{
             remove(uroven14,uroven141,uroven014,progressBar);
             id.setWatertempdata(policko14.getValue());
@@ -473,7 +486,7 @@ public class AddanewlogView extends VerticalLayout {
         progressBar.setWidth("200px");
         Image img15 = new Image("images/WeightComfort.jpg","Failed to load image");
         img15.setHeight("350px");
-        NumberField policko14 = new NumberField("Amount of weights in kg");
+        TextField policko14 = new TextField("Amount of weights in kg");
         ComboBox<String> comfort = new ComboBox<>("Select comfort level");
         comfort.setItems("Too heavy", "Good", "Too light");
         Button nextButton = new Button("Next");
@@ -654,7 +667,12 @@ public class AddanewlogView extends VerticalLayout {
             Edu();
         });
         saveButton.addClickListener(buttonClickEvent -> {
-           //prejit na logbookView
+            List<ReadWriteUtilityForFile.logdata> logdataList = Arrays.asList(
+                    new ReadWriteUtilityForFile.logdata(id.getDivesitedata(),id.getLocationdata(),id.getDateofdivedata(),id.getStarttimedata(),
+                            id.getBottomtimedata(),id.getEndtimedata(),id.getMaxdepthdata(),id.getAvgdepthdata(),id.getTankindata(),id.getTankoutdata(),id.getWaterconditionsdata(),
+                            id.getTypeofdivedata(),id.getAirtempdata(),id.getWatertempdata(),id.getWeightsdata(),id.getWeightcomfortdata(),
+                            id.getHeatdata(),id.getHeatcomfortdata(),id.getNotesdata(),id.getBuddydata(),id.getEdudata(),id.getDiveclubdata(),
+                            id.getInstructordata(),id.getFeelingdata()));
         });
         add(progressBar,uroven0020,uroven020,uroven20,uroven201);
     }
@@ -756,8 +774,25 @@ public class AddanewlogView extends VerticalLayout {
             DiveClub();
         });
         saveButton.addClickListener(buttonClickEvent -> {
-            //prejit na logbookView
+            List<ReadWriteUtilityForFile.logdata> logdataList = Arrays.asList(
+                    new ReadWriteUtilityForFile.logdata(id.getDivesitedata(),id.getLocationdata(),id.getDateofdivedata(),id.getStarttimedata(),
+                            id.getBottomtimedata(),id.getEndtimedata(),id.getMaxdepthdata(),id.getAvgdepthdata(),id.getTankindata(),id.getTankoutdata(),id.getWaterconditionsdata(),
+                            id.getTypeofdivedata(),id.getAirtempdata(),id.getWatertempdata(),id.getWeightsdata(),id.getWeightcomfortdata(),
+                            id.getHeatdata(),id.getHeatcomfortdata(),id.getNotesdata(),id.getBuddydata(),id.getEdudata(),id.getDiveclubdata(),
+                            id.getInstructordata(),id.getFeelingdata()));
+            HorizontalLayout uroven2311 = new HorizontalLayout();
+            Grid<ReadWriteUtilityForFile.logdata> grid = new Grid<>();
+            grid.setItems(logdataList);
+            grid.addColumn(ReadWriteUtilityForFile.logdata::getDivesitedata).setHeader("Dive site");
+            grid.addColumn(ReadWriteUtilityForFile.logdata::getLocationdata)
+                    .setHeader("Location");
+            uroven2311.add(grid);
+            add(uroven2311);
         });
+
         add(progressBar,uroven0023,uroven023,uroven23,uroven231);
+
+
     }
+
 }

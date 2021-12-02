@@ -62,6 +62,8 @@ public class LogbookView extends VerticalLayout {
         logdataGrid.getColumnByKey("locationdata").setHeader("Location");
         logdataGrid.getColumnByKey("divesitedata").setHeader("Dive site");
 
+
+
     }
 }
 
