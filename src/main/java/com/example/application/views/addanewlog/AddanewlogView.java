@@ -17,18 +17,14 @@ import com.vaadin.flow.component.progressbar.ProgressBar;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.timepicker.TimePicker;
-import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
-import java.util.Arrays;
-import java.util.List;
-
 @PageTitle("Add a new dive")
 @Route(value = "add", layout = MainLayout.class)
-@StyleSheet("./styles.css")
+@StyleSheet("/themes/divers-logbook/styles.css")
 public class AddanewlogView extends VerticalLayout {
-Binder<ReadWriteUtilityForFile.logdata> binder = new Binder<>(ReadWriteUtilityForFile.logdata.class);
+
     public AddanewlogView() {
         setSpacing(false);
         setMargin(false);
@@ -669,12 +665,8 @@ Binder<ReadWriteUtilityForFile.logdata> binder = new Binder<>(ReadWriteUtilityFo
             Edu();
         });
         saveButton.addClickListener(buttonClickEvent -> {
-            List<ReadWriteUtilityForFile.logdata> logdataList = Arrays.asList(
-                    new ReadWriteUtilityForFile.logdata(id.getDivesitedata(),id.getLocationdata(),id.getDateofdivedata(),id.getStarttimedata(),
-                            id.getBottomtimedata(),id.getEndtimedata(),id.getMaxdepthdata(),id.getAvgdepthdata(),id.getTankindata(),id.getTankoutdata(),id.getWaterconditionsdata(),
-                            id.getTypeofdivedata(),id.getAirtempdata(),id.getWatertempdata(),id.getWeightsdata(),id.getWeightcomfortdata(),
-                            id.getHeatdata(),id.getHeatcomfortdata(),id.getNotesdata(),id.getBuddydata(),id.getEdudata(),id.getDiveclubdata(),
-                            id.getInstructordata(),id.getFeelingdata()));
+            sl.setList();
+            //prejit na logbookView
         });
         add(progressBar,uroven0020,uroven020,uroven20,uroven201);
     }
@@ -776,19 +768,8 @@ Binder<ReadWriteUtilityForFile.logdata> binder = new Binder<>(ReadWriteUtilityFo
             DiveClub();
         });
         saveButton.addClickListener(buttonClickEvent -> {
-           /* List<ReadWriteUtilityForFile.logdata> logdataList = Arrays.asList(
-                    new ReadWriteUtilityForFile.logdata(id.getDivesitedata(),id.getLocationdata(),id.getDateofdivedata(),id.getStarttimedata(),
-                            id.getBottomtimedata(),id.getEndtimedata(),id.getMaxdepthdata(),id.getAvgdepthdata(),id.getTankindata(),id.getTankoutdata(),id.getWaterconditionsdata(),
-                            id.getTypeofdivedata(),id.getAirtempdata(),id.getWatertempdata(),id.getWeightsdata(),id.getWeightcomfortdata(),
-                            id.getHeatdata(),id.getHeatcomfortdata(),id.getNotesdata(),id.getBuddydata(),id.getEdudata(),id.getDiveclubdata(),
-                            id.getInstructordata(),id.getFeelingdata()));
-
-            Grid<ReadWriteUtilityForFile.logdata> grid = new Grid<>();
-            grid.setItems(logdataList);
-            grid.addColumn(ReadWriteUtilityForFile.logdata::getDivesitedata).setHeader("Dive site");
-            grid.addColumn(ReadWriteUtilityForFile.logdata::getLocationdata)
-                    .setHeader("Location");*/
             sl.setList();
+            //prejit na logbookView
         });
 
         add(progressBar,uroven0023,uroven023,uroven23,uroven231);

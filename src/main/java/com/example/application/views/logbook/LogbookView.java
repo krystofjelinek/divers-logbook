@@ -9,8 +9,8 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
-@StyleSheet("./styles.css")
-@PageTitle("logbook")
+@StyleSheet("/themes/divers-logbook/styles.css")
+@PageTitle("Logbook")
 @Route(value = "", layout = MainLayout.class)
 public class LogbookView extends VerticalLayout {
 
@@ -65,8 +65,6 @@ public class LogbookView extends VerticalLayout {
         logdataGrid.getColumnByKey("edudata").setHeader("Edu");
         logdataGrid.getColumnByKey("locationdata").setHeader("Location");
         logdataGrid.getColumnByKey("divesitedata").setHeader("Dive site");
-
-
     }
 }
 
