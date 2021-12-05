@@ -1,7 +1,8 @@
 package com.example.application.views.logbook;
 
+import com.example.application.backend.ReadWriteUtilityForFile;
+import com.example.application.backend.saveList;
 import com.example.application.views.MainLayout;
-import com.example.application.views.addanewlog.ReadWriteUtilityForFile;
 import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -14,6 +15,7 @@ import com.vaadin.flow.router.Route;
 public class LogbookView extends VerticalLayout {
 
     Grid<ReadWriteUtilityForFile.logdata> logdataGrid = new Grid<>(ReadWriteUtilityForFile.logdata.class);
+    saveList sl = new saveList();
 
     public LogbookView() {
         addClassName("list-view");
@@ -26,6 +28,7 @@ public class LogbookView extends VerticalLayout {
     }
 
     private void configureGrid() {
+        logdataGrid.setItems(sl.getList());
         logdataGrid.addClassName("grid");
         logdataGrid.setSizeFull();
         logdataGrid.removeColumnByKey("feelingdata");
@@ -51,6 +54,7 @@ public class LogbookView extends VerticalLayout {
         logdataGrid.removeColumnByKey("bottomtimedata");
         logdataGrid.removeColumnByKey("edudata");
 
+
         logdataGrid.getColumns().forEach(logdataColumn -> logdataColumn.setAutoWidth(true));
         logdataGrid.setColumns("dateofdivedata", "locationdata", "divesitedata", "maxdepthdata","bottomtimedata","buddydata","edudata");
 
@@ -61,7 +65,6 @@ public class LogbookView extends VerticalLayout {
         logdataGrid.getColumnByKey("edudata").setHeader("Edu");
         logdataGrid.getColumnByKey("locationdata").setHeader("Location");
         logdataGrid.getColumnByKey("divesitedata").setHeader("Dive site");
-
 
 
     }

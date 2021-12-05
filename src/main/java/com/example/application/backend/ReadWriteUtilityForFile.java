@@ -1,5 +1,5 @@
 
-package com.example.application.views.addanewlog;
+package com.example.application.backend;
 
 import com.google.gson.Gson;
 

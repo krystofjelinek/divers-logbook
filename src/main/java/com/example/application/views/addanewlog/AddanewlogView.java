@@ -1,12 +1,13 @@
 package com.example.application.views.addanewlog;
 
+import com.example.application.backend.ReadWriteUtilityForFile;
+import com.example.application.backend.saveList;
 import com.example.application.views.MainLayout;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.dependency.StyleSheet;
-import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Paragraph;
@@ -38,6 +39,7 @@ Binder<ReadWriteUtilityForFile.logdata> binder = new Binder<>(ReadWriteUtilityFo
         DiveSite();
     }
     ReadWriteUtilityForFile.logdata id = new ReadWriteUtilityForFile.logdata();
+    saveList sl = new saveList();
  /*  List<ReadWriteUtilityForFile.logdata> logdataList = Arrays.asList(
             new ReadWriteUtilityForFile.logdata(id.getDivesitedata(),id.getLocationdata(),id.getDateofdivedata(),id.getStarttimedata(),
                     id.getBottomtimedata(),id.getEndtimedata(),id.getMaxdepthdata(),id.getAvgdepthdata(),id.getTankindata(),id.getTankoutdata(),id.getWaterconditionsdata(),
@@ -774,20 +776,19 @@ Binder<ReadWriteUtilityForFile.logdata> binder = new Binder<>(ReadWriteUtilityFo
             DiveClub();
         });
         saveButton.addClickListener(buttonClickEvent -> {
-            List<ReadWriteUtilityForFile.logdata> logdataList = Arrays.asList(
+           /* List<ReadWriteUtilityForFile.logdata> logdataList = Arrays.asList(
                     new ReadWriteUtilityForFile.logdata(id.getDivesitedata(),id.getLocationdata(),id.getDateofdivedata(),id.getStarttimedata(),
                             id.getBottomtimedata(),id.getEndtimedata(),id.getMaxdepthdata(),id.getAvgdepthdata(),id.getTankindata(),id.getTankoutdata(),id.getWaterconditionsdata(),
                             id.getTypeofdivedata(),id.getAirtempdata(),id.getWatertempdata(),id.getWeightsdata(),id.getWeightcomfortdata(),
                             id.getHeatdata(),id.getHeatcomfortdata(),id.getNotesdata(),id.getBuddydata(),id.getEdudata(),id.getDiveclubdata(),
                             id.getInstructordata(),id.getFeelingdata()));
-            HorizontalLayout uroven2311 = new HorizontalLayout();
+
             Grid<ReadWriteUtilityForFile.logdata> grid = new Grid<>();
             grid.setItems(logdataList);
             grid.addColumn(ReadWriteUtilityForFile.logdata::getDivesitedata).setHeader("Dive site");
             grid.addColumn(ReadWriteUtilityForFile.logdata::getLocationdata)
-                    .setHeader("Location");
-            uroven2311.add(grid);
-            add(uroven2311);
+                    .setHeader("Location");*/
+            sl.setList();
         });
 
         add(progressBar,uroven0023,uroven023,uroven23,uroven231);
