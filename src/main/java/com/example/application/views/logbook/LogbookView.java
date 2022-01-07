@@ -7,11 +7,15 @@ import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
+import com.vaadin.flow.router.PreserveOnRefresh;
 import com.vaadin.flow.router.Route;
+
+import java.util.Collection;
 
 @StyleSheet("/themes/divers-logbook/styles.css")
 @PageTitle("Logbook")
 @Route(value = "", layout = MainLayout.class)
+@PreserveOnRefresh
 public class LogbookView extends VerticalLayout {
 
     Grid<ReadWriteUtilityForFile.logdata> logdataGrid = new Grid<>(ReadWriteUtilityForFile.logdata.class);
@@ -28,7 +32,8 @@ public class LogbookView extends VerticalLayout {
     }
 
     private void configureGrid() {
-        logdataGrid.setItems(sl.getList());
+        Collection<ReadWriteUtilityForFile.logdata> collection = sl.getList();
+        logdataGrid.setItems(collection);
         logdataGrid.addClassName("grid");
         logdataGrid.setSizeFull();
         logdataGrid.removeColumnByKey("feelingdata");

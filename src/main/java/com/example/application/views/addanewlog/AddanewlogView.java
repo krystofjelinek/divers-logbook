@@ -18,11 +18,13 @@ import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.timepicker.TimePicker;
 import com.vaadin.flow.router.PageTitle;
+import com.vaadin.flow.router.PreserveOnRefresh;
 import com.vaadin.flow.router.Route;
 
 @PageTitle("Add a new dive")
 @Route(value = "add", layout = MainLayout.class)
 @StyleSheet("/themes/divers-logbook/styles.css")
+@PreserveOnRefresh
 public class AddanewlogView extends VerticalLayout {
 
     public AddanewlogView() {
@@ -32,16 +34,31 @@ public class AddanewlogView extends VerticalLayout {
         setJustifyContentMode(JustifyContentMode.CENTER);
         setDefaultHorizontalComponentAlignment(Alignment.CENTER);
         getStyle().set("text-align", "center");
-        DiveSite();
+        AddImport();
     }
+
+    private void AddImport() {
+        HorizontalLayout uroven0 = new HorizontalLayout();
+        Button add = new Button("Add");
+        add.addClickListener(buttonClickEvent -> {
+            remove(uroven0);
+            DiveSite();
+        });
+        add.addClassName("add-button");
+        Button importDive = new Button("Import");
+        importDive.addClickListener(buttonClickEvent -> {
+            remove(uroven0);
+            //prejit na LogbookView
+            //nacteni z json filu
+        });
+        importDive.addClassName("import-button");
+        uroven0.add(add,importDive);
+        add(uroven0);
+
+    }
+
     ReadWriteUtilityForFile.logdata id = new ReadWriteUtilityForFile.logdata();
     saveList sl = new saveList();
- /*  List<ReadWriteUtilityForFile.logdata> logdataList = Arrays.asList(
-            new ReadWriteUtilityForFile.logdata(id.getDivesitedata(),id.getLocationdata(),id.getDateofdivedata(),id.getStarttimedata(),
-                    id.getBottomtimedata(),id.getEndtimedata(),id.getMaxdepthdata(),id.getAvgdepthdata(),id.getTankindata(),id.getTankoutdata(),id.getWaterconditionsdata(),
-                    id.getTypeofdivedata(),id.getAirtempdata(),id.getWatertempdata(),id.getWeightsdata(),id.getWeightcomfortdata(),
-                    id.getHeatdata(),id.getHeatcomfortdata(),id.getNotesdata(),id.getBuddydata(),id.getEdudata(),id.getDiveclubdata(),
-                    id.getInstructordata(),id.getFeelingdata()));*/
 
     /**
      * Ochránit vstupy (Binder)(prázné pole apod.)
@@ -51,6 +68,7 @@ public class AddanewlogView extends VerticalLayout {
      * save button -> LogbookView
      * Login pro více uživatelů(user, userpass)
      * Forgotten password
+     * CVS database
      */
 
     public void DiveSite() {
@@ -73,15 +91,23 @@ public class AddanewlogView extends VerticalLayout {
             }
         });
         Button nextButton = new Button("Next");
-        Button invisibleButton = new Button("Previous");
-        invisibleButton.addClassName("invisible-button");
+        Button previousButton = new Button("Previous");
+        Button saveButton = new Button("Save");
         uroven01.add(img1);
         uroven1.add(new Paragraph(new H2("Dive site:")), policko1);
-        uroven11.add(invisibleButton,nextButton);
+        uroven11.add(previousButton,nextButton,saveButton);
+        saveButton.addClickListener(buttonClickEvent -> {
+            id.setDivesitedata(policko1.getValue());
+            sl.setList();
+        });
         nextButton.addClickListener(buttonClickEvent -> {
             id.setDivesitedata(policko1.getValue());
             remove(uroven01,uroven1,uroven11,progressBar);
             Location();
+        });
+        previousButton.addClickListener(buttonClickEvent -> {
+            remove(uroven01,uroven1,uroven11,progressBar);
+            AddImport();
         });
         add(progressBar,uroven01,uroven1,uroven11);
     }
@@ -769,7 +795,6 @@ public class AddanewlogView extends VerticalLayout {
         });
         saveButton.addClickListener(buttonClickEvent -> {
             sl.setList();
-            //prejit na logbookView
         });
 
         add(progressBar,uroven0023,uroven023,uroven23,uroven231);
