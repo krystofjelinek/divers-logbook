@@ -2,6 +2,7 @@ package com.example.application.views.addanewlog;
 
 import com.example.application.backend.ReadWriteUtilityForFile;
 import com.example.application.backend.saveList;
+import com.example.application.jsonParsing.Json;
 import com.example.application.views.MainLayout;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
@@ -21,13 +22,15 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.PreserveOnRefresh;
 import com.vaadin.flow.router.Route;
 
+import java.io.IOException;
+
 @PageTitle("Add a new dive")
 @Route(value = "add", layout = MainLayout.class)
 @StyleSheet("/themes/divers-logbook/styles.css")
 @PreserveOnRefresh
 public class AddanewlogView extends VerticalLayout {
 
-    public AddanewlogView() {
+    public AddanewlogView() throws IOException {
         setSpacing(false);
         setMargin(false);
         setSizeFull();
@@ -59,6 +62,7 @@ public class AddanewlogView extends VerticalLayout {
 
     ReadWriteUtilityForFile.logdata id = new ReadWriteUtilityForFile.logdata();
     saveList sl = new saveList();
+    Json js = new Json();
 
     /**
      * Ochránit vstupy (Binder)(prázné pole apod.)
@@ -692,6 +696,7 @@ public class AddanewlogView extends VerticalLayout {
         });
         saveButton.addClickListener(buttonClickEvent -> {
             sl.setList();
+            js.setData();
             //prejit na logbookView
         });
         add(progressBar,uroven0020,uroven020,uroven20,uroven201);
@@ -795,6 +800,8 @@ public class AddanewlogView extends VerticalLayout {
         });
         saveButton.addClickListener(buttonClickEvent -> {
             sl.setList();
+            js.setData();
+            //prejit na logbookView
         });
 
         add(progressBar,uroven0023,uroven023,uroven23,uroven231);
