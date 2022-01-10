@@ -1,32 +1,34 @@
 package com.example.application.jsonParsing;
 
 import com.example.application.backend.ReadWriteUtilityForFile;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 
 public class Json {
     ReadWriteUtilityForFile.logdata id = new ReadWriteUtilityForFile.logdata();
-    File file = new File("divedata.json");
-    FileWriter fileWriter = new FileWriter(file, StandardCharsets.UTF_8);
+    FileReader fileReader = new FileReader("/Users/krystofjelinek/IdeaProjects/divers-logbook/divedata.json");
+    JSONArray seznam = new JSONArray();
 
-    public Json() throws IOException {
+    public Json() throws FileNotFoundException {
     }
 
     public void setData(){
+
         JSONObject dive = new JSONObject();
         dive.put("divesite",id.getDivesitedata());
         dive.put("location",id.getLocationdata());
-        dive.put("dateofdive",id.getDateofdivedata());
-        dive.put("starttime",id.getStarttimedata());
-        dive.put("bottomtime",id.getBottomtimedata());
-        dive.put("endtime",id.getEndtimedata());
+        dive.put("dateofdive",id.getDateofdivedata().toString());
+        dive.put("starttime",id.getStarttimedata().toString());
+        dive.put("bottomtime",id.getBottomtimedata().toString());
+        dive.put("endtime",id.getEndtimedata().toString());
         dive.put("maxdepth",id.getMaxdepthdata());
         dive.put("avgdepth",id.getAvgdepthdata());
         dive.put("tankin",id.getTankindata());
@@ -49,8 +51,10 @@ public class Json {
         JSONObject diveObject = new JSONObject();
         diveObject.put("dive",dive);
 
-        try (FileWriter file = new FileWriter("divedata.json")) {
-            file.write(diveObject.toJSONString());
+        seznam.add(diveObject);
+
+        try (FileWriter file = new FileWriter("/Users/krystofjelinek/IdeaProjects/divers-logbook/divedata.json")) {
+            file.write(seznam.toJSONString());
             file.flush();
 
         } catch (IOException e) {
@@ -58,13 +62,65 @@ public class Json {
         }
     }
 
-    public void getData() throws IOException, ParseException {
+    public ArrayList getData() throws IOException, ParseException {
+        ArrayList<String> list = new ArrayList<String>();
+
         JSONParser jsonParser = new JSONParser();
-        FileReader fileReader = new FileReader("divedata.json");
+
 
         Object obj = jsonParser.parse(fileReader);
         JSONObject jsonObject = (JSONObject) obj;
 
         String divesite = (String) jsonObject.get("divesite");
+        String location = (String) jsonObject.get("location");
+        String dateofdive = (String) jsonObject.get("dateofdive");
+        String starttime = (String) jsonObject.get("starttime");
+        String bottomtime = (String) jsonObject.get("bottomtime");
+        String endtime = (String) jsonObject.get("endtime");
+        String maxdepth = (String) jsonObject.get("maxdepth");
+        String avgdepth = (String) jsonObject.get("avgdepth");
+        String tankin = (String) jsonObject.get("tankin");
+        String tankout = (String) jsonObject.get("tankout");
+        String watercond = (String) jsonObject.get("watercond");
+        String typeofdive = (String) jsonObject.get("typeofdive");
+        String airtemp = (String) jsonObject.get("airtemp");
+        String watertemp = (String) jsonObject.get("watertemp");
+        String weights = (String) jsonObject.get("weights");
+        String weightscomf = (String) jsonObject.get("weightscomf");
+        String heat = (String) jsonObject.get("heat");
+        String heatcomf = (String) jsonObject.get("heatcomf");
+        String notes = (String) jsonObject.get("notes");
+        String buddy = (String) jsonObject.get("buddy");
+        String edu = (String) jsonObject.get("edu");
+        String diveclub = (String) jsonObject.get("diveclub");
+        String instructor = (String) jsonObject.get("instructor");
+        String feeling = (String) jsonObject.get("feeling");
+
+        list.add(divesite);
+        list.add(location);
+        list.add(dateofdive);
+        list.add(starttime);
+        list.add(bottomtime);
+        list.add(endtime);
+        list.add(maxdepth);
+        list.add(avgdepth);
+        list.add(tankin);
+        list.add(tankout);
+        list.add(watercond);
+        list.add(typeofdive);
+        list.add(airtemp);
+        list.add(watertemp);
+        list.add(weights);
+        list.add(weightscomf);
+        list.add(heat);
+        list.add(heatcomf);
+        list.add(notes);
+        list.add(buddy);
+        list.add(edu);
+        list.add(diveclub);
+        list.add(instructor);
+        list.add(feeling);
+
+        return list;
     }
 }

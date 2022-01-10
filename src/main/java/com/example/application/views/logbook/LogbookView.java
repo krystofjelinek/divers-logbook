@@ -2,6 +2,7 @@ package com.example.application.views.logbook;
 
 import com.example.application.backend.ReadWriteUtilityForFile;
 import com.example.application.backend.saveList;
+import com.example.application.jsonParsing.Json;
 import com.example.application.views.MainLayout;
 import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.grid.Grid;
@@ -9,8 +10,10 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.PreserveOnRefresh;
 import com.vaadin.flow.router.Route;
+import org.json.simple.parser.ParseException;
 
-import java.util.Collection;
+import java.io.IOException;
+import java.util.ArrayList;
 
 @StyleSheet("/themes/divers-logbook/styles.css")
 @PageTitle("Logbook")
@@ -20,8 +23,9 @@ public class LogbookView extends VerticalLayout {
 
     Grid<ReadWriteUtilityForFile.logdata> logdataGrid = new Grid<>(ReadWriteUtilityForFile.logdata.class);
     saveList sl = new saveList();
+    Json js = new Json();
 
-    public LogbookView() {
+    public LogbookView() throws IOException, ParseException {
         addClassName("list-view");
         setSizeFull();
         setJustifyContentMode(JustifyContentMode.CENTER);
@@ -31,9 +35,10 @@ public class LogbookView extends VerticalLayout {
         add(logdataGrid);
     }
 
-    private void configureGrid() {
-        Collection<ReadWriteUtilityForFile.logdata> collection = sl.getList();
-        logdataGrid.setItems(collection);
+    private void configureGrid() throws IOException, ParseException {
+        //Collection<ReadWriteUtilityForFile.logdata> collection = js.getData();
+        ArrayList list = js.getData();
+        logdataGrid.setItems(list);
         logdataGrid.addClassName("grid");
         logdataGrid.setSizeFull();
         logdataGrid.removeColumnByKey("feelingdata");

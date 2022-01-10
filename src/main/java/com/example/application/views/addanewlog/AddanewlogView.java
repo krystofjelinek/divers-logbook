@@ -21,6 +21,7 @@ import com.vaadin.flow.component.timepicker.TimePicker;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.PreserveOnRefresh;
 import com.vaadin.flow.router.Route;
+import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
 
@@ -51,8 +52,10 @@ public class AddanewlogView extends VerticalLayout {
         Button importDive = new Button("Import");
         importDive.addClickListener(buttonClickEvent -> {
             remove(uroven0);
+            DiveSite();
+            //nacteni z json file
             //prejit na LogbookView
-            //nacteni z json filu
+
         });
         importDive.addClassName("import-button");
         uroven0.add(add,importDive);
@@ -72,7 +75,6 @@ public class AddanewlogView extends VerticalLayout {
      * save button -> LogbookView
      * Login pro více uživatelů(user, userpass)
      * Forgotten password
-     * CVS database
      */
 
     public void DiveSite() {
@@ -102,7 +104,14 @@ public class AddanewlogView extends VerticalLayout {
         uroven11.add(previousButton,nextButton,saveButton);
         saveButton.addClickListener(buttonClickEvent -> {
             id.setDivesitedata(policko1.getValue());
-            sl.setList();
+            try {
+                js.setData();
+                sl.setList();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         });
         nextButton.addClickListener(buttonClickEvent -> {
             id.setDivesitedata(policko1.getValue());
@@ -695,7 +704,6 @@ public class AddanewlogView extends VerticalLayout {
             Edu();
         });
         saveButton.addClickListener(buttonClickEvent -> {
-            sl.setList();
             js.setData();
             //prejit na logbookView
         });
@@ -799,8 +807,12 @@ public class AddanewlogView extends VerticalLayout {
             DiveClub();
         });
         saveButton.addClickListener(buttonClickEvent -> {
-            sl.setList();
-            js.setData();
+            try {
+                js.setData();
+                sl.setList();
+            } catch (IOException | ParseException e) {
+                e.printStackTrace();
+            }
             //prejit na logbookView
         });
 
