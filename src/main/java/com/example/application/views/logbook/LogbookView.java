@@ -13,7 +13,6 @@ import com.vaadin.flow.router.Route;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 @StyleSheet("/themes/divers-logbook/styles.css")
 @PageTitle("Logbook")
@@ -37,8 +36,8 @@ public class LogbookView extends VerticalLayout {
 
     private void configureGrid() throws IOException, ParseException {
         //Collection<ReadWriteUtilityForFile.logdata> collection = js.getData();
-        ArrayList list = js.getData();
-        logdataGrid.setItems(list);
+        //ArrayList list = js.getData();
+        //logdataGrid.setItems(list);
         logdataGrid.addClassName("grid");
         logdataGrid.setSizeFull();
         logdataGrid.removeColumnByKey("feelingdata");

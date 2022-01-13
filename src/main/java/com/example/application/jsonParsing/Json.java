@@ -15,13 +15,12 @@ import java.util.ArrayList;
 public class Json {
     ReadWriteUtilityForFile.logdata id = new ReadWriteUtilityForFile.logdata();
     FileReader fileReader = new FileReader("/Users/krystofjelinek/IdeaProjects/divers-logbook/divedata.json");
-    JSONArray seznam = new JSONArray();
+    public static JSONArray seznam = new JSONArray();
 
     public Json() throws FileNotFoundException {
     }
 
     public void setData(){
-
         JSONObject dive = new JSONObject();
         dive.put("divesite",id.getDivesitedata());
         dive.put("location",id.getLocationdata());
@@ -50,13 +49,11 @@ public class Json {
 
         JSONObject diveObject = new JSONObject();
         diveObject.put("dive",dive);
-
         seznam.add(diveObject);
 
         try (FileWriter file = new FileWriter("/Users/krystofjelinek/IdeaProjects/divers-logbook/divedata.json")) {
             file.write(seznam.toJSONString());
             file.flush();
-
         } catch (IOException e) {
             e.printStackTrace();
         }
