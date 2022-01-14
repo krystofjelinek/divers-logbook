@@ -6,19 +6,16 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Json {
     ReadWriteUtilityForFile.logdata id = new ReadWriteUtilityForFile.logdata();
-    FileReader fileReader = new FileReader("/Users/krystofjelinek/IdeaProjects/divers-logbook/divedata.json");
     public static JSONArray seznam = new JSONArray();
-
-    public Json() throws FileNotFoundException {
-    }
+    public static List<ArrayList<String>> outerList = new ArrayList<ArrayList<String>>();
 
     public void setData(){
         JSONObject dive = new JSONObject();
@@ -59,16 +56,22 @@ public class Json {
         }
     }
 
-    public ArrayList getData() throws IOException, ParseException {
-        ArrayList<String> list = new ArrayList<String>();
+    public List<ArrayList<String>> getData() throws IOException, ParseException {
+        FileReader fileReader = new FileReader("/Users/krystofjelinek/IdeaProjects/divers-logbook/divedata.json");
+
+
 
         JSONParser jsonParser = new JSONParser();
 
 
         Object obj = jsonParser.parse(fileReader);
-        JSONObject jsonObject = (JSONObject) obj;
+        JSONArray diveList = (JSONArray) obj;
 
-        String divesite = (String) jsonObject.get("divesite");
+
+        diveList.forEach(dve -> parseDiveObject((JSONObject) dve));
+
+
+       /* String divesite = (String) jsonObject.get("divesite");
         String location = (String) jsonObject.get("location");
         String dateofdive = (String) jsonObject.get("dateofdive");
         String starttime = (String) jsonObject.get("starttime");
@@ -91,7 +94,40 @@ public class Json {
         String edu = (String) jsonObject.get("edu");
         String diveclub = (String) jsonObject.get("diveclub");
         String instructor = (String) jsonObject.get("instructor");
-        String feeling = (String) jsonObject.get("feeling");
+        String feeling = (String) jsonObject.get("feeling");*/
+
+        return this.outerList;
+
+    }
+
+    private static void parseDiveObject(JSONObject dive){
+        ArrayList<String> list = new ArrayList<String>();
+        JSONObject diveObject = (JSONObject) dive.get("dive");
+
+        String divesite = (String) diveObject.get("divesite");
+        String location = (String) diveObject.get("location");
+        String dateofdive = (String) diveObject.get("dateofdive");
+        String starttime = (String) diveObject.get("starttime");
+        String bottomtime = (String) diveObject.get("bottomtime");
+        String endtime = (String) diveObject.get("endtime");
+        String maxdepth = (String) diveObject.get("maxdepth");
+        String avgdepth = (String) diveObject.get("avgdepth");
+        String tankin = (String) diveObject.get("tankin");
+        String tankout = (String) diveObject.get("tankout");
+        String watercond = (String) diveObject.get("watercond");
+        String typeofdive = (String) diveObject.get("typeofdive");
+        String airtemp = (String) diveObject.get("airtemp");
+        String watertemp = (String) diveObject.get("watertemp");
+        String weights = (String) diveObject.get("weights");
+        String weightscomf = (String) diveObject.get("weightscomf");
+        String heat = (String) diveObject.get("heat");
+        String heatcomf = (String) diveObject.get("heatcomf");
+        String notes = (String) diveObject.get("notes");
+        String buddy = (String) diveObject.get("buddy");
+        String edu = (String) diveObject.get("edu");
+        String diveclub = (String) diveObject.get("diveclub");
+        String instructor = (String) diveObject.get("instructor");
+        String feeling = (String) diveObject.get("feeling");
 
         list.add(divesite);
         list.add(location);
@@ -118,6 +154,6 @@ public class Json {
         list.add(instructor);
         list.add(feeling);
 
-        return list;
+        outerList.add(list);
     }
 }

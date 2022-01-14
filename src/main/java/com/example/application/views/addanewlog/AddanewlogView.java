@@ -809,7 +809,8 @@ public class AddanewlogView extends VerticalLayout {
         saveButton.addClickListener(buttonClickEvent -> {
             try {
                 js.setData();
-                sl.setList();
+                // doplnit u obou savebuttonu
+                js.getData();
             } catch (IOException | ParseException e) {
                 e.printStackTrace();
             }
