@@ -26,7 +26,7 @@ public class saveList {
     }
 */
     public void setList() throws IOException, ParseException {
-        list = js.getData();
+        //list = js.getData();
     }
 
 

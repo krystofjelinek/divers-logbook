@@ -3,19 +3,15 @@ package com.example.application.jsonParsing;
 import com.example.application.backend.ReadWriteUtilityForFile;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Json {
+    // public static List<ArrayList<String>> outerList = new ArrayList<ArrayList<String>>();
     ReadWriteUtilityForFile.logdata id = new ReadWriteUtilityForFile.logdata();
     public static JSONArray seznam = new JSONArray();
-    public static List<ArrayList<String>> outerList = new ArrayList<ArrayList<String>>();
+
 
     public void setData(){
         JSONObject dive = new JSONObject();
@@ -56,7 +52,7 @@ public class Json {
         }
     }
 
-    public List<ArrayList<String>> getData() throws IOException, ParseException {
+   /* public List<ArrayList<String>> getData() throws IOException, ParseException {
         FileReader fileReader = new FileReader("/Users/krystofjelinek/IdeaProjects/divers-logbook/divedata.json");
 
 
@@ -71,7 +67,7 @@ public class Json {
         diveList.forEach(dve -> parseDiveObject((JSONObject) dve));
 
 
-       /* String divesite = (String) jsonObject.get("divesite");
+       *//* String divesite = (String) jsonObject.get("divesite");
         String location = (String) jsonObject.get("location");
         String dateofdive = (String) jsonObject.get("dateofdive");
         String starttime = (String) jsonObject.get("starttime");
@@ -94,7 +90,7 @@ public class Json {
         String edu = (String) jsonObject.get("edu");
         String diveclub = (String) jsonObject.get("diveclub");
         String instructor = (String) jsonObject.get("instructor");
-        String feeling = (String) jsonObject.get("feeling");*/
+        String feeling = (String) jsonObject.get("feeling");*//*
 
         return this.outerList;
 
@@ -155,5 +151,5 @@ public class Json {
         list.add(feeling);
 
         outerList.add(list);
-    }
+    }*/
 }

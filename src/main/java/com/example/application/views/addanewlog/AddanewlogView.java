@@ -21,15 +21,30 @@ import com.vaadin.flow.component.timepicker.TimePicker;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.PreserveOnRefresh;
 import com.vaadin.flow.router.Route;
-import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @PageTitle("Add a new dive")
 @Route(value = "add", layout = MainLayout.class)
 @StyleSheet("/themes/divers-logbook/styles.css")
 @PreserveOnRefresh
 public class AddanewlogView extends VerticalLayout {
+
+    ReadWriteUtilityForFile.logdata id = new ReadWriteUtilityForFile.logdata();
+    saveList sl = new saveList();
+    Json js = new Json();
+
+    /**
+     * Ochránit vstupy (Binder)
+     * stylizovat Feeling buttons
+     * Xml reader suunto DM5
+     * Stylizovat polícka aby měla stejnou velikost
+     * save button -> přejít na LogbookView
+     * Login pro více uživatelů(user, userpass)(dodělat přihlašovací databázi)
+     * Forgotten password
+     */
 
     public AddanewlogView() throws IOException {
         setSpacing(false);
@@ -43,39 +58,24 @@ public class AddanewlogView extends VerticalLayout {
 
     private void AddImport() {
         HorizontalLayout uroven0 = new HorizontalLayout();
-        Button add = new Button("Add");
-        add.addClickListener(buttonClickEvent -> {
+        Button addButton = new Button("Add");
+        addButton.addClickListener(buttonClickEvent -> {
             remove(uroven0);
             DiveSite();
         });
-        add.addClassName("add-button");
+        addButton.addClassName("add-button");
         Button importDive = new Button("Import");
         importDive.addClickListener(buttonClickEvent -> {
             remove(uroven0);
             DiveSite();
-            //nacteni z json file
+            //nacteni dat z potapecskeho pocitace(xml file)
             //prejit na LogbookView
-
         });
         importDive.addClassName("import-button");
-        uroven0.add(add,importDive);
+        uroven0.add(addButton,importDive);
         add(uroven0);
 
     }
-
-    ReadWriteUtilityForFile.logdata id = new ReadWriteUtilityForFile.logdata();
-    saveList sl = new saveList();
-    Json js = new Json();
-
-    /**
-     * Ochránit vstupy (Binder)(prázné pole apod.)
-     * stylizovat Feeling buttons/Feeling.jpg
-     * Xml reader suunto DM5
-     * Stylizovat polícka aby měla stejnou velikost
-     * save button -> LogbookView
-     * Login pro více uživatelů(user, userpass)
-     * Forgotten password
-     */
 
     public void DiveSite() {
         HorizontalLayout uroven01 = new HorizontalLayout();
@@ -93,30 +93,26 @@ public class AddanewlogView extends VerticalLayout {
             id.setDivesitedata(policko1.getValue());
             Location();}
             else {
-                policko1.setErrorMessage("invalid");
+                id.setDivesitedata("-");
+                remove(uroven01,uroven1,uroven11,progressBar);
+                Location();
             }
         });
         Button nextButton = new Button("Next");
         Button previousButton = new Button("Previous");
-        Button saveButton = new Button("Save");
         uroven01.add(img1);
         uroven1.add(new Paragraph(new H2("Dive site:")), policko1);
-        uroven11.add(previousButton,nextButton,saveButton);
-        saveButton.addClickListener(buttonClickEvent -> {
-            id.setDivesitedata(policko1.getValue());
-            try {
-                js.setData();
-                sl.setList();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-        });
+        uroven11.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
+            if(policko1.getValue().length() > 0){
             id.setDivesitedata(policko1.getValue());
             remove(uroven01,uroven1,uroven11,progressBar);
-            Location();
+            Location();}
+            else {
+                id.setDivesitedata("-");
+                remove(uroven01,uroven1,uroven11,progressBar);
+                Location();
+            }
         });
         previousButton.addClickListener(buttonClickEvent -> {
             remove(uroven01,uroven1,uroven11,progressBar);
@@ -136,9 +132,15 @@ public class AddanewlogView extends VerticalLayout {
         img2.setHeight("350px");
         TextField policko2 = new TextField("e. g. Liberec/Czechia");
         policko2.addKeyPressListener(Key.ENTER, e->{
+            if (policko2.getValue().length()>0){
             remove(uroven2,uroven21,uroven02,progressBar);
             id.setLocationdata(policko2.getValue());
-            DateOfDive();
+            DateOfDive();}
+            else {
+                remove(uroven2,uroven21,uroven02,progressBar);
+                id.setLocationdata("-");
+                DateOfDive();
+            }
         });
         Button previousButton = new Button("Previous");
         Button nextButton = new Button("Next");
@@ -146,9 +148,15 @@ public class AddanewlogView extends VerticalLayout {
         uroven21.add(previousButton,nextButton);
         uroven02.add(img2);
         nextButton.addClickListener(buttonClickEvent -> {
-            id.setLocationdata(policko2.getValue());
-            remove(uroven2,uroven21,uroven02,progressBar);
-            DateOfDive();
+            if (policko2.getValue().length()>0){
+                remove(uroven2,uroven21,uroven02,progressBar);
+                id.setLocationdata(policko2.getValue());
+                DateOfDive();}
+            else {
+                remove(uroven2,uroven21,uroven02,progressBar);
+                id.setLocationdata("-");
+                DateOfDive();
+            }
         });
         previousButton.addClickListener(buttonClickEvent -> {
             remove(uroven2,uroven21,uroven02,progressBar);
@@ -173,9 +181,15 @@ public class AddanewlogView extends VerticalLayout {
         uroven3.add(new Paragraph(new H2("Date of dive:")), date);
         uroven31.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
+            if(date.getValue().lengthOfYear()==4){
             id.setDateofdivedata(date.getValue());
             remove(progressBar,uroven03,uroven3,uroven31);
-            StartTime();
+            StartTime();}
+            else {
+                id.setDateofdivedata(LocalDate.now());
+                remove(progressBar,uroven03,uroven3,uroven31);
+                StartTime();
+            }
         });
         previousButton.addClickListener(buttonClickEvent -> {
             remove(progressBar,uroven03,uroven3,uroven31);
@@ -200,9 +214,14 @@ public class AddanewlogView extends VerticalLayout {
         uroven4.add(new Paragraph(new H2("Start time:")), startTime);
         uroven41.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
+            if (startTime.getValue().toString().length() == 0){
+                id.setStarttimedata(LocalTime.now());
+                remove(uroven4,uroven41,uroven04,progressBar);
+                BottomTime();
+            } else {
             id.setStarttimedata(startTime.getValue());
             remove(uroven4,uroven41,uroven04,progressBar);
-            BottomTime();
+            BottomTime();}
         });
         previousButton.addClickListener(buttonClickEvent -> {
             remove(uroven4,uroven41,uroven04,progressBar);
@@ -227,9 +246,14 @@ public class AddanewlogView extends VerticalLayout {
         uroven5.add(new Paragraph(new H2("Bottom time:")), bottomTime);
         uroven51.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
+            if (bottomTime.getValue().toString().length()==0){
+                id.setBottomtimedata(LocalTime.now());
+                remove(uroven5,uroven51,uroven05,progressBar);
+                EndTime();
+            } else {
             id.setBottomtimedata(bottomTime.getValue());
             remove(uroven5,uroven51,uroven05,progressBar);
-            EndTime();
+            EndTime();}
         });
         previousButton.addClickListener(buttonClickEvent -> {
             remove(uroven5,uroven51,uroven05,progressBar);
@@ -254,9 +278,14 @@ public class AddanewlogView extends VerticalLayout {
         uroven6.add(new Paragraph(new H2("End time:")), endTime);
         uroven61.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
+            if (endTime.getValue().toString().length()==0){
+                id.setEndtimedata(LocalTime.now());
+                remove(uroven6,uroven61,uroven06,progressBar);
+                MaximumDepth();
+            } else {
             id.setEndtimedata(endTime.getValue());
             remove(uroven6,uroven61,uroven06,progressBar);
-            MaximumDepth();
+            MaximumDepth();}
         });
         previousButton.addClickListener(buttonClickEvent -> {
             remove(uroven6,uroven61,uroven06,progressBar);
@@ -276,9 +305,15 @@ public class AddanewlogView extends VerticalLayout {
         img7.setHeight("350px");
         TextField policko7 = new TextField("Depth in meters");
         policko7.addKeyPressListener(Key.ENTER, e->{
+            if (policko7.getValue().length()>0){
             remove(uroven7,uroven71,uroven07,progressBar);
             id.setMaxdepthdata(policko7.getValue());
-            AverageDepth();
+            AverageDepth();}
+            else {
+                remove(uroven7,uroven71,uroven07,progressBar);
+                id.setMaxdepthdata("-");
+                AverageDepth();
+            }
         });
         Button nextButton = new Button("Next");
         Button previousButton = new Button("Previous");
@@ -286,9 +321,15 @@ public class AddanewlogView extends VerticalLayout {
         uroven7.add(new Paragraph(new H2("Maximum depth:")), policko7);
         uroven71.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
-            remove(uroven7,uroven71,uroven07,progressBar);
-            id.setMaxdepthdata(policko7.getValue());
-            AverageDepth();
+            if (policko7.getValue().length()>0){
+                remove(uroven7,uroven71,uroven07,progressBar);
+                id.setMaxdepthdata(policko7.getValue());
+                AverageDepth();}
+            else {
+                remove(uroven7,uroven71,uroven07,progressBar);
+                id.setMaxdepthdata("-");
+                AverageDepth();
+            }
         });
         previousButton.addClickListener(buttonClickEvent -> {
             remove(uroven7,uroven71,uroven07,progressBar);
@@ -308,9 +349,15 @@ public class AddanewlogView extends VerticalLayout {
         img8.setHeight("350px");
         TextField policko8 = new TextField("Depth in meters");
         policko8.addKeyPressListener(Key.ENTER, e->{
+            if (policko8.getValue().length()>0){
             remove(uroven8,uroven81,uroven08,progressBar);
             id.setAvgdepthdata(policko8.getValue());
-            TankIn();
+            TankIn();}
+            else {
+                remove(uroven8,uroven81,uroven08,progressBar);
+                id.setAvgdepthdata("-");
+                TankIn();
+            }
         });
         Button nextButton = new Button("Next");
         Button previousButton = new Button("Previous");
@@ -318,9 +365,15 @@ public class AddanewlogView extends VerticalLayout {
         uroven8.add(new Paragraph(new H2("Average depth:")), policko8);
         uroven81.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
-            id.setAvgdepthdata(policko8.getValue());
-            remove(uroven8,uroven81,uroven08,progressBar);
-            TankIn();
+            if (policko8.getValue().length()>0){
+                remove(uroven8,uroven81,uroven08,progressBar);
+                id.setAvgdepthdata(policko8.getValue());
+                TankIn();}
+            else {
+                remove(uroven8,uroven81,uroven08,progressBar);
+                id.setAvgdepthdata("-");
+                TankIn();
+            }
         });
         previousButton.addClickListener(buttonClickEvent -> {
             remove(uroven8,uroven81,uroven08,progressBar);
@@ -340,9 +393,15 @@ public class AddanewlogView extends VerticalLayout {
         img9.setHeight("350px");
         TextField policko9 = new TextField("Pressure in BAR");
         policko9.addKeyPressListener(Key.ENTER, e->{
+            if (policko9.getValue().length()>0){
             remove(uroven9,uroven91,uroven09,progressBar);
             id.setTankindata(policko9.getValue());
-            TankOut();
+            TankOut();}
+            else {
+                remove(uroven9,uroven91,uroven09,progressBar);
+                id.setTankindata("-");
+                TankOut();
+            }
         });
         Button nextButton = new Button("Next");
         Button previousButton = new Button("Previous");
@@ -350,9 +409,15 @@ public class AddanewlogView extends VerticalLayout {
         uroven9.add(new Paragraph(new H2("Tank pressure start:")), policko9);
         uroven91.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
-            id.setTankindata(policko9.getValue());
-            remove(uroven9,uroven91,uroven09,progressBar);
-            TankOut();
+            if (policko9.getValue().length()>0){
+                remove(uroven9,uroven91,uroven09,progressBar);
+                id.setTankindata(policko9.getValue());
+                TankOut();}
+            else {
+                remove(uroven9,uroven91,uroven09,progressBar);
+                id.setTankindata("-");
+                TankOut();
+            }
         });
         previousButton.addClickListener(buttonClickEvent -> {
             remove(uroven9,uroven91,uroven09,progressBar);
@@ -372,9 +437,15 @@ public class AddanewlogView extends VerticalLayout {
         img10.setHeight("350px");
         TextField policko10 = new TextField("Pressure in BAR");
         policko10.addKeyPressListener(Key.ENTER, e->{
+            if (policko10.getValue().length()>0){
             remove(uroven10,uroven101,uroven010,progressBar);
             id.setTankoutdata(policko10.getValue());
-            WaterConditions();
+            WaterConditions();}
+            else {
+                remove(uroven10,uroven101,uroven010,progressBar);
+                id.setTankoutdata("-");
+                WaterConditions();
+            }
         });
         Button nextButton = new Button("Next");
         Button previousButton = new Button("Previous");
@@ -382,9 +453,15 @@ public class AddanewlogView extends VerticalLayout {
         uroven10.add(new Paragraph(new H2("Tank pressure end:")), policko10);
         uroven101.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
-            id.setTankoutdata(policko10.getValue());
-            remove(uroven10,uroven101,uroven010,progressBar);
-            WaterConditions();
+            if (policko10.getValue().length()>0){
+                remove(uroven10,uroven101,uroven010,progressBar);
+                id.setTankoutdata(policko10.getValue());
+                WaterConditions();}
+            else {
+                remove(uroven10,uroven101,uroven010,progressBar);
+                id.setTankoutdata("-");
+                WaterConditions();
+            }
         });
         previousButton.addClickListener(buttonClickEvent -> {
             remove(uroven10,uroven101,uroven010,progressBar);
@@ -411,9 +488,15 @@ public class AddanewlogView extends VerticalLayout {
         uroven11.add(new Paragraph(new H2("Water conditions:")), waterConditions);
         uroven111.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
+            if (waterConditions.getValue().length()>0){
             id.setWaterconditionsdata(waterConditions.getValue());
             remove(uroven11,uroven111,uroven011,progressBar);
-            TypeOfDive();
+            TypeOfDive();}
+            else {
+                id.setWaterconditionsdata("-");
+                remove(uroven11,uroven111,uroven011,progressBar);
+                TypeOfDive();
+            }
         });
         previousButton.addClickListener(buttonClickEvent -> {
             remove(uroven11,uroven111,uroven011,progressBar);
@@ -439,9 +522,15 @@ public class AddanewlogView extends VerticalLayout {
         uroven12.add(new Paragraph(new H2("Type of dive:")), typeOfDive);
         uroven121.add(previousButton, nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
+            if (typeOfDive.getValue().length()>0){
             id.setTypeofdivedata(typeOfDive.getValue());
             remove(uroven12,uroven121,uroven012,progressBar);
-            AirTemperature();
+            AirTemperature();}
+            else {
+                id.setTypeofdivedata("-");
+                remove(uroven12,uroven121,uroven012,progressBar);
+                AirTemperature();
+            }
         });
         previousButton.addClickListener(buttonClickEvent -> {
             remove(uroven12,uroven121,uroven012,progressBar);
@@ -461,9 +550,15 @@ public class AddanewlogView extends VerticalLayout {
         img13.setHeight("350px");
         TextField policko13 = new TextField("Enter temperature in °C");
         policko13.addKeyPressListener(Key.ENTER, e->{
+            if (policko13.getValue().length()>0){
             remove(uroven13,uroven131,uroven013,progressBar);
             id.setAirtempdata(policko13.getValue());
-            WaterTemperature();
+            WaterTemperature();}
+            else {
+                remove(uroven13,uroven131,uroven013,progressBar);
+                id.setAirtempdata("-");
+                WaterTemperature();
+            }
         });
         Button nextButton = new Button("Next");
         Button previousButton = new Button("Previous");
@@ -471,9 +566,15 @@ public class AddanewlogView extends VerticalLayout {
         uroven13.add(new Paragraph(new H2("Air temperature:")), policko13);
         uroven131.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
-            id.setAirtempdata(policko13.getValue());
-            remove(uroven13,uroven131,uroven013,progressBar);
-            WaterTemperature();
+            if (policko13.getValue().length()>0){
+                remove(uroven13,uroven131,uroven013,progressBar);
+                id.setAirtempdata(policko13.getValue());
+                WaterTemperature();}
+            else {
+                remove(uroven13,uroven131,uroven013,progressBar);
+                id.setAirtempdata("-");
+                WaterTemperature();
+            }
         });
         previousButton.addClickListener(buttonClickEvent -> {
             remove(uroven13,uroven131,uroven013,progressBar);
@@ -493,9 +594,15 @@ public class AddanewlogView extends VerticalLayout {
         img14.setHeight("350px");
         TextField policko14 = new TextField("Enter temperature in °C");
         policko14.addKeyPressListener(Key.ENTER, e->{
+            if (policko14.getValue().length()>0){
             remove(uroven14,uroven141,uroven014,progressBar);
             id.setWatertempdata(policko14.getValue());
-            WeightComfort();
+            WeightComfort();}
+            else {
+                remove(uroven14,uroven141,uroven014,progressBar);
+                id.setWatertempdata("-");
+                WeightComfort();
+            }
         });
         Button nextButton = new Button("Next");
         Button previousButton = new Button("Previous");
@@ -503,9 +610,15 @@ public class AddanewlogView extends VerticalLayout {
         uroven14.add(new Paragraph(new H2("Water temperature:")), policko14);
         uroven141.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
-            id.setWatertempdata(policko14.getValue());
-            remove(uroven14,uroven141,uroven014,progressBar);
-            WeightComfort();
+            if (policko14.getValue().length()>0){
+                remove(uroven14,uroven141,uroven014,progressBar);
+                id.setWatertempdata(policko14.getValue());
+                WeightComfort();}
+            else {
+                remove(uroven14,uroven141,uroven014,progressBar);
+                id.setWatertempdata("-");
+                WeightComfort();
+            }
         });
         previousButton.addClickListener(buttonClickEvent -> {
             remove(uroven14,uroven141,uroven014,progressBar);
@@ -532,10 +645,17 @@ public class AddanewlogView extends VerticalLayout {
         uroven15.add(new Paragraph(new H2("Weight comfort:")), policko14, comfort);
         uroven151.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
+            if (policko14.getValue().length()>0 || comfort.getValue().length()>0){
             id.setWeightsdata(policko14.getValue());
             id.setWeightcomfortdata(comfort.getValue());
             remove(uroven15,uroven151,uroven015,progressBar);
-            HeatComfort();
+            HeatComfort();}
+            else {
+                id.setWeightsdata("-");
+                id.setWeightcomfortdata("-");
+                remove(uroven15,uroven151,uroven015,progressBar);
+                HeatComfort();
+            }
         });
         previousButton.addClickListener(buttonClickEvent -> {
             remove(uroven15,uroven151,uroven015,progressBar);
@@ -563,10 +683,17 @@ public class AddanewlogView extends VerticalLayout {
         uroven16.add(new Paragraph(new H2("Heat comfort:")), thickness, comfort);
         uroven161.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
+            if (thickness.getValue().length()>0 || comfort.getValue().length()>0){
             id.setHeatdata(thickness.getValue());
             id.setHeatcomfortdata(comfort.getValue());
             remove(uroven16,uroven161,uroven016,progressBar);
-            Notes();
+            Notes();}
+            else {
+                id.setHeatdata(thickness.getValue());
+                id.setHeatcomfortdata(comfort.getValue());
+                remove(uroven16,uroven161,uroven016,progressBar);
+                Notes();
+            }
         });
         previousButton.addClickListener(buttonClickEvent -> {
             remove(uroven16,uroven161,uroven016,progressBar);
@@ -586,9 +713,15 @@ public class AddanewlogView extends VerticalLayout {
         img17.setHeight("350px");
         TextArea policko17 = new TextArea("Max. 400 characters");
         policko17.addKeyPressListener(Key.ENTER, e ->{
+            if (policko17.getValue().length()>0){
             remove(uroven017,uroven171,uroven17,progressBar);
             id.setNotesdata(policko17.getValue());
-            Buddy();
+            Buddy();}
+            else {
+                remove(uroven017,uroven171,uroven17,progressBar);
+                id.setNotesdata("-");
+                Buddy();
+            }
         });
         Button nextButton = new Button("Next");
         Button previousButton = new Button("Previous");
@@ -596,9 +729,15 @@ public class AddanewlogView extends VerticalLayout {
         uroven17.add(new Paragraph(new H2("Notes:")),policko17);
         uroven171.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
-            id.setNotesdata(policko17.getValue());
-            remove(uroven017,uroven171,uroven17,progressBar);
-            Buddy();
+            if (policko17.getValue().length()>0){
+                remove(uroven017,uroven171,uroven17,progressBar);
+                id.setNotesdata(policko17.getValue());
+                Buddy();}
+            else {
+                remove(uroven017,uroven171,uroven17,progressBar);
+                id.setNotesdata("-");
+                Buddy();
+            }
         });
         previousButton.addClickListener(buttonClickEvent -> {
             remove(uroven17,uroven171,uroven017,progressBar);
@@ -618,9 +757,15 @@ public class AddanewlogView extends VerticalLayout {
         img18.setHeight("350px");
         TextField policko18 = new TextField("Name");
         policko18.addKeyPressListener(Key.ENTER, e->{
+            if (policko18.getValue().length()>0){
             remove(uroven18,uroven181,uroven018,progressBar);
             id.setBuddydata(policko18.getValue());
-            Edu();
+            Edu();}
+            else {
+                remove(uroven18,uroven181,uroven018,progressBar);
+                id.setBuddydata("-");
+                Edu();
+            }
         });
         Button nextButton = new Button("Next");
         Button previousButton = new Button("Previous");
@@ -628,9 +773,15 @@ public class AddanewlogView extends VerticalLayout {
         uroven18.add(new Paragraph(new H2("Dive buddy:")),policko18);
         uroven181.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
-            id.setBuddydata(policko18.getValue());
-            remove(uroven018,uroven181,uroven18,progressBar);
-            Edu();
+            if (policko18.getValue().length()>0){
+                remove(uroven18,uroven181,uroven018,progressBar);
+                id.setBuddydata(policko18.getValue());
+                Edu();}
+            else {
+                remove(uroven18,uroven181,uroven018,progressBar);
+                id.setBuddydata("-");
+                Edu();
+            }
         });
         previousButton.addClickListener(buttonClickEvent -> {
             remove(uroven18,uroven181,uroven018,progressBar);
@@ -704,8 +855,19 @@ public class AddanewlogView extends VerticalLayout {
             Edu();
         });
         saveButton.addClickListener(buttonClickEvent -> {
-            js.setData();
-            //prejit na logbookView
+            if (id.getFeelingdata()==null) {
+                id.setFeelingdata("-");
+                // js.setData();
+                // js.getData();
+                //prejit na logbookView
+            }
+            else {
+                id.setInstructordata("-");
+                id.setDiveclubdata("-");
+                js.setData();
+                //  js.getData();
+                //prejit na logbookView
+            }
         });
         add(progressBar,uroven0020,uroven020,uroven20,uroven201);
     }
@@ -721,9 +883,15 @@ public class AddanewlogView extends VerticalLayout {
         img21.setHeight("350px");
         TextField policko21 = new TextField("Name");
         policko21.addKeyPressListener(Key.ENTER,e->{
+            if (policko21.getValue().length()>0){
             remove(uroven21s,uroven021,uroven211,progressBar);
             id.setInstructordata(policko21.getValue());
-            DiveClub();
+            DiveClub();}
+            else {
+                remove(uroven21s,uroven021,uroven211,progressBar);
+                id.setInstructordata("-");
+                DiveClub();
+            }
         });
         Button nextButton = new Button("Next");
         Button previousButton = new Button("Previous");
@@ -731,9 +899,15 @@ public class AddanewlogView extends VerticalLayout {
         uroven21s.add(new Paragraph(new H2("Dive instructor:")),policko21);
         uroven211.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
-            id.setInstructordata(policko21.getValue());
-            remove(uroven021,uroven21s,uroven211,progressBar);
-            DiveClub();
+            if (policko21.getValue().length()>0){
+                remove(uroven21s,uroven021,uroven211,progressBar);
+                id.setInstructordata(policko21.getValue());
+                DiveClub();}
+            else {
+                remove(uroven21s,uroven021,uroven211,progressBar);
+                id.setInstructordata("-");
+                DiveClub();
+            }
         });
         previousButton.addClickListener(buttonClickEvent -> {
             remove(uroven021,uroven21s,uroven211,progressBar);
@@ -753,9 +927,15 @@ public class AddanewlogView extends VerticalLayout {
         img22.setHeight("350px");
         TextField policko22 = new TextField("Name");
         policko22.addKeyPressListener(Key.ENTER,e->{
+            if (policko22.getValue().length()>0){
             remove(uroven022,uroven22,uroven221,progressBar);
             id.setDiveclubdata(policko22.getValue());
-            FeelingEnd();
+            FeelingEnd();}
+            else {
+                remove(uroven022,uroven22,uroven221,progressBar);
+                id.setDiveclubdata("-");
+                FeelingEnd();
+            }
         });
         Button nextButton = new Button("Next");
         Button previousButton = new Button("Previous");
@@ -763,9 +943,15 @@ public class AddanewlogView extends VerticalLayout {
         uroven22.add(new Paragraph(new H2("Dive club:")),policko22);
         uroven221.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
-            id.setDiveclubdata(policko22.getValue());
-            remove(uroven022,uroven22,uroven221,progressBar);
-            FeelingEnd();
+            if (policko22.getValue().length()>0){
+                remove(uroven022,uroven22,uroven221,progressBar);
+                id.setDiveclubdata(policko22.getValue());
+                FeelingEnd();}
+            else {
+                remove(uroven022,uroven22,uroven221,progressBar);
+                id.setDiveclubdata("-");
+                FeelingEnd();
+            }
         });
         previousButton.addClickListener(buttonClickEvent -> {
             remove(uroven022,uroven22,uroven221,progressBar);
@@ -807,19 +993,19 @@ public class AddanewlogView extends VerticalLayout {
             DiveClub();
         });
         saveButton.addClickListener(buttonClickEvent -> {
-            try {
+            if (id.getFeelingdata()==null) {
+                id.setFeelingdata("-");
                 js.setData();
-                // doplnit u obou savebuttonu
-                js.getData();
-            } catch (IOException | ParseException e) {
-                e.printStackTrace();
+                //js.getData();
+                //prejit na logbookView
             }
-            //prejit na logbookView
+            else {
+                js.setData();
+                //js.getData();
+            }
+
+
         });
-
         add(progressBar,uroven0023,uroven023,uroven23,uroven231);
-
-
     }
-
 }
