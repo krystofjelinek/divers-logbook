@@ -6,9 +6,11 @@ import org.json.simple.JSONObject;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Json {
-    // public static List<ArrayList<String>> outerList = new ArrayList<ArrayList<String>>();
+    public static List<ArrayList<String>> outerList = new ArrayList<>();
     ReadWriteUtilityForFile.logdata id = new ReadWriteUtilityForFile.logdata();
     public static JSONArray seznam = new JSONArray();
 
@@ -55,48 +57,72 @@ public class Json {
    /* public List<ArrayList<String>> getData() throws IOException, ParseException {
         FileReader fileReader = new FileReader("/Users/krystofjelinek/IdeaProjects/divers-logbook/divedata.json");
 
-
-
         JSONParser jsonParser = new JSONParser();
-
 
         Object obj = jsonParser.parse(fileReader);
         JSONArray diveList = (JSONArray) obj;
 
+        for (int i = 0; i < diveList.size(); i++) {
+            JSONObject jsonObject = (JSONObject) diveList.get(i);
 
-        diveList.forEach(dve -> parseDiveObject((JSONObject) dve));
+            String divesite = (String) jsonObject.get("divesite");
+            String location = (String) jsonObject.get("location");
+            String dateofdive = (String) jsonObject.get("dateofdive");
+            String starttime = (String) jsonObject.get("starttime");
+            String bottomtime = (String) jsonObject.get("bottomtime");
+            String endtime = (String) jsonObject.get("endtime");
+            String maxdepth = (String) jsonObject.get("maxdepth");
+            String avgdepth = (String) jsonObject.get("avgdepth");
+            String tankin = (String) jsonObject.get("tankin");
+            String tankout = (String) jsonObject.get("tankout");
+            String watercond = (String) jsonObject.get("watercond");
+            String typeofdive = (String) jsonObject.get("typeofdive");
+            String airtemp = (String) jsonObject.get("airtemp");
+            String watertemp = (String) jsonObject.get("watertemp");
+            String weights = (String) jsonObject.get("weights");
+            String weightscomf = (String) jsonObject.get("weightscomf");
+            String heat = (String) jsonObject.get("heat");
+            String heatcomf = (String) jsonObject.get("heatcomf");
+            String notes = (String) jsonObject.get("notes");
+            String buddy = (String) jsonObject.get("buddy");
+            String edu = (String) jsonObject.get("edu");
+            String diveclub = (String) jsonObject.get("diveclub");
+            String instructor = (String) jsonObject.get("instructor");
+            String feeling = (String) jsonObject.get("feeling");
 
+            ArrayList<String> list = new ArrayList<String>();
+            list.add(divesite);
+            list.add(location);
+            list.add(dateofdive);
+            list.add(starttime);
+            list.add(bottomtime);
+            list.add(endtime);
+            list.add(maxdepth);
+            list.add(avgdepth);
+            list.add(tankin);
+            list.add(tankout);
+            list.add(watercond);
+            list.add(typeofdive);
+            list.add(airtemp);
+            list.add(watertemp);
+            list.add(weights);
+            list.add(weightscomf);
+            list.add(heat);
+            list.add(heatcomf);
+            list.add(notes);
+            list.add(buddy);
+            list.add(edu);
+            list.add(diveclub);
+            list.add(instructor);
+            list.add(feeling);
 
-       *//* String divesite = (String) jsonObject.get("divesite");
-        String location = (String) jsonObject.get("location");
-        String dateofdive = (String) jsonObject.get("dateofdive");
-        String starttime = (String) jsonObject.get("starttime");
-        String bottomtime = (String) jsonObject.get("bottomtime");
-        String endtime = (String) jsonObject.get("endtime");
-        String maxdepth = (String) jsonObject.get("maxdepth");
-        String avgdepth = (String) jsonObject.get("avgdepth");
-        String tankin = (String) jsonObject.get("tankin");
-        String tankout = (String) jsonObject.get("tankout");
-        String watercond = (String) jsonObject.get("watercond");
-        String typeofdive = (String) jsonObject.get("typeofdive");
-        String airtemp = (String) jsonObject.get("airtemp");
-        String watertemp = (String) jsonObject.get("watertemp");
-        String weights = (String) jsonObject.get("weights");
-        String weightscomf = (String) jsonObject.get("weightscomf");
-        String heat = (String) jsonObject.get("heat");
-        String heatcomf = (String) jsonObject.get("heatcomf");
-        String notes = (String) jsonObject.get("notes");
-        String buddy = (String) jsonObject.get("buddy");
-        String edu = (String) jsonObject.get("edu");
-        String diveclub = (String) jsonObject.get("diveclub");
-        String instructor = (String) jsonObject.get("instructor");
-        String feeling = (String) jsonObject.get("feeling");*//*
+            outerList.add(list);
 
-        return this.outerList;
+        }
+        return outerList;
+    }*/
 
-    }
-
-    private static void parseDiveObject(JSONObject dive){
+   /* private static void parseDiveObject(JSONObject dive){
         ArrayList<String> list = new ArrayList<String>();
         JSONObject diveObject = (JSONObject) dive.get("dive");
 

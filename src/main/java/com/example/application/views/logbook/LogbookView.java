@@ -1,7 +1,6 @@
 package com.example.application.views.logbook;
 
 import com.example.application.backend.ReadWriteUtilityForFile;
-import com.example.application.backend.saveList;
 import com.example.application.jsonParsing.Json;
 import com.example.application.views.MainLayout;
 import com.vaadin.flow.component.dependency.StyleSheet;
@@ -19,8 +18,6 @@ import java.io.IOException;
 public class LogbookView extends VerticalLayout {
 
     Grid<ReadWriteUtilityForFile.logdata> logdataGrid = new Grid<>(ReadWriteUtilityForFile.logdata.class);
-    saveList sl = new saveList();
-    Json js = new Json();
 
     public LogbookView() throws IOException, ParseException {
         addClassName("list-view");
@@ -33,8 +30,9 @@ public class LogbookView extends VerticalLayout {
     }
 
     private void configureGrid() throws IOException, ParseException {
-       // ArrayList list = (ArrayList) js.getData();
-        //logdataGrid.setItems(list);
+        Json js = new Json();
+       /* ArrayList list = (ArrayList) js.getData();
+        logdataGrid.setItems(list);*/
         logdataGrid.addClassName("grid");
         logdataGrid.setSizeFull();
         logdataGrid.removeColumnByKey("feelingdata");

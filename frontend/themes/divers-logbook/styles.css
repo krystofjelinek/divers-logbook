@@ -18,3 +18,46 @@
 .logout{
     margin-left: 900px;
 }
+
+.next-button:hover{
+    opacity: 90%;
+    color: white;
+    background-color: rgb(7,104,252);
+    transition-duration: 0.75s;
+    transition-fill-mode: linear;
+}
+
+.save-button:hover{
+    opacity: 90%;
+    color: white;
+    background-color: rgb(7,104,252);
+    transition-duration: 0.75s;
+    transition-fill-mode: linear;
+}
+
+.ok-button:hover{
+    color: #48d6ff;
+    opacity: 90%;
+}
+
+.ok-button-clicked{
+    color: #48d6ff;
+}
+
+.good-button:hover{
+    color: #4fff41;
+    opacity: 90%;
+}
+
+.good-button-clicked{
+    color: #4fff41;
+}
+
+.bad-button:hover{
+    color: #ff6069;
+    opacity: 90%;
+}
+
+.bad-button-clicked{
+    color: #ff6069;
+}

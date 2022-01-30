@@ -78,7 +78,7 @@ public class MainLayout extends AppLayout {
     }
 
     private Component createDrawerContent() {
-        H2 appName = new H2("divers-logbook");
+        H2 appName = new H2("Divers logbook");
         appName.addClassNames("flex", "items-center", "h-xl", "m-0", "px-m", "text-m");
 
         com.vaadin.flow.component.html.Section section = new com.vaadin.flow.component.html.Section(appName,
@@ -110,11 +110,13 @@ public class MainLayout extends AppLayout {
 
     private List<RouterLink> createLinks() {
         MenuItemInfo[] menuItems = new MenuItemInfo[]{ //
-                new MenuItemInfo("Logbook", "la la-file", LogbookView.class), //
+                new MenuItemInfo("Logbook",
+                        "la la-book", LogbookView.class), //
 
-                new MenuItemInfo("Add a new log", "la la-file", AddanewlogView.class), //
+                new MenuItemInfo("Add a new log", "la la-plus-circle", AddanewlogView.class), //
 
-                new MenuItemInfo("Dive sites", "la la-file", DivesitesView.class), //
+                new MenuItemInfo("Dive sites",
+                        "la la-map-marker", DivesitesView.class), //
 
         };
         List<RouterLink> links = new ArrayList<>();

@@ -39,6 +39,7 @@ public class AddanewlogView extends VerticalLayout {
     /**
      * Ochránit vstupy (Binder)
      * stylizovat Feeling buttons
+     * stylizovat Add a Import buttons a taky edu-buttons
      * Xml reader suunto DM5
      * Stylizovat polícka aby měla stejnou velikost
      * save button -> přejít na LogbookView
@@ -99,6 +100,7 @@ public class AddanewlogView extends VerticalLayout {
             }
         });
         Button nextButton = new Button("Next");
+        nextButton.addClassName("next-button");
         Button previousButton = new Button("Previous");
         uroven01.add(img1);
         uroven1.add(new Paragraph(new H2("Dive site:")), policko1);
@@ -144,6 +146,7 @@ public class AddanewlogView extends VerticalLayout {
         });
         Button previousButton = new Button("Previous");
         Button nextButton = new Button("Next");
+        nextButton.addClassName("next-button");
         uroven2.add(new Paragraph(new H2("Location:")), policko2);
         uroven21.add(previousButton,nextButton);
         uroven02.add(img2);
@@ -176,12 +179,13 @@ public class AddanewlogView extends VerticalLayout {
         img3.setHeight("350px");
         DatePicker date = new DatePicker("Select date");
         Button nextButton = new Button("Next");
+        nextButton.addClassName("next-button");
         Button previousButton = new Button("Previous");
         uroven03.add(img3);
         uroven3.add(new Paragraph(new H2("Date of dive:")), date);
         uroven31.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
-            if(date.getValue().lengthOfYear()==4){
+            if(!date.isEmpty()){
             id.setDateofdivedata(date.getValue());
             remove(progressBar,uroven03,uroven3,uroven31);
             StartTime();}
@@ -209,12 +213,13 @@ public class AddanewlogView extends VerticalLayout {
         img4.setHeight("350px");
         TimePicker startTime = new TimePicker("Select start time");
         Button nextButton = new Button("Next");
+        nextButton.addClassName("next-button");
         Button previousButton = new Button("Previous");
         uroven04.add(img4);
         uroven4.add(new Paragraph(new H2("Start time:")), startTime);
         uroven41.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
-            if (startTime.getValue().toString().length() == 0){
+            if (!startTime.isEmpty()){
                 id.setStarttimedata(LocalTime.now());
                 remove(uroven4,uroven41,uroven04,progressBar);
                 BottomTime();
@@ -241,12 +246,13 @@ public class AddanewlogView extends VerticalLayout {
         img5.setHeight("350px");
         TimePicker bottomTime = new TimePicker("Select bottom time");
         Button nextButton = new Button("Next");
+        nextButton.addClassName("next-button");
         Button previousButton = new Button("Previous");
         uroven05.add(img5);
         uroven5.add(new Paragraph(new H2("Bottom time:")), bottomTime);
         uroven51.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
-            if (bottomTime.getValue().toString().length()==0){
+            if (!bottomTime.isEmpty()){
                 id.setBottomtimedata(LocalTime.now());
                 remove(uroven5,uroven51,uroven05,progressBar);
                 EndTime();
@@ -273,12 +279,13 @@ public class AddanewlogView extends VerticalLayout {
         img6.setHeight("350px");
         TimePicker endTime = new TimePicker("Select end time");
         Button nextButton = new Button("Next");
+        nextButton.addClassName("next-button");
         Button previousButton = new Button("Previous");
         uroven06.add(img6);
         uroven6.add(new Paragraph(new H2("End time:")), endTime);
         uroven61.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
-            if (endTime.getValue().toString().length()==0){
+            if (!endTime.isEmpty()){
                 id.setEndtimedata(LocalTime.now());
                 remove(uroven6,uroven61,uroven06,progressBar);
                 MaximumDepth();
@@ -316,6 +323,7 @@ public class AddanewlogView extends VerticalLayout {
             }
         });
         Button nextButton = new Button("Next");
+        nextButton.addClassName("next-button");
         Button previousButton = new Button("Previous");
         uroven07.add(img7);
         uroven7.add(new Paragraph(new H2("Maximum depth:")), policko7);
@@ -360,6 +368,7 @@ public class AddanewlogView extends VerticalLayout {
             }
         });
         Button nextButton = new Button("Next");
+        nextButton.addClassName("next-button");
         Button previousButton = new Button("Previous");
         uroven08.add(img8);
         uroven8.add(new Paragraph(new H2("Average depth:")), policko8);
@@ -404,6 +413,7 @@ public class AddanewlogView extends VerticalLayout {
             }
         });
         Button nextButton = new Button("Next");
+        nextButton.addClassName("next-button");
         Button previousButton = new Button("Previous");
         uroven09.add(img9);
         uroven9.add(new Paragraph(new H2("Tank pressure start:")), policko9);
@@ -448,6 +458,7 @@ public class AddanewlogView extends VerticalLayout {
             }
         });
         Button nextButton = new Button("Next");
+        nextButton.addClassName("next-button");
         Button previousButton = new Button("Previous");
         uroven010.add(img10);
         uroven10.add(new Paragraph(new H2("Tank pressure end:")), policko10);
@@ -483,12 +494,13 @@ public class AddanewlogView extends VerticalLayout {
         waterConditions.setItems("Waves", "Current","None");
         waterConditions.setLabel("Select one option");
         Button nextButton = new Button("Next");
+         nextButton.addClassName("next-button");
         Button previousButton = new Button("Previous");
         uroven011.add(img11);
         uroven11.add(new Paragraph(new H2("Water conditions:")), waterConditions);
         uroven111.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
-            if (waterConditions.getValue().length()>0){
+            if (!waterConditions.isEmpty()){
             id.setWaterconditionsdata(waterConditions.getValue());
             remove(uroven11,uroven111,uroven011,progressBar);
             TypeOfDive();}
@@ -517,12 +529,13 @@ public class AddanewlogView extends VerticalLayout {
         ComboBox<String> typeOfDive = new ComboBox<>("Select one option");
         typeOfDive.setItems("Lake", "Sea", "River");
         Button nextButton = new Button("Next");
+        nextButton.addClassName("next-button");
         Button previousButton = new Button("Previous");
         uroven012.add(img12);
         uroven12.add(new Paragraph(new H2("Type of dive:")), typeOfDive);
         uroven121.add(previousButton, nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
-            if (typeOfDive.getValue().length()>0){
+            if (!typeOfDive.isEmpty()){
             id.setTypeofdivedata(typeOfDive.getValue());
             remove(uroven12,uroven121,uroven012,progressBar);
             AirTemperature();}
@@ -561,6 +574,7 @@ public class AddanewlogView extends VerticalLayout {
             }
         });
         Button nextButton = new Button("Next");
+        nextButton.addClassName("next-button");
         Button previousButton = new Button("Previous");
         uroven013.add(img13);
         uroven13.add(new Paragraph(new H2("Air temperature:")), policko13);
@@ -605,6 +619,7 @@ public class AddanewlogView extends VerticalLayout {
             }
         });
         Button nextButton = new Button("Next");
+        nextButton.addClassName("next-button");
         Button previousButton = new Button("Previous");
         uroven014.add(img14);
         uroven14.add(new Paragraph(new H2("Water temperature:")), policko14);
@@ -640,6 +655,7 @@ public class AddanewlogView extends VerticalLayout {
         ComboBox<String> comfort = new ComboBox<>("Select comfort level");
         comfort.setItems("Too heavy", "Good", "Too light");
         Button nextButton = new Button("Next");
+        nextButton.addClassName("next-button");
         Button previousButton = new Button("Previous");
         uroven015.add(img15);
         uroven15.add(new Paragraph(new H2("Weight comfort:")), policko14, comfort);
@@ -678,6 +694,7 @@ public class AddanewlogView extends VerticalLayout {
         ComboBox<String> comfort = new ComboBox<>("Select comfort level");
         comfort.setItems("Too hot", "Good", "Too cold");
         Button nextButton = new Button("Next");
+        nextButton.addClassName("next-button");
         Button previousButton = new Button("Previous");
         uroven016.add(img16);
         uroven16.add(new Paragraph(new H2("Heat comfort:")), thickness, comfort);
@@ -724,6 +741,7 @@ public class AddanewlogView extends VerticalLayout {
             }
         });
         Button nextButton = new Button("Next");
+        nextButton.addClassName("next-button");
         Button previousButton = new Button("Previous");
         uroven017.add(img17);
         uroven17.add(new Paragraph(new H2("Notes:")),policko17);
@@ -768,6 +786,7 @@ public class AddanewlogView extends VerticalLayout {
             }
         });
         Button nextButton = new Button("Next");
+        nextButton.addClassName("next-button");
         Button previousButton = new Button("Previous");
         uroven018.add(img18);
         uroven18.add(new Paragraph(new H2("Dive buddy:")),policko18);
@@ -834,21 +853,31 @@ public class AddanewlogView extends VerticalLayout {
         img20.setHeight("350px");
         Button previousButton = new Button("Previous");
         Button saveButton = new Button("Save");
+        saveButton.addClassName("save-button");
         Button goodButton = new Button("Good");
-        Button okButton = new Button("Ok");
+        goodButton.addClassName("good-button");
+        Button okButton = new Button("Okay");
+        okButton.addClassName("ok-button");
         Button badButton = new Button("Bad");
+        badButton.addClassName("bad-button");
         uroven0020.add(img20);
         uroven020.add(new Paragraph(new H2("How did you feel during this dive?")));
         uroven20.add(goodButton,okButton,badButton);
         uroven201.add(previousButton,saveButton);
         goodButton.addClickListener(buttonClickEvent -> {
             id.setFeelingdata("Good");
+            goodButton.removeClassName("good-button");
+            goodButton.addClassName("good-button-clicked");
         });
         okButton.addClickListener(buttonClickEvent -> {
-            id.setFeelingdata("Ok");
+            id.setFeelingdata("Okay");
+            okButton.removeClassName("ok-button");
+            okButton.addClassName("ok-button-clicked");
         });
         badButton.addClickListener(buttonClickEvent -> {
             id.setFeelingdata("Bad");
+            badButton.removeClassName("bad-button");
+            badButton.addClassName("bad-button-clicked");
         });
         previousButton.addClickListener(buttonClickEvent -> {
             remove(uroven0020,uroven20,uroven201,uroven020,progressBar);
@@ -894,6 +923,7 @@ public class AddanewlogView extends VerticalLayout {
             }
         });
         Button nextButton = new Button("Next");
+        nextButton.addClassName("next-button");
         Button previousButton = new Button("Previous");
         uroven021.add(img21);
         uroven21s.add(new Paragraph(new H2("Dive instructor:")),policko21);
@@ -938,6 +968,7 @@ public class AddanewlogView extends VerticalLayout {
             }
         });
         Button nextButton = new Button("Next");
+        nextButton.addClassName("next-button");
         Button previousButton = new Button("Previous");
         uroven022.add(img22);
         uroven22.add(new Paragraph(new H2("Dive club:")),policko22);
@@ -972,37 +1003,59 @@ public class AddanewlogView extends VerticalLayout {
         img23.setHeight("350px");
         Button previousButton = new Button("Previous");
         Button saveButton = new Button("Save");
+        saveButton.addClassName("save-button");
         Button goodButton = new Button("Good");
-        Button okButton = new Button("Ok");
+        goodButton.addClassName("good-button");
+        Button okButton = new Button("Okay");
+        okButton.addClassName("ok-button");
         Button badButton = new Button("Bad");
+        badButton.addClassName("bad-button");
         uroven0023.add(img23);
         uroven023.add(new Paragraph(new H2("How did you feel during this dive?")));
         uroven23.add(goodButton,okButton,badButton);
         uroven231.add(previousButton,saveButton);
         goodButton.addClickListener(buttonClickEvent -> {
             id.setFeelingdata("Good");
+            goodButton.removeClassName("good-button");
+            goodButton.addClassName("good-button-clicked");
         });
         okButton.addClickListener(buttonClickEvent -> {
-            id.setFeelingdata("Ok");
+            id.setFeelingdata("Okay");
+            okButton.removeClassName("ok-button");
+            okButton.addClassName("ok-button-clicked");
         });
         badButton.addClickListener(buttonClickEvent -> {
             id.setFeelingdata("Bad");
+            badButton.removeClassName("bad-button");
+            badButton.addClassName("bad-button-clicked");
         });
         previousButton.addClickListener(buttonClickEvent -> {
             remove(uroven23,uroven231,uroven023,progressBar,uroven0023);
             DiveClub();
         });
         saveButton.addClickListener(buttonClickEvent -> {
-            if (id.getFeelingdata()==null) {
+           /* if (id.getFeelingdata()==null) {
                 id.setFeelingdata("-");
                 js.setData();
-                //js.getData();
+                try {
+                    js.getData();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
                 //prejit na logbookView
             }
             else {
                 js.setData();
-                //js.getData();
-            }
+                try {
+                    js.getData();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }*/
 
 
         });
