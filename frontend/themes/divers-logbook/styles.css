@@ -9,12 +9,29 @@
     border-radius: 150px;
 }
 
+.add-button:hover{
+    background-color: rgb(7,104,252);
+    color: white;
+    opacity: 90%;
+    transition-duration: 0.75s;
+    transition-fill-mode: linear;
+}
+
 .import-button{
     width: 150px;
     height: 150px;
     margin-bottom: 200px;
     border-radius: 75px;
 }
+
+.import-button:hover{
+    background-color: rgb(7,104,252);
+    color: white;
+    opacity: 90%;
+    transition-duration: 0.75s;
+    transition-fill-mode: linear;
+}
+
 .logout{
     margin-left: 900px;
 }

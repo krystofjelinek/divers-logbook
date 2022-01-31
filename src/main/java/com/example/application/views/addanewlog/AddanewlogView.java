@@ -38,8 +38,7 @@ public class AddanewlogView extends VerticalLayout {
 
     /**
      * Ochránit vstupy (Binder)
-     * stylizovat Feeling buttons
-     * stylizovat Add a Import buttons a taky edu-buttons
+     * stylizovat edu-buttons
      * Xml reader suunto DM5
      * Stylizovat polícka aby měla stejnou velikost
      * save button -> přejít na LogbookView
@@ -60,19 +59,19 @@ public class AddanewlogView extends VerticalLayout {
     private void AddImport() {
         HorizontalLayout uroven0 = new HorizontalLayout();
         Button addButton = new Button("Add");
+        addButton.addClassName("add-button");
         addButton.addClickListener(buttonClickEvent -> {
             remove(uroven0);
             DiveSite();
         });
-        addButton.addClassName("add-button");
         Button importDive = new Button("Import");
+        importDive.addClassName("import-button");
         importDive.addClickListener(buttonClickEvent -> {
             remove(uroven0);
             DiveSite();
             //nacteni dat z potapecskeho pocitace(xml file)
             //prejit na LogbookView
         });
-        importDive.addClassName("import-button");
         uroven0.add(addButton,importDive);
         add(uroven0);
 
@@ -868,16 +867,28 @@ public class AddanewlogView extends VerticalLayout {
             id.setFeelingdata("Good");
             goodButton.removeClassName("good-button");
             goodButton.addClassName("good-button-clicked");
+            okButton.removeClassName("ok-button-clicked");
+            okButton.addClassName("ok-button");
+            badButton.removeClassName("bad-button-clicked");
+            badButton.addClassName("bad-button");
         });
         okButton.addClickListener(buttonClickEvent -> {
             id.setFeelingdata("Okay");
             okButton.removeClassName("ok-button");
             okButton.addClassName("ok-button-clicked");
+            badButton.removeClassName("bad-button-clicked");
+            badButton.addClassName("bad-button");
+            goodButton.removeClassName("good-button-clicked");
+            goodButton.addClassName("good-button");
         });
         badButton.addClickListener(buttonClickEvent -> {
             id.setFeelingdata("Bad");
             badButton.removeClassName("bad-button");
             badButton.addClassName("bad-button-clicked");
+            goodButton.removeClassName("good-button-clicked");
+            goodButton.addClassName("good-button");
+            okButton.removeClassName("ok-button-clicked");
+            okButton.addClassName("ok-button");
         });
         previousButton.addClickListener(buttonClickEvent -> {
             remove(uroven0020,uroven20,uroven201,uroven020,progressBar);
@@ -1018,16 +1029,28 @@ public class AddanewlogView extends VerticalLayout {
             id.setFeelingdata("Good");
             goodButton.removeClassName("good-button");
             goodButton.addClassName("good-button-clicked");
+            okButton.removeClassName("ok-button-clicked");
+            okButton.addClassName("ok-button");
+            badButton.removeClassName("bad-button-clicked");
+            badButton.addClassName("bad-button");
         });
         okButton.addClickListener(buttonClickEvent -> {
             id.setFeelingdata("Okay");
             okButton.removeClassName("ok-button");
             okButton.addClassName("ok-button-clicked");
+            badButton.removeClassName("bad-button-clicked");
+            badButton.addClassName("bad-button");
+            goodButton.removeClassName("good-button-clicked");
+            goodButton.addClassName("good-button");
         });
         badButton.addClickListener(buttonClickEvent -> {
             id.setFeelingdata("Bad");
             badButton.removeClassName("bad-button");
             badButton.addClassName("bad-button-clicked");
+            goodButton.removeClassName("good-button-clicked");
+            goodButton.addClassName("good-button");
+            okButton.removeClassName("ok-button-clicked");
+            okButton.addClassName("ok-button");
         });
         previousButton.addClickListener(buttonClickEvent -> {
             remove(uroven23,uroven231,uroven023,progressBar,uroven0023);
