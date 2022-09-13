@@ -42,10 +42,9 @@ public class Json {
         dive.put("instructor",id.getInstructordata());
         dive.put("feeling",id.getFeelingdata());
 
-        JSONObject diveObject = new JSONObject();
-        diveObject.put("dive",dive);
-        seznam.add(diveObject);
-
+        /*JSONObject diveObject = new JSONObject();
+        diveObject.put("dive",dive);*/
+        seznam.add(dive); //(diveObject)
         try (FileWriter file = new FileWriter("/Users/krystofjelinek/IdeaProjects/divers-logbook/divedata.json")) {
             file.write(seznam.toJSONString());
             file.flush();
@@ -54,7 +53,7 @@ public class Json {
         }
     }
 
-   /* public List<ArrayList<String>> getData() throws IOException, ParseException {
+    /*public List<ArrayList<String>> getData() throws IOException, ParseException {
         FileReader fileReader = new FileReader("/Users/krystofjelinek/IdeaProjects/divers-logbook/divedata.json");
 
         JSONParser jsonParser = new JSONParser();
@@ -89,6 +88,8 @@ public class Json {
             String diveclub = (String) jsonObject.get("diveclub");
             String instructor = (String) jsonObject.get("instructor");
             String feeling = (String) jsonObject.get("feeling");
+
+            //new ReadwriteUitiltiyForFile.logdata(---)
 
             ArrayList<String> list = new ArrayList<String>();
             list.add(divesite);

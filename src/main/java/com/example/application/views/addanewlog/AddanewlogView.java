@@ -5,6 +5,7 @@ import com.example.application.backend.saveList;
 import com.example.application.jsonParsing.Json;
 import com.example.application.views.MainLayout;
 import com.vaadin.flow.component.Key;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.datepicker.DatePicker;
@@ -897,16 +898,14 @@ public class AddanewlogView extends VerticalLayout {
         saveButton.addClickListener(buttonClickEvent -> {
             if (id.getFeelingdata()==null) {
                 id.setFeelingdata("-");
-                // js.setData();
-                // js.getData();
-                //prejit na logbookView
+                js.setData();
+                UI.getCurrent().navigate(MainLayout.class);
             }
             else {
                 id.setInstructordata("-");
                 id.setDiveclubdata("-");
                 js.setData();
-                //  js.getData();
-                //prejit na logbookView
+                UI.getCurrent().navigate(MainLayout.class);
             }
         });
         add(progressBar,uroven0020,uroven020,uroven20,uroven201);
@@ -1057,30 +1056,15 @@ public class AddanewlogView extends VerticalLayout {
             DiveClub();
         });
         saveButton.addClickListener(buttonClickEvent -> {
-           /* if (id.getFeelingdata()==null) {
+            if (id.getFeelingdata()==null) {
                 id.setFeelingdata("-");
                 js.setData();
-                try {
-                    js.getData();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
                 //prejit na logbookView
             }
             else {
                 js.setData();
-                try {
-                    js.getData();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-            }*/
-
-
+                //prejit na logbookView
+            }
         });
         add(progressBar,uroven0023,uroven023,uroven23,uroven231);
     }

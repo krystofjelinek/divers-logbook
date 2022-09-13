@@ -1,15 +1,19 @@
 package com.example.application.views.logbook;
 
-import com.example.application.backend.ReadWriteUtilityForFile;
-import com.example.application.jsonParsing.Json;
 import com.example.application.views.MainLayout;
+import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.dependency.StyleSheet;
-import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.html.H2;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import java.io.FileReader;
 import java.io.IOException;
 
 @StyleSheet("/themes/divers-logbook/styles.css")
@@ -17,58 +21,59 @@ import java.io.IOException;
 @Route(value = "", layout = MainLayout.class)
 public class LogbookView extends VerticalLayout {
 
-    Grid<ReadWriteUtilityForFile.logdata> logdataGrid = new Grid<>(ReadWriteUtilityForFile.logdata.class);
-
-    public LogbookView() throws IOException, ParseException {
+    public LogbookView() throws IOException, ParseException, java.text.ParseException {
         addClassName("list-view");
         setSizeFull();
         setJustifyContentMode(JustifyContentMode.CENTER);
         setDefaultHorizontalComponentAlignment(Alignment.CENTER);
         getStyle().set("text-align", "center");
-        configureGrid();
-        add(logdataGrid);
-    }
 
-    private void configureGrid() throws IOException, ParseException {
-        Json js = new Json();
-       /* ArrayList list = (ArrayList) js.getData();
-        logdataGrid.setItems(list);*/
-        logdataGrid.addClassName("grid");
-        logdataGrid.setSizeFull();
-        logdataGrid.removeColumnByKey("feelingdata");
-        logdataGrid.removeColumnByKey("starttimedata");
-        logdataGrid.removeColumnByKey("endtimedata");
-        logdataGrid.removeColumnByKey("airtempdata");
-        logdataGrid.removeColumnByKey("watertempdata");
-        logdataGrid.removeColumnByKey("diveclubdata");
-        logdataGrid.removeColumnByKey("heatcomfortdata");
-        logdataGrid.removeColumnByKey("heatdata");
-        logdataGrid.removeColumnByKey("instructordata");
-        logdataGrid.removeColumnByKey("notesdata");
-        logdataGrid.removeColumnByKey("typeofdivedata");
-        logdataGrid.removeColumnByKey("tankindata");
-        logdataGrid.removeColumnByKey("tankoutdata");
-        logdataGrid.removeColumnByKey("waterconditionsdata");
-        logdataGrid.removeColumnByKey("weightcomfortdata");
-        logdataGrid.removeColumnByKey("weightsdata");
-        logdataGrid.removeColumnByKey("dateofdivedata");
-        logdataGrid.removeColumnByKey("buddydata");
-        logdataGrid.removeColumnByKey("avgdepthdata");
-        logdataGrid.removeColumnByKey("maxdepthdata");
-        logdataGrid.removeColumnByKey("bottomtimedata");
-        logdataGrid.removeColumnByKey("edudata");
+        FileReader fileReader = new FileReader("/Users/krystofjelinek/IdeaProjects/divers-logbook/divedata.json");
 
+        JSONParser jsonParser = new JSONParser();
 
-        logdataGrid.getColumns().forEach(logdataColumn -> logdataColumn.setAutoWidth(true));
-        logdataGrid.setColumns("dateofdivedata", "locationdata", "divesitedata", "maxdepthdata","bottomtimedata","buddydata","edudata");
+        Object obj = jsonParser.parse(fileReader);
+        JSONArray diveList = (JSONArray) obj;
 
-        logdataGrid.getColumnByKey("dateofdivedata").setHeader("Date");
-        logdataGrid.getColumnByKey("bottomtimedata").setHeader("Bottom time");
-        logdataGrid.getColumnByKey("buddydata").setHeader("Buddy");
-        logdataGrid.getColumnByKey("maxdepthdata").setHeader("Max. depth");
-        logdataGrid.getColumnByKey("edudata").setHeader("Edu");
-        logdataGrid.getColumnByKey("locationdata").setHeader("Location");
-        logdataGrid.getColumnByKey("divesitedata").setHeader("Dive site");
+        for (int i = 0; i < diveList.size(); i++) {
+            JSONObject jsonObject = (JSONObject) diveList.get(i);
+
+            String divesite = (String) jsonObject.get("divesite");
+            String location = (String) jsonObject.get("location");
+            String dateofdive = (String) jsonObject.get("dateofdive");
+            String starttime = (String) jsonObject.get("starttime");
+            String bottomtime = (String) jsonObject.get("bottomtime");
+            String endtime = (String) jsonObject.get("endtime");
+            String maxdepth = (String) jsonObject.get("maxdepth");
+            String avgdepth = (String) jsonObject.get("avgdepth");
+            String tankin = (String) jsonObject.get("tankin");
+            String tankout = (String) jsonObject.get("tankout");
+            String watercond = (String) jsonObject.get("watercond");
+            String typeofdive = (String) jsonObject.get("typeofdive");
+            String airtemp = (String) jsonObject.get("airtemp");
+            String watertemp = (String) jsonObject.get("watertemp");
+            String weights = (String) jsonObject.get("weights");
+            String weightscomf = (String) jsonObject.get("weightscomf");
+            String heat = (String) jsonObject.get("heat");
+            String heatcomf = (String) jsonObject.get("heatcomf");
+            String notes = (String) jsonObject.get("notes");
+            String buddy = (String) jsonObject.get("buddy");
+            String edu = (String) jsonObject.get("edu");
+            String diveclub = (String) jsonObject.get("diveclub");
+            String instructor = (String) jsonObject.get("instructor");
+            String feeling = (String) jsonObject.get("feeling");
+
+            HorizontalLayout uroven = new HorizontalLayout();
+            uroven.add(new H2(dateofdive));
+            HorizontalLayout nizsiUroven1 = new HorizontalLayout();
+            nizsiUroven1.add(new Text("Depth: " + maxdepth + " m"));
+            nizsiUroven1.add(new Text(" Dive time: " + bottomtime));
+            HorizontalLayout nizsiUroven2 = new HorizontalLayout();
+            nizsiUroven2.add(new Text("Edu: " + edu));
+            nizsiUroven2.add(new Text(" Location: " + location));
+            nizsiUroven2.addClassName("text");
+            add(uroven,nizsiUroven1,nizsiUroven2);
+        }
     }
 }
 
