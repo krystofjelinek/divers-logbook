@@ -1,9 +1,12 @@
 package com.example.application.views.logbook;
 
 import com.example.application.views.MainLayout;
-import com.vaadin.flow.component.Text;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.html.H2;
+import com.vaadin.flow.component.html.Span;
+import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
@@ -66,13 +69,34 @@ public class LogbookView extends VerticalLayout {
             HorizontalLayout uroven = new HorizontalLayout();
             uroven.add(new H2(dateofdive));
             HorizontalLayout nizsiUroven1 = new HorizontalLayout();
-            nizsiUroven1.add(new Text("Depth: " + maxdepth + " m"));
-            nizsiUroven1.add(new Text(" Dive time: " + bottomtime));
+            Span hloubka = new Span("Depth: " + maxdepth + " m");
+            hloubka.addClassName("text");
+            Span cas = new Span("Dive time: " + bottomtime);
+            cas.addClassName("text");
+            nizsiUroven1.add(hloubka,cas);
+
             HorizontalLayout nizsiUroven2 = new HorizontalLayout();
-            nizsiUroven2.add(new Text("Edu: " + edu));
-            nizsiUroven2.add(new Text(" Location: " + location));
-            nizsiUroven2.addClassName("text");
-            add(uroven,nizsiUroven1,nizsiUroven2);
+            Span vzd = new Span("Edu: " + edu);
+            vzd.addClassName("text");
+            Span lokace = new Span("Location: " + location);
+            lokace.addClassName("text");
+            nizsiUroven2.add(vzd, lokace);
+
+            HorizontalLayout nizsiUroven3 = new HorizontalLayout();
+            Button otevrit = new Button("Open",new Icon(VaadinIcon.EXPAND_SQUARE));
+            //stylizovat hover u buttonu
+            otevrit.addClickListener(buttonClickEvent -> {
+               //zde se otevre cely ponor
+            });
+            Button smazat = new Button("Delete", new Icon(VaadinIcon.TRASH));
+            smazat.addClassName("delete-button");
+            //stylizovat button a hover
+            smazat.addClickListener(buttonClickEvent -> {
+                //vyskoci pop-up jestli chceme opravdu smazat
+            });
+            nizsiUroven3.add(otevrit,smazat);
+            add(uroven,nizsiUroven1,nizsiUroven2,nizsiUroven3);
+
         }
     }
 }

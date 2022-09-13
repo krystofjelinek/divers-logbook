@@ -78,3 +78,8 @@
 .bad-button-clicked{
     color: #ff6069;
 }
+
+.text{
+    color: black;
+    font-weight: bold;
+}
