@@ -43,6 +43,7 @@ public class AddanewlogView extends VerticalLayout {
      * Xml reader suunto DM5
      * Stylizovat polícka aby měla stejnou velikost
      * save button -> přejít na LogbookView
+     *  UI.getCurrent().navigate(AddanewlogView.class);
      * Login pro více uživatelů(user, userpass)(dodělat přihlašovací databázi)
      * Forgotten password
      */

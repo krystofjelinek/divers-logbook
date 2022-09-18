@@ -3,6 +3,8 @@ package com.example.application.views.logbook;
 import com.example.application.views.MainLayout;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.StyleSheet;
+import com.vaadin.flow.component.dialog.Dialog;
+import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.Icon;
@@ -38,7 +40,7 @@ public class LogbookView extends VerticalLayout {
         Object obj = jsonParser.parse(fileReader);
         JSONArray diveList = (JSONArray) obj;
 
-        for (int i = 0; i < diveList.size(); i++) {
+        for (int i = 0; i < diveList.size(); i++){
             JSONObject jsonObject = (JSONObject) diveList.get(i);
 
             String divesite = (String) jsonObject.get("divesite");
@@ -86,7 +88,26 @@ public class LogbookView extends VerticalLayout {
             Button otevrit = new Button("Open",new Icon(VaadinIcon.EXPAND_SQUARE));
             //stylizovat hover u buttonu
             otevrit.addClickListener(buttonClickEvent -> {
-               //zde se otevre cely ponor
+
+                    Dialog dialog = new Dialog();
+                    dialog.getElement().setAttribute("aria-label", "Create new employee");
+                    //back button
+                    remove(uroven,nizsiUroven1,nizsiUroven2,nizsiUroven3);
+                    HorizontalLayout hlavni = new HorizontalLayout();
+                    Button backButton = new Button("Back");
+                    backButton.addClickListener(buttonClickEvent1 ->{
+
+
+                    });
+                    hlavni.add(backButton,new H1(dateofdive));
+
+                    HorizontalLayout druhaUroven = new HorizontalLayout();
+                    Span text = new Span("Bottom time: " + bottomtime);
+
+                    druhaUroven.add(text);
+
+                    add(hlavni);
+
             });
             Button smazat = new Button("Delete", new Icon(VaadinIcon.TRASH));
             smazat.addClassName("delete-button");
@@ -96,6 +117,7 @@ public class LogbookView extends VerticalLayout {
             });
             nizsiUroven3.add(otevrit,smazat);
             add(uroven,nizsiUroven1,nizsiUroven2,nizsiUroven3);
+            break;
 
         }
     }
