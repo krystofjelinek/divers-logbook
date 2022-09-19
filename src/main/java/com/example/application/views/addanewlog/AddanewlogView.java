@@ -4,6 +4,7 @@ import com.example.application.backend.ReadWriteUtilityForFile;
 import com.example.application.backend.saveList;
 import com.example.application.jsonParsing.Json;
 import com.example.application.views.MainLayout;
+import com.example.application.views.logbook.LogbookView;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
@@ -42,8 +43,8 @@ public class AddanewlogView extends VerticalLayout {
      * stylizovat edu-buttons
      * Xml reader suunto DM5
      * Stylizovat polícka aby měla stejnou velikost
-     * save button -> přejít na LogbookView
-     *  UI.getCurrent().navigate(AddanewlogView.class);
+     * Stylizovat next a previous buttons
+     * Ochránit heatComfort a weightComfort
      * Login pro více uživatelů(user, userpass)(dodělat přihlašovací databázi)
      * Forgotten password
      */
@@ -900,13 +901,13 @@ public class AddanewlogView extends VerticalLayout {
             if (id.getFeelingdata()==null) {
                 id.setFeelingdata("-");
                 js.setData();
-                UI.getCurrent().navigate(MainLayout.class);
+                UI.getCurrent().navigate(LogbookView.class);
             }
             else {
                 id.setInstructordata("-");
                 id.setDiveclubdata("-");
                 js.setData();
-                UI.getCurrent().navigate(MainLayout.class);
+                UI.getCurrent().navigate(LogbookView.class);
             }
         });
         add(progressBar,uroven0020,uroven020,uroven20,uroven201);
@@ -1060,11 +1061,11 @@ public class AddanewlogView extends VerticalLayout {
             if (id.getFeelingdata()==null) {
                 id.setFeelingdata("-");
                 js.setData();
-                //prejit na logbookView
+                UI.getCurrent().navigate(LogbookView.class);
             }
             else {
                 js.setData();
-                //prejit na logbookView
+                UI.getCurrent().navigate(LogbookView.class);
             }
         });
         add(progressBar,uroven0023,uroven023,uroven23,uroven231);
