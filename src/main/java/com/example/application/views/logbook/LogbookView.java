@@ -3,8 +3,6 @@ package com.example.application.views.logbook;
 import com.example.application.views.MainLayout;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.StyleSheet;
-import com.vaadin.flow.component.dialog.Dialog;
-import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.Icon;
@@ -20,6 +18,7 @@ import org.json.simple.parser.ParseException;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @StyleSheet("/themes/divers-logbook/styles.css")
 @PageTitle("Logbook")
@@ -40,8 +39,8 @@ public class LogbookView extends VerticalLayout {
         Object obj = jsonParser.parse(fileReader);
         JSONArray diveList = (JSONArray) obj;
 
-        for (int i = 0; i < diveList.size(); i++){
-            JSONObject jsonObject = (JSONObject) diveList.get(i);
+        for (AtomicInteger i = new AtomicInteger(); i.get() < diveList.size();){
+            JSONObject jsonObject = (JSONObject) diveList.get(i.get());
 
             String divesite = (String) jsonObject.get("divesite");
             String location = (String) jsonObject.get("location");
@@ -88,37 +87,35 @@ public class LogbookView extends VerticalLayout {
             Button otevrit = new Button("Open",new Icon(VaadinIcon.EXPAND_SQUARE));
             //stylizovat hover u buttonu
             otevrit.addClickListener(buttonClickEvent -> {
-
-                    Dialog dialog = new Dialog();
-                    dialog.getElement().setAttribute("aria-label", "Create new employee");
-                    //back button
-                    remove(uroven,nizsiUroven1,nizsiUroven2,nizsiUroven3);
-                    HorizontalLayout hlavni = new HorizontalLayout();
-                    Button backButton = new Button("Back");
-                    backButton.addClickListener(buttonClickEvent1 ->{
-
-
-                    });
-                    hlavni.add(backButton,new H1(dateofdive));
-
-                    HorizontalLayout druhaUroven = new HorizontalLayout();
-                    Span text = new Span("Bottom time: " + bottomtime);
-
-                    druhaUroven.add(text);
-
-                    add(hlavni);
-
+                //vyskoci pop-up se vsemi informacemi
             });
             Button smazat = new Button("Delete", new Icon(VaadinIcon.TRASH));
             smazat.addClassName("delete-button");
-            //stylizovat button a hover
+            //stylizovat hover
             smazat.addClickListener(buttonClickEvent -> {
                 //vyskoci pop-up jestli chceme opravdu smazat
             });
             nizsiUroven3.add(otevrit,smazat);
-            add(uroven,nizsiUroven1,nizsiUroven2,nizsiUroven3);
-            break;
 
+            HorizontalLayout nizsiUroven4 = new HorizontalLayout();
+            Button nextButton = new Button("Next");
+            nextButton.addClickListener(buttonClickEvent -> {
+                i.set(+1);
+            });
+            nextButton.addClassName("next-button");
+            Button previousButton = new Button("Previous");
+            previousButton.addClickListener(buttonClickEvent -> {
+                i.set(-1);
+            });
+            if (i.get() == 0){
+                nizsiUroven4.add(nextButton);
+            } else if (i.get() == diveList.size()-1){
+                nizsiUroven4.add(previousButton);
+            } else {
+                nizsiUroven4.add(previousButton,nextButton);
+            }
+            add(uroven,nizsiUroven1,nizsiUroven2,nizsiUroven3,nizsiUroven4);
+            break;
         }
     }
 }
