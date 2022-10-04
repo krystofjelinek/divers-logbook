@@ -96,28 +96,18 @@ public class LogbookView extends VerticalLayout {
             });
             nizsiUroven3.add(otevrit,smazat);
 
-            /*HorizontalLayout nizsiUroven4 = new HorizontalLayout();
+            HorizontalLayout nizsiUroven4 = new HorizontalLayout();
             Button nextButton = new Button("Next");
             nextButton.addClickListener(buttonClickEvent -> {
-                    remove(
-                *//*i.incrementAndGet();*//*
+                
             });
             nextButton.addClassName("next-button");
             Button previousButton = new Button("Previous");
             previousButton.addClickListener(buttonClickEvent -> {
 
-                *//*i.decrementAndGet();*//*
+
             });
-            *//*if (i.get() == 0){
-                nizsiUroven4.add(nextButton);
-            } else if (i.get() == diveList.size()){
-                nizsiUroven4.add(previousButton);
-            } else {
-                nizsiUroven4.add(previousButton,nextButton);
-            }*//*
-            nizsiUroven4.add(previousButton,nextButton);*/
-            add(uroven,nizsiUroven1,nizsiUroven2,nizsiUroven3/*,nizsiUroven4*/);
-            //prechazet mezi layouty, nefunguje protoze for cyklus skonci
+            add(uroven,nizsiUroven1,nizsiUroven2,nizsiUroven3,nizsiUroven4);
         }
     }
 }
