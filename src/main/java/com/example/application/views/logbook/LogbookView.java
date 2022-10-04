@@ -18,7 +18,6 @@ import org.json.simple.parser.ParseException;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @StyleSheet("/themes/divers-logbook/styles.css")
 @PageTitle("Logbook")
@@ -39,8 +38,8 @@ public class LogbookView extends VerticalLayout {
         Object obj = jsonParser.parse(fileReader);
         JSONArray diveList = (JSONArray) obj;
 
-        for (AtomicInteger i = new AtomicInteger(); i.get() < diveList.size();){
-            JSONObject jsonObject = (JSONObject) diveList.get(i.get());
+        for ( int i = 0; i < diveList.size(); i++){
+            JSONObject jsonObject = (JSONObject) diveList.get(i);
 
             String divesite = (String) jsonObject.get("divesite");
             String location = (String) jsonObject.get("location");
@@ -97,25 +96,28 @@ public class LogbookView extends VerticalLayout {
             });
             nizsiUroven3.add(otevrit,smazat);
 
-            HorizontalLayout nizsiUroven4 = new HorizontalLayout();
+            /*HorizontalLayout nizsiUroven4 = new HorizontalLayout();
             Button nextButton = new Button("Next");
             nextButton.addClickListener(buttonClickEvent -> {
-                i.set(+1);
+                    remove(
+                *//*i.incrementAndGet();*//*
             });
             nextButton.addClassName("next-button");
             Button previousButton = new Button("Previous");
             previousButton.addClickListener(buttonClickEvent -> {
-                i.set(-1);
+
+                *//*i.decrementAndGet();*//*
             });
-            if (i.get() == 0){
+            *//*if (i.get() == 0){
                 nizsiUroven4.add(nextButton);
-            } else if (i.get() == diveList.size()-1){
+            } else if (i.get() == diveList.size()){
                 nizsiUroven4.add(previousButton);
             } else {
                 nizsiUroven4.add(previousButton,nextButton);
-            }
-            add(uroven,nizsiUroven1,nizsiUroven2,nizsiUroven3,nizsiUroven4);
-            break;
+            }*//*
+            nizsiUroven4.add(previousButton,nextButton);*/
+            add(uroven,nizsiUroven1,nizsiUroven2,nizsiUroven3/*,nizsiUroven4*/);
+            //prechazet mezi layouty, nefunguje protoze for cyklus skonci
         }
     }
 }

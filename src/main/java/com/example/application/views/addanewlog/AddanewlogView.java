@@ -1,7 +1,6 @@
 package com.example.application.views.addanewlog;
 
 import com.example.application.backend.ReadWriteUtilityForFile;
-import com.example.application.backend.saveList;
 import com.example.application.jsonParsing.Json;
 import com.example.application.views.MainLayout;
 import com.example.application.views.logbook.LogbookView;
@@ -35,7 +34,6 @@ import java.time.LocalTime;
 public class AddanewlogView extends VerticalLayout {
 
     ReadWriteUtilityForFile.logdata id = new ReadWriteUtilityForFile.logdata();
-    saveList sl = new saveList();
     Json js = new Json();
 
     /**
