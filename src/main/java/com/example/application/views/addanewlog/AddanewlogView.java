@@ -32,7 +32,6 @@ import java.time.LocalTime;
 @StyleSheet("/themes/divers-logbook/styles.css")
 @PreserveOnRefresh
 public class AddanewlogView extends VerticalLayout {
-
     ReadWriteUtilityForFile.logdata id = new ReadWriteUtilityForFile.logdata();
     Json js = new Json();
 
