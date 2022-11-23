@@ -1,52 +1,51 @@
 
 package com.example.application.backend;
 
-import com.google.gson.Gson;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+public class Dive implements Serializable {
 
-public class ReadWriteUtilityForFile {
 
-    private static final String FileLocation = "/Users/appshah/Documents/data.txt";
-    private static final Gson gson = new Gson();
+        @Id
+        @EqualsAndHashCode.Include
+        private String username;
+        private String divesitedata;
+        private String locationdata;
+        private LocalDate dateofdivedata;
+        private LocalTime starttimedata;
+        private LocalTime bottomtimedata;
+        private LocalTime endtimedata;
+        private String maxdepthdata;
+        private String avgdepthdata;
+        private String tankindata;
+        private String tankoutdata;
+        private String waterconditionsdata;
+        private String typeofdivedata;
+        private String airtempdata;
+        private String watertempdata;
+        private String weightsdata;
+        private String weightcomfortdata;
+        private String heatdata;
+        private String heatcomfortdata;
+        private String notesdata;
+        private String buddydata;
+        private String Edudata;
+        private String diveclubdata;
+        private String instructordata;
+        private String feelingdata;
 
-    public static class logdata {
-        private static String divesitedata;
-        private static String locationdata;
-        private static LocalDate dateofdivedata;
-        private static LocalTime starttimedata;
-        private static LocalTime bottomtimedata;
-        private static LocalTime endtimedata;
-        private static String maxdepthdata;
-        private static String avgdepthdata;
-        private static String tankindata;
-        private static String tankoutdata;
-        private static String waterconditionsdata;
-        private static String typeofdivedata;
-        private static String airtempdata;
-        private static String watertempdata;
-        private static String weightsdata;
-        private static String weightcomfortdata;
-        private static String heatdata;
-        private static String heatcomfortdata;
-        private static String notesdata;
-        private static String buddydata;
-        private static String Edudata;
-        private static String diveclubdata;
-        private static String instructordata;
-        private static String feelingdata;
-
-        public logdata(String divesitedata, String locationdata, LocalDate dateofdivedata, LocalTime starttimedata,
-                 LocalTime bottomtimedata, LocalTime endtimedata, String maxdepthdata, String avgdepthdata,
-                 String tankindata, String tankoutdata, String waterconditionsdata, String typeofdivedata, String airtempdata,
-                String watertempdata, String weightsdata, String weightcomfortdata, String heatdata, String heatcomfortdata,
-                String notesdata, String buddydata, String Edudata, String diveclubdata, String instructordata, String feelingdata) {
-        }
-
-        public logdata() {
-
-        }
 
         public String getDivesitedata() {
             return divesitedata;
@@ -240,12 +239,19 @@ public class ReadWriteUtilityForFile {
             this.feelingdata = feelingdata;
         }
 
-        public String getDivesitedata(logdata logdata) {
+        public String getUsername() {
+            return username;
+        }
+
+        public void setUsername(String username) {
+            this.username = username;
+        }
+        /*public String getDivesitedata(logdata logdata) {
             return logdata.toString();
         }
 
         public String setDivesitedata(logdata logdata, String s) {
             return logdata.toString();
-        }
+        }*/
     }
-}
+

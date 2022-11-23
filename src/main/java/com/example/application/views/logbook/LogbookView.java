@@ -1,38 +1,28 @@
 package com.example.application.views.logbook;
 
-import com.example.application.views.MainLayout;
-import com.vaadin.flow.component.button.Button;
+import com.example.application.DiveService;
+import com.example.application.backend.Dive;
 import com.vaadin.flow.component.dependency.StyleSheet;
-import com.vaadin.flow.component.dialog.Dialog;
-import com.vaadin.flow.component.html.H2;
-import com.vaadin.flow.component.html.Span;
-import com.vaadin.flow.component.icon.Icon;
-import com.vaadin.flow.component.icon.VaadinIcon;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-
-import java.io.FileReader;
-import java.io.IOException;
+import org.vaadin.crudui.crud.impl.GridCrud;
 
 @StyleSheet("/themes/divers-logbook/styles.css")
 @PageTitle("Logbook")
-@Route(value = "", layout = MainLayout.class)
+@Route(value = "" /*,layout = MainLayout.class*/)
 public class LogbookView extends VerticalLayout {
 
-    public LogbookView() throws IOException, ParseException, java.text.ParseException {
+    public LogbookView(DiveService service){
+        GridCrud<Dive> crud = new GridCrud<>(Dive.class, service);
+        add(crud);
         addClassName("list-view");
         setSizeFull();
         setJustifyContentMode(JustifyContentMode.CENTER);
         setDefaultHorizontalComponentAlignment(Alignment.CENTER);
         getStyle().set("text-align", "center");
 
-        FileReader fileReader = new FileReader("/Users/krystofjelinek/IdeaProjects/divers-logbook/divedata.json");
+        /*FileReader fileReader = new FileReader("/Users/krystofjelinek/IdeaProjects/divers-logbook/divedata.json");
 
         JSONParser jsonParser = new JSONParser();
 
@@ -105,7 +95,7 @@ public class LogbookView extends VerticalLayout {
                 //vyskoci pop-up jestli chceme opravdu smazat
             });
             nizsiUroven3.add(otevrit,smazat);
-
+*/
             /*HorizontalLayout nizsiUroven4 = new HorizontalLayout();
             Button nextButton = new Button("Next");
             nextButton.addClickListener(buttonClickEvent -> {
@@ -116,14 +106,13 @@ public class LogbookView extends VerticalLayout {
             previousButton.addClickListener(buttonClickEvent -> {
 
             });
-            nizsiUroven4.add(previousButton,nextButton);*/
+            nizsiUroven4.add(previousButton,nextButton);
             add(uroven,nizsiUroven1,nizsiUroven2,nizsiUroven3);
-        }
+        }*/
 
     }
 
-    private VerticalLayout createDialogLayout(Dialog dialog) {
-        return new VerticalLayout();
-    }
+
+
 }
 

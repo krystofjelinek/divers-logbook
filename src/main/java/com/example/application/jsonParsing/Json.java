@@ -1,21 +1,23 @@
 package com.example.application.jsonParsing;
 
-import com.example.application.backend.ReadWriteUtilityForFile;
+import com.example.application.backend.Dive;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
-import java.io.FileWriter;
+import java.io.FileReader;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Json {
     public static List<ArrayList<String>> outerList = new ArrayList<>();
-    ReadWriteUtilityForFile.logdata id = new ReadWriteUtilityForFile.logdata();
+    Dive id = new Dive();
     public static JSONArray seznam = new JSONArray();
 
 
-    public void setData(){
+    public JSONObject setData(){
         JSONObject dive = new JSONObject();
         dive.put("divesite",id.getDivesitedata());
         dive.put("location",id.getLocationdata());
@@ -38,22 +40,24 @@ public class Json {
         dive.put("notes",id.getNotesdata());
         dive.put("buddy",id.getBuddydata());
         dive.put("edu",id.getEdudata());
-        dive.put("diveclub",id.getBuddydata());
+        dive.put("diveclub",id.getDiveclubdata());
         dive.put("instructor",id.getInstructordata());
         dive.put("feeling",id.getFeelingdata());
 
+       return dive;
+
         /*JSONObject diveObject = new JSONObject();
         diveObject.put("dive",dive);*/
-        seznam.add(dive); //(diveObject)
+       /* seznam.add(dive); //(diveObject)
         try (FileWriter file = new FileWriter("/Users/krystofjelinek/IdeaProjects/divers-logbook/divedata.json")) {
             file.write(seznam.toJSONString());
             file.flush();
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
-    /*public List<ArrayList<String>> getData() throws IOException, ParseException {
+    public List<ArrayList<String>> getData() throws IOException, ParseException, org.json.simple.parser.ParseException {
         FileReader fileReader = new FileReader("/Users/krystofjelinek/IdeaProjects/divers-logbook/divedata.json");
 
         JSONParser jsonParser = new JSONParser();
@@ -121,7 +125,7 @@ public class Json {
 
         }
         return outerList;
-    }*/
+    }
 
    /* private static void parseDiveObject(JSONObject dive){
         ArrayList<String> list = new ArrayList<String>();
