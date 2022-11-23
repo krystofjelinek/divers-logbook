@@ -30,16 +30,14 @@ import java.time.LocalTime;
 @StyleSheet("/themes/divers-logbook/styles.css")
 //@PreserveOnRefresh
 public class AddanewlogView extends VerticalLayout {
-
     Dive id = new Dive();
     //Json js = new Json();
 
-
     /**
      * Ochránit vstupy (Binder)
-     * stylizovat log-out button
-     * dashboard počítání spotřeby
-     * ??Xml reader suunto DM5
+     * stylizovat edu-buttons
+     * počítání spotřeby
+     * Xml reader suunto DM5
      * Stylizovat polícka aby měla stejnou velikost
      * Stylizovat next a previous buttons
      * Ochránit heatComfort a weightComfort
@@ -907,7 +905,7 @@ public class AddanewlogView extends VerticalLayout {
                 id.setDiveclubdata("-");
                 //js.setData();
             }
-            //diveRepository.save(id);
+
             UI.getCurrent().navigate(LogbookView.class);
         });
         add(progressBar,uroven0020,uroven020,uroven20,uroven201);
@@ -1061,12 +1059,12 @@ public class AddanewlogView extends VerticalLayout {
             if (id.getFeelingdata()==null) {
                 id.setFeelingdata("-");
                 //js.setData();
-                //diveRepository.save(id);
+
                 UI.getCurrent().navigate(LogbookView.class);
 
             }
             else {
-                //diveRepository.save(id);
+
                 UI.getCurrent().navigate(LogbookView.class);
                 //js.setData();
             }

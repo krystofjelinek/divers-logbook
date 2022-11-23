@@ -1,26 +1,11 @@
 
 package com.example.application.backend;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Dive implements Serializable {
+public class Dive {
 
-
-        @Id
-        @EqualsAndHashCode.Include
-        private String username;
         private String divesitedata;
         private String locationdata;
         private LocalDate dateofdivedata;
@@ -238,20 +223,5 @@ public class Dive implements Serializable {
         public void setFeelingdata(String feelingdata) {
             this.feelingdata = feelingdata;
         }
-
-        public String getUsername() {
-            return username;
-        }
-
-        public void setUsername(String username) {
-            this.username = username;
-        }
-        /*public String getDivesitedata(logdata logdata) {
-            return logdata.toString();
-        }
-
-        public String setDivesitedata(logdata logdata, String s) {
-            return logdata.toString();
-        }*/
     }
 

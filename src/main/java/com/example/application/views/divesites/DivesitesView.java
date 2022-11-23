@@ -1,4 +1,4 @@
-package com.example.application.views.dashboard;
+package com.example.application.views.divesites;
 
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Image;
@@ -10,9 +10,9 @@ import com.example.application.views.MainLayout;
 
 @PageTitle("Dive sites")
 @Route(value = "empty2", layout = MainLayout.class)
-public class DashboardView extends VerticalLayout {
+public class DivesitesView extends VerticalLayout {
 
-    public DashboardView() {
+    public DivesitesView() {
         setSpacing(false);
 
         Image img = new Image("images/empty-plant.png", "placeholder plant");
