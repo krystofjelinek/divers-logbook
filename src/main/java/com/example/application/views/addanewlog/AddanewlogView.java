@@ -30,8 +30,14 @@ import java.time.LocalTime;
 @StyleSheet("/themes/divers-logbook/styles.css")
 //@PreserveOnRefresh
 public class AddanewlogView extends VerticalLayout {
+<<<<<<< HEAD
     Dive id = new Dive();
     //Json js = new Json();
+=======
+
+    ReadWriteUtilityForFile.logdata id = new ReadWriteUtilityForFile.logdata();
+    Json js = new Json();
+>>>>>>> parent of 49f42e5... 11.10.2022
 
     /**
      * Ochránit vstupy (Binder)

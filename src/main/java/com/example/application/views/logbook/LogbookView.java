@@ -3,6 +3,14 @@ package com.example.application.views.logbook;
 import com.example.application.DiveService;
 import com.example.application.backend.Dive;
 import com.vaadin.flow.component.dependency.StyleSheet;
+<<<<<<< HEAD
+=======
+import com.vaadin.flow.component.html.H2;
+import com.vaadin.flow.component.html.Span;
+import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+>>>>>>> parent of 49f42e5... 11.10.2022
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
@@ -28,7 +36,6 @@ public class LogbookView extends VerticalLayout {
 
         Object obj = jsonParser.parse(fileReader);
         JSONArray diveList = (JSONArray) obj;
-
 
         for ( int i = 0; i < diveList.size(); i++){
             JSONObject jsonObject = (JSONObject) diveList.get(i);
@@ -74,38 +81,37 @@ public class LogbookView extends VerticalLayout {
             lokace.addClassName("text");
             nizsiUroven2.add(vzd, lokace);
 
-            Dialog dialog = new Dialog();
-
             HorizontalLayout nizsiUroven3 = new HorizontalLayout();
-            Button otevrit = new Button("Open",new Icon(VaadinIcon.EXPAND_SQUARE),  e -> dialog.open());
+            Button otevrit = new Button("Open",new Icon(VaadinIcon.EXPAND_SQUARE));
             //stylizovat hover u buttonu
-            otevrit.addClassName(String.valueOf(i));
             otevrit.addClickListener(buttonClickEvent -> {
-                 int j = Integer.parseInt(otevrit.getClassName());
-                 dialog.getElement().setAttribute("aria-label",dateofdive);
-                 VerticalLayout dialogLayout = createDialogLayout(dialog);
-                dialog.add(dialogLayout);
-
+                //vyskoci pop-up se vsemi informacemi
             });
             Button smazat = new Button("Delete", new Icon(VaadinIcon.TRASH));
             smazat.addClassName("delete-button");
-            smazat.addClassName(String.valueOf(i));
             //stylizovat hover
             smazat.addClickListener(buttonClickEvent -> {
                 //vyskoci pop-up jestli chceme opravdu smazat
             });
             nizsiUroven3.add(otevrit,smazat);
+<<<<<<< HEAD
 */
             /*HorizontalLayout nizsiUroven4 = new HorizontalLayout();
+=======
+
+            HorizontalLayout nizsiUroven4 = new HorizontalLayout();
+>>>>>>> parent of 49f42e5... 11.10.2022
             Button nextButton = new Button("Next");
             nextButton.addClickListener(buttonClickEvent -> {
-
+                
             });
             nextButton.addClassName("next-button");
             Button previousButton = new Button("Previous");
             previousButton.addClickListener(buttonClickEvent -> {
 
+
             });
+<<<<<<< HEAD
             nizsiUroven4.add(previousButton,nextButton);
             add(uroven,nizsiUroven1,nizsiUroven2,nizsiUroven3);
         }*/
@@ -114,5 +120,10 @@ public class LogbookView extends VerticalLayout {
 
 
 
+=======
+            add(uroven,nizsiUroven1,nizsiUroven2,nizsiUroven3,nizsiUroven4);
+        }
+    }
+>>>>>>> parent of 49f42e5... 11.10.2022
 }
 
