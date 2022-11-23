@@ -1,29 +1,19 @@
 package com.example.application.views.logbook;
 
-import com.example.application.DiveService;
-import com.example.application.backend.Dive;
 import com.vaadin.flow.component.dependency.StyleSheet;
-<<<<<<< HEAD
-=======
-import com.vaadin.flow.component.html.H2;
-import com.vaadin.flow.component.html.Span;
-import com.vaadin.flow.component.icon.Icon;
-import com.vaadin.flow.component.icon.VaadinIcon;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
->>>>>>> parent of 49f42e5... 11.10.2022
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import org.vaadin.crudui.crud.impl.GridCrud;
+
+import java.io.IOException;
+import java.text.ParseException;
 
 @StyleSheet("/themes/divers-logbook/styles.css")
 @PageTitle("Logbook")
 @Route(value = "" /*,layout = MainLayout.class*/)
 public class LogbookView extends VerticalLayout {
 
-    public LogbookView(DiveService service){
-        GridCrud<Dive> crud = new GridCrud<>(Dive.class, service);
-        add(crud);
+    public LogbookView() throws IOException, ParseException, java.text.ParseException {
         addClassName("list-view");
         setSizeFull();
         setJustifyContentMode(JustifyContentMode.CENTER);
@@ -94,36 +84,9 @@ public class LogbookView extends VerticalLayout {
                 //vyskoci pop-up jestli chceme opravdu smazat
             });
             nizsiUroven3.add(otevrit,smazat);
-<<<<<<< HEAD
-*/
-            /*HorizontalLayout nizsiUroven4 = new HorizontalLayout();
-=======
-
-            HorizontalLayout nizsiUroven4 = new HorizontalLayout();
->>>>>>> parent of 49f42e5... 11.10.2022
-            Button nextButton = new Button("Next");
-            nextButton.addClickListener(buttonClickEvent -> {
-                
-            });
-            nextButton.addClassName("next-button");
-            Button previousButton = new Button("Previous");
-            previousButton.addClickListener(buttonClickEvent -> {
+                */
 
 
-            });
-<<<<<<< HEAD
-            nizsiUroven4.add(previousButton,nextButton);
-            add(uroven,nizsiUroven1,nizsiUroven2,nizsiUroven3);
-        }*/
-
-    }
-
-
-
-=======
-            add(uroven,nizsiUroven1,nizsiUroven2,nizsiUroven3,nizsiUroven4);
-        }
-    }
->>>>>>> parent of 49f42e5... 11.10.2022
 }
 
+}
