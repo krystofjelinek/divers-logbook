@@ -1,1 +1,26 @@
-[{"heat":"7 mm","watertemp":"33","notes":"333322","endtime":"15:32:01.002756","typeofdive":"Lake","dateofdive":"2022-11-16","starttime":"15:31:55.599112","feeling":"Okay","weights":"3","maxdepth":"12","weightscomf":"Too light","heatcomf":"Good","tankin":"200","avgdepth":"12","instructor":null,"edu":"No","diveclub":"Marek","airtemp":"33","location":null,"watercond":"None","bottomtime":"15:31:58.170501","tankout":"120","buddy":"Marek","divesite":null}]
+{
+  "username": "krystofkkj",
+  "divesitedata": "barbora",
+  "locationdata": "Duchcov",
+  "dateofdivedata": "2022-12-12",
+  "starttimedata": "12:23:00",
+  "bottomtimedata": "00:30:21",
+  "endtimedata":"12:53:21",
+  "maxdepthdata": "12.3",
+  "avgdepthdata":"7.5",
+  "tankindata": "220",
+  "tankoutdata": "50",
+  "waterconditionsdata": "Waves",
+  "typeofdivedata": "Lake",
+  "airtempdata": "22",
+  "watertempdata": "15",
+  "weightsdata":"10",
+  "weightcomfortdata": "Good",
+  "heatdata":"7 mm",
+  "heatcomfortdata": "Good",
+  "notesdata": "bylo to super",
+  "buddydata": "Vítek",
+  "Edudata": "Yes",
+  "diveclubdata":"kraken",
+  "feelingdata": "Good"
+}

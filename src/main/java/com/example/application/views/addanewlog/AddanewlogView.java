@@ -30,7 +30,7 @@ import java.time.LocalTime;
 @StyleSheet("/themes/divers-logbook/styles.css")
 //@PreserveOnRefresh
 public class AddanewlogView extends VerticalLayout {
-    Dive id = new Dive();
+     Dive id = new Dive();
     //Json js = new Json();
 
     /**

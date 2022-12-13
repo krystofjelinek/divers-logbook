@@ -1,18 +1,7 @@
 package com.example.application.jsonParsing;
 
-import com.example.application.backend.Dive;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-
-import java.io.FileReader;
-import java.io.IOException;
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.List;
-
 public class Json {
-    public static List<ArrayList<String>> outerList = new ArrayList<>();
+    /*public static List<ArrayList<String>> outerList = new ArrayList<>();
     Dive id = new Dive();
     public static JSONArray seznam = new JSONArray();
 
@@ -44,7 +33,7 @@ public class Json {
         dive.put("instructor",id.getInstructordata());
         dive.put("feeling",id.getFeelingdata());
 
-       return dive;
+       return dive;*/
 
         /*JSONObject diveObject = new JSONObject();
         diveObject.put("dive",dive);*/
@@ -55,7 +44,7 @@ public class Json {
         } catch (IOException e) {
             e.printStackTrace();
         }*/
-    }
+   /* }
 
     public List<ArrayList<String>> getData() throws IOException, ParseException, org.json.simple.parser.ParseException {
         FileReader fileReader = new FileReader("/Users/krystofjelinek/IdeaProjects/divers-logbook/divedata.json");
@@ -125,7 +114,7 @@ public class Json {
 
         }
         return outerList;
-    }
+    }*/
 
    /* private static void parseDiveObject(JSONObject dive){
         ArrayList<String> list = new ArrayList<String>();

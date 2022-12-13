@@ -13,7 +13,8 @@ import java.util.Collections;
 
 @Route("login")
 @PageTitle("Login | Divers logbook")
-public class LoginView extends VerticalLayout implements BeforeEnterObserver {
+public class LoginView extends VerticalLayout implements BeforeEnterObserver
+ {
 
     LoginForm login = new LoginForm();
 

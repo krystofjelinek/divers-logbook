@@ -1,11 +1,16 @@
 
 package com.example.application.backend;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+@Document("dives")
 public class Dive {
-
+        @Id
+        private String username;
         private String divesitedata;
         private String locationdata;
         private LocalDate dateofdivedata;
@@ -26,11 +31,10 @@ public class Dive {
         private String heatcomfortdata;
         private String notesdata;
         private String buddydata;
-        private String Edudata;
+        private String edudata;
         private String diveclubdata;
         private String instructordata;
         private String feelingdata;
-
 
         public String getDivesitedata() {
             return divesitedata;
@@ -193,11 +197,11 @@ public class Dive {
         }
 
         public String getEdudata() {
-            return Edudata;
+            return edudata;
         }
 
         public void setEdudata(String edudata) {
-            Edudata = edudata;
+            edudata = edudata;
         }
 
         public String getDiveclubdata() {
@@ -222,6 +226,14 @@ public class Dive {
 
         public void setFeelingdata(String feelingdata) {
             this.feelingdata = feelingdata;
+        }
+
+        public String getUsername() {
+            return username;
+        }
+
+        public void setUsername(String username) {
+            this.username = username;
         }
     }
 
