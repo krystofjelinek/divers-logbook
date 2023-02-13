@@ -6,37 +6,81 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Objects;
 
-@Document("dives")
+
+@Document(collection = "diving_logs")
 public class Dive {
-        @Id
-        private String username;
-        private String divesitedata;
-        private String locationdata;
-        private LocalDate dateofdivedata;
-        private LocalTime starttimedata;
-        private LocalTime bottomtimedata;
-        private LocalTime endtimedata;
-        private String maxdepthdata;
-        private String avgdepthdata;
-        private String tankindata;
-        private String tankoutdata;
-        private String waterconditionsdata;
-        private String typeofdivedata;
-        private String airtempdata;
-        private String watertempdata;
-        private String weightsdata;
-        private String weightcomfortdata;
-        private String heatdata;
-        private String heatcomfortdata;
-        private String notesdata;
-        private String buddydata;
-        private String edudata;
-        private String diveclubdata;
-        private String instructordata;
-        private String feelingdata;
 
-        public String getDivesitedata() {
+
+    @Id
+        public String id;
+        public String username;
+        public String divesitedata;
+        public String locationdata;
+        public LocalDate dateofdivedata;
+        public LocalTime starttimedata;
+        public LocalTime bottomtimedata;
+        public LocalTime endtimedata;
+        public String maxdepthdata;
+        public String avgdepthdata;
+        public String tankindata;
+        public String tankoutdata;
+        public String waterconditionsdata;
+        public String typeofdivedata;
+        public String airtempdata;
+        public String watertempdata;
+        public String weightsdata;
+        public String weightcomfortdata;
+        public String heatdata;
+        public String heatcomfortdata;
+        public String notesdata;
+        public String buddydata;
+        public String edudata;
+        public String diveclubdata;
+        public String instructordata;
+        public String feelingdata;
+
+        public Dive(){
+        }
+
+        //???
+
+
+   public Dive(String username,String divesitedata, String locationdata, LocalDate dateofdivedata, LocalTime starttimedata,
+                LocalTime bottomtimedata, LocalTime endtimedata, String maxdepthdata, String avgdepthdata,
+                String tankindata, String tankoutdata, String waterconditionsdata, String typeofdivedata,
+                String airtempdata, String watertempdata, String weightsdata, String weightcomfortdata,
+                String heatdata, String heatcomfortdata, String notesdata, String buddydata, String edudata,
+                String diveclubdata, String instructordata, String feelingdata) {
+        this.divesitedata = divesitedata;
+        this.locationdata = locationdata;
+        this.dateofdivedata = dateofdivedata;
+        this.starttimedata = starttimedata;
+        this.bottomtimedata = bottomtimedata;
+        this.endtimedata = endtimedata;
+        this.maxdepthdata = maxdepthdata;
+        this.avgdepthdata = avgdepthdata;
+        this.tankindata = tankindata;
+        this.tankoutdata = tankoutdata;
+        this.waterconditionsdata = waterconditionsdata;
+        this.typeofdivedata = typeofdivedata;
+        this.airtempdata = airtempdata;
+        this.watertempdata = watertempdata;
+        this.weightsdata = weightsdata;
+        this.weightcomfortdata = weightcomfortdata;
+        this.heatdata = heatdata;
+        this.heatcomfortdata = heatcomfortdata;
+        this.notesdata = notesdata;
+        this.buddydata = buddydata;
+        this.edudata = edudata;
+        this.diveclubdata = diveclubdata;
+        this.instructordata = instructordata;
+        this.feelingdata = feelingdata;
+        this.username = username;
+    }
+
+    public String getDivesitedata() {
             return divesitedata;
         }
 
@@ -231,9 +275,30 @@ public class Dive {
         public String getUsername() {
             return username;
         }
-
+        
         public void setUsername(String username) {
-            this.username = username;
+        this.username = username;
         }
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Dive dive = (Dive) o;
+        return id.equals(dive.id) && username.equals(dive.username);
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, username);
+    }
+    //???
+}
 

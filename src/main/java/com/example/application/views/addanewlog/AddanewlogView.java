@@ -1,23 +1,12 @@
 package com.example.application.views.addanewlog;
 
 import com.example.application.backend.Dive;
+import com.example.application.backend.DiveRepository;
 import com.example.application.views.MainLayout;
-import com.example.application.views.logbook.LogbookView;
-import com.vaadin.flow.component.Key;
-import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.combobox.ComboBox;
-import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.dependency.StyleSheet;
-import com.vaadin.flow.component.html.H2;
-import com.vaadin.flow.component.html.Image;
-import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.progressbar.ProgressBar;
-import com.vaadin.flow.component.textfield.TextArea;
-import com.vaadin.flow.component.textfield.TextField;
-import com.vaadin.flow.component.timepicker.TimePicker;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
@@ -30,8 +19,11 @@ import java.time.LocalTime;
 @StyleSheet("/themes/divers-logbook/styles.css")
 //@PreserveOnRefresh
 public class AddanewlogView extends VerticalLayout {
-     Dive id = new Dive();
+    //Dive id = new Dive();
+     DiveRepository repository;
     //Json js = new Json();
+
+
 
     /**
      * Ochránit vstupy (Binder)
@@ -53,6 +45,7 @@ public class AddanewlogView extends VerticalLayout {
         setDefaultHorizontalComponentAlignment(Alignment.CENTER);
         getStyle().set("text-align", "center");
         AddImport();
+
     }
 
     private void AddImport() {
@@ -60,23 +53,51 @@ public class AddanewlogView extends VerticalLayout {
         Button addButton = new Button("Add");
         addButton.addClassName("add-button");
         addButton.addClickListener(buttonClickEvent -> {
-            remove(uroven0);
-            DiveSite();
+            Dive id = new Dive();
+            id.setUsername("kkj");    //
+            id.setId("5");            //
+            id.setTankindata("100");  //
+            id.setFeelingdata("Good"); //
+            id.setEdudata("Yes");    //
+            id.setDiveclubdata("kraken"); //
+            id.setInstructordata("vitek"); //
+            id.setAirtempdata("22");   //
+            id.setAvgdepthdata("22");  //
+            id.setBuddydata("mara");   //
+            id.setDivesitedata("barbora");  //
+            id.setLocationdata("czechia");  //
+            id.setMaxdepthdata("30");    //
+            id.setNotesdata("ahoj");    //
+            id.setTankoutdata("200");   //
+            id.setWatertempdata("22");  //
+            id.setBottomtimedata(LocalTime.parse("10:12")); //
+            id.setEndtimedata(LocalTime.parse("10:12")); //
+            id.setDateofdivedata(LocalDate.ofEpochDay(2022-12-12)); //
+            id.setStarttimedata(LocalTime.parse("10:12")); //
+            id.setHeatcomfortdata("fwif");    //
+            id.setHeatdata("efei");           //
+            id.setTypeofdivedata("RRro");     //
+            id.setWaterconditionsdata("GOOD"); //
+            id.setWeightcomfortdata("Good");   //
+            id.setWeightsdata("20");           //
+            repository.save(id);
+            //remove(uroven0);
+            //DiveSite();
         });
         Button importDive = new Button("Import");
         importDive.addClassName("import-button");
         importDive.addClickListener(buttonClickEvent -> {
             remove(uroven0);
-            DiveSite();
+           // DiveSite();
             //nacteni dat z potapecskeho pocitace(xml file)
             //prejit na LogbookView
         });
         uroven0.add(addButton,importDive);
         add(uroven0);
 
-    }
+    }}
 
-    public void DiveSite() {
+ /*   public void DiveSite() {
         HorizontalLayout uroven01 = new HorizontalLayout();
         HorizontalLayout uroven1 = new HorizontalLayout();
         HorizontalLayout uroven11 = new HorizontalLayout();
@@ -659,7 +680,7 @@ public class AddanewlogView extends VerticalLayout {
         uroven15.add(new Paragraph(new H2("Weight comfort:")), policko14, comfort);
         uroven151.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
-            if (policko14.getValue().length()>0 || comfort.getValue().length()>0){
+            if (policko14.getValue().length()>0 && comfort.getValue().length()>0){
             id.setWeightsdata(policko14.getValue());
             id.setWeightcomfortdata(comfort.getValue());
             remove(uroven15,uroven151,uroven015,progressBar);
@@ -698,14 +719,14 @@ public class AddanewlogView extends VerticalLayout {
         uroven16.add(new Paragraph(new H2("Heat comfort:")), thickness, comfort);
         uroven161.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
-            if (thickness.getValue().length()>0 || comfort.getValue().length()>0){
+            if (thickness.getValue().length()>0 && comfort.getValue().length()>0){
             id.setHeatdata(thickness.getValue());
             id.setHeatcomfortdata(comfort.getValue());
             remove(uroven16,uroven161,uroven016,progressBar);
             Notes();}
             else {
-                id.setHeatdata(thickness.getValue());
-                id.setHeatcomfortdata(comfort.getValue());
+                id.setHeatdata("-");
+                id.setHeatcomfortdata("-");
                 remove(uroven16,uroven161,uroven016,progressBar);
                 Notes();
             }
@@ -898,11 +919,13 @@ public class AddanewlogView extends VerticalLayout {
                 id.setFeelingdata("-");
                 id.setInstructordata("-");
                 id.setDiveclubdata("-");
+                repository.save(id);
                 //js.setData();
             }
             else {
                 id.setInstructordata("-");
                 id.setDiveclubdata("-");
+                repository.save(id);
                 //js.setData();
             }
 
@@ -1059,17 +1082,18 @@ public class AddanewlogView extends VerticalLayout {
             if (id.getFeelingdata()==null) {
                 id.setFeelingdata("-");
                 //js.setData();
-
+                repository.save(id);
                 UI.getCurrent().navigate(LogbookView.class);
-
             }
             else {
-
+                repository.save(id);
                 UI.getCurrent().navigate(LogbookView.class);
                 //js.setData();
+
             }
 
         });
         add(progressBar,uroven0023,uroven023,uroven23,uroven231);
     }
 }
+*/

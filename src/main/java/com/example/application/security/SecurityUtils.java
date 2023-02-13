@@ -1,3 +1,4 @@
+
 package com.example.application.security;
 
 import com.vaadin.flow.server.HandlerHelper.RequestType;
@@ -29,3 +30,4 @@ public final class SecurityUtils {
                 && authentication.isAuthenticated();
     }
 }
+
