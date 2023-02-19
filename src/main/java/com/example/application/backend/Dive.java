@@ -4,13 +4,15 @@ package com.example.application.backend;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Objects;
 
 
 @Document(collection = "diving_logs")
-public class Dive {
+public class Dive implements Serializable {
+    private static final long serialVersionUID = -1606960938289190456L;
 
 
     @Id
@@ -41,10 +43,8 @@ public class Dive {
         public String instructordata;
         public String feelingdata;
 
-        /*public Dive(){
-        }*/
-
-        //???
+        public Dive(){
+        }
 
 
    public Dive(String username,String divesitedata, String locationdata, LocalDate dateofdivedata, LocalTime starttimedata,

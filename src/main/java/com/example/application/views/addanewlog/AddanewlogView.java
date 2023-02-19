@@ -3,10 +3,22 @@ package com.example.application.views.addanewlog;
 import com.example.application.backend.Dive;
 import com.example.application.backend.DiveRepository;
 import com.example.application.views.MainLayout;
+import com.example.application.views.logbook.LogbookView;
+import com.vaadin.flow.component.Key;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.combobox.ComboBox;
+import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.dependency.StyleSheet;
+import com.vaadin.flow.component.html.H2;
+import com.vaadin.flow.component.html.Image;
+import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.progressbar.ProgressBar;
+import com.vaadin.flow.component.textfield.TextArea;
+import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.component.timepicker.TimePicker;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,13 +32,16 @@ import java.time.LocalTime;
 @Route(value = "add", layout = MainLayout.class)
 @StyleSheet("/themes/divers-logbook/styles.css")
 //@PreserveOnRefresh
-public class AddanewlogView extends VerticalLayout implements Serializable {
-    private static final long serialVersionUID = 6529685098267757690L;
-    //Dive id;
+public class AddanewlogView extends VerticalLayout implements Serializable
+         {
+    private static final long serialVersionUID = 2121010853008479565L;
+
+    Dive id = new Dive();
     @Autowired
     private DiveRepository repository;
     //Json js = new Json();
 
+    //Binder<Dive> binder = new Binder<>(Dive.class);
 
 
 
@@ -58,46 +73,9 @@ public class AddanewlogView extends VerticalLayout implements Serializable {
         Button addButton = new Button("Add");
         addButton.addClassName("add-button");
         addButton.addClickListener(buttonClickEvent -> {
-           /* id.setUsername("kkj");    //
-            id.setId("5");            //
-            id.setTankindata("100");  //
-            id.setFeelingdata("Good"); //
-            id.setEdudata("Yes");    //
-            id.setDiveclubdata("kraken"); //
-            id.setInstructordata("vitek"); //
-            id.setAirtempdata("22");   //
-            id.setAvgdepthdata("22");  //
-            id.setBuddydata("mara");   //
-            id.setDivesitedata("barbora");  //
-            id.setLocationdata("czechia");  //
-            id.setMaxdepthdata("30");    //
-            id.setNotesdata("ahoj");    //
-            id.setTankoutdata("200");   //
-            id.setWatertempdata("22");  //
-            id.setBottomtimedata(LocalTime.parse("10:12")); //
-            id.setEndtimedata(LocalTime.parse("10:12")); //
-            id.setDateofdivedata(LocalDate.ofEpochDay(2022-12-12)); //
-            id.setStarttimedata(LocalTime.parse("10:12")); //
-            id.setHeatcomfortdata("fwif");    //
-            id.setHeatdata("efei");           //
-            id.setTypeofdivedata("RRro");     //
-            id.setWaterconditionsdata("GOOD"); //
-            id.setWeightcomfortdata("Good");   //
-            id.setWeightsdata("20");           //*/
-           /* repository.save(new Dive("krystof","barbora","wdwdwih",LocalDate.parse("2022-12-12"),
-                    LocalTime.parse("12:24"), LocalTime.parse("12:24"),LocalTime.parse("12:24"),"22","2",
-                    "220", "100", "Good","Lake", "22", "12", "10",
-                    "Good", "7mm", "Good", "dobry", "vitek","Yes",
-                    "Kraken", "Eda", "Good"));*/
-           /* Dive savedDive = repository.save(("krystof","barbora","wdwdwih",LocalDate.parse("2022-12-12"),
-                    LocalTime.parse("12:24"), LocalTime.parse("12:24"),LocalTime.parse("12:24"),"22","2",
-                    "220", "100", "Good","Lake", "22", "12", "10",
-                    "Good", "7mm", "Good", "dobry", "vitek","Yes",
-                    "Kraken", "Eda", "Good");*/
-
-            //remove(uroven0);
-            //DiveSite();
-            try{
+            remove(uroven0);
+            DiveSite();
+           /* try{
                  repository.save(new Dive("krystof","barbora","wdwdwih", LocalDate.parse("2022-12-12"),
                         LocalTime.parse("12:24"), LocalTime.parse("12:24"),LocalTime.parse("12:24"),"22","2",
                         "220", "100", "Good","Lake", "22", "12", "10",
@@ -105,22 +83,22 @@ public class AddanewlogView extends VerticalLayout implements Serializable {
                         "Kraken", "Eda", "Good"));}
             catch(NullPointerException e){
                 System.out.println("Je to v pici");
-            }
+            }*/
         });
         Button importDive = new Button("Import");
         importDive.addClassName("import-button");
         importDive.addClickListener(buttonClickEvent -> {
             remove(uroven0);
-           // DiveSite();
+            DiveSite();
             //nacteni dat z potapecskeho pocitace(xml file)
             //prejit na LogbookView
         });
         uroven0.add(addButton,importDive);
         add(uroven0);
 
-    }}
+    }
 
- /*   public void DiveSite() {
+    public void DiveSite() {
         HorizontalLayout uroven01 = new HorizontalLayout();
         HorizontalLayout uroven1 = new HorizontalLayout();
         HorizontalLayout uroven11 = new HorizontalLayout();
@@ -133,6 +111,7 @@ public class AddanewlogView extends VerticalLayout implements Serializable {
         policko1.addKeyPressListener(Key.ENTER, e->{
             if (policko1.getValue().length() > 0){
             remove(uroven1,uroven11,uroven01,progressBar);
+            //binder.bind(policko1, id.divesitedata);
             id.setDivesitedata(policko1.getValue());
             Location();}
             else {
@@ -1104,19 +1083,25 @@ public class AddanewlogView extends VerticalLayout implements Serializable {
         saveButton.addClickListener(buttonClickEvent -> {
             if (id.getFeelingdata()==null) {
                 id.setFeelingdata("-");
-                //js.setData();
-                repository.save(id);
-                UI.getCurrent().navigate(LogbookView.class);
+                try{
+                    repository.save(id);
+                    UI.getCurrent().navigate(LogbookView.class);
+                }
+                catch (Exception e){
+                    System.out.println("Something went wrong");
+                }
             }
             else {
-                repository.save(id);
-                UI.getCurrent().navigate(LogbookView.class);
-                //js.setData();
-
+                try{
+                    repository.save(id);
+                    UI.getCurrent().navigate(LogbookView.class);
+                }
+                catch (Exception e){
+                    System.out.println("Something went wrong");
+                }
             }
-
         });
         add(progressBar,uroven0023,uroven023,uroven23,uroven231);
     }
 }
-*/
+
