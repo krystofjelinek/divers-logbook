@@ -9,8 +9,10 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -18,10 +20,14 @@ import java.time.LocalTime;
 @Route(value = "add", layout = MainLayout.class)
 @StyleSheet("/themes/divers-logbook/styles.css")
 //@PreserveOnRefresh
-public class AddanewlogView extends VerticalLayout {
-    //Dive id = new Dive();
-     DiveRepository repository;
+public class AddanewlogView extends VerticalLayout implements Serializable {
+    private static final long serialVersionUID = 6529685098267757690L;
+    //Dive id;
+    @Autowired
+    private DiveRepository repository;
     //Json js = new Json();
+
+
 
 
 
@@ -45,7 +51,6 @@ public class AddanewlogView extends VerticalLayout {
         setDefaultHorizontalComponentAlignment(Alignment.CENTER);
         getStyle().set("text-align", "center");
         AddImport();
-
     }
 
     private void AddImport() {
@@ -53,8 +58,7 @@ public class AddanewlogView extends VerticalLayout {
         Button addButton = new Button("Add");
         addButton.addClassName("add-button");
         addButton.addClickListener(buttonClickEvent -> {
-            Dive id = new Dive();
-            id.setUsername("kkj");    //
+           /* id.setUsername("kkj");    //
             id.setId("5");            //
             id.setTankindata("100");  //
             id.setFeelingdata("Good"); //
@@ -79,10 +83,29 @@ public class AddanewlogView extends VerticalLayout {
             id.setTypeofdivedata("RRro");     //
             id.setWaterconditionsdata("GOOD"); //
             id.setWeightcomfortdata("Good");   //
-            id.setWeightsdata("20");           //
-            repository.save(id);
+            id.setWeightsdata("20");           //*/
+           /* repository.save(new Dive("krystof","barbora","wdwdwih",LocalDate.parse("2022-12-12"),
+                    LocalTime.parse("12:24"), LocalTime.parse("12:24"),LocalTime.parse("12:24"),"22","2",
+                    "220", "100", "Good","Lake", "22", "12", "10",
+                    "Good", "7mm", "Good", "dobry", "vitek","Yes",
+                    "Kraken", "Eda", "Good"));*/
+           /* Dive savedDive = repository.save(("krystof","barbora","wdwdwih",LocalDate.parse("2022-12-12"),
+                    LocalTime.parse("12:24"), LocalTime.parse("12:24"),LocalTime.parse("12:24"),"22","2",
+                    "220", "100", "Good","Lake", "22", "12", "10",
+                    "Good", "7mm", "Good", "dobry", "vitek","Yes",
+                    "Kraken", "Eda", "Good");*/
+
             //remove(uroven0);
             //DiveSite();
+            try{
+                 repository.save(new Dive("krystof","barbora","wdwdwih", LocalDate.parse("2022-12-12"),
+                        LocalTime.parse("12:24"), LocalTime.parse("12:24"),LocalTime.parse("12:24"),"22","2",
+                        "220", "100", "Good","Lake", "22", "12", "10",
+                        "Good", "7mm", "Good", "dobry", "vitek","Yes",
+                        "Kraken", "Eda", "Good"));}
+            catch(NullPointerException e){
+                System.out.println("Je to v pici");
+            }
         });
         Button importDive = new Button("Import");
         importDive.addClassName("import-button");

@@ -41,8 +41,8 @@ public class Dive {
         public String instructordata;
         public String feelingdata;
 
-        public Dive(){
-        }
+        /*public Dive(){
+        }*/
 
         //???
 
