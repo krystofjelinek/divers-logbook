@@ -4,9 +4,10 @@ import com.example.application.backend.Dive;
 import com.example.application.backend.DiveController;
 import com.example.application.views.MainLayout;
 import com.vaadin.flow.component.dependency.StyleSheet;
+import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.GridVariant;
-import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.renderer.ComponentRenderer;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
@@ -16,6 +17,7 @@ import org.vaadin.crudui.crud.impl.GridCrud;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.stream.Stream;
 
 @StyleSheet("/themes/divers-logbook/styles.css")
 @PageTitle("Logbook")
@@ -35,24 +37,27 @@ public class LogbookView extends VerticalLayout implements Serializable {
          crud.setUpdateOperationVisible(false);
          crud.setAddOperationVisible(false);
          crud.setClickRowToUpdate(false);
-         crud.getGrid().setItemDetailsRenderer(
+
+         crud.getGrid().setItemDetailsRenderer(createDiveDetailsRenderer());
+         /*crud.getGrid().setItemDetailsRenderer(
                  new ComponentRenderer<>(dive -> {
                      VerticalLayout layout = new VerticalLayout();
                      layout.add(new Label("Date: " +
                              dive.getDateofdivedata()));
 
-                     /*layout.add(new Label("Year of birth: " +
-                             person.getYearOfBirth()));*/
+                     *//*layout.add(new Label("Year of birth: " +
+                             person.getYearOfBirth()));*//*
                      return layout;
-                 }));
+                 }));*/
 
-         //crud.getGrid().removeAllColumns();
-         /*crud.getGrid().addColumn(Dive::getDateofdivedata).setHeader("Date");
+
+
+         crud.getGrid().removeAllColumns();
+         crud.getGrid().addColumn(Dive::getDateofdivedata).setHeader("Date");
          crud.getGrid().addColumn(Dive::getMaxdepthdata).setHeader("Max. depth [m]");
          crud.getGrid().addColumn(Dive::getDivesitedata).setHeader("Dive site");
          crud.getGrid().addColumn(Dive::getBuddydata).setHeader("Buddy");
-         crud*/
-        crud.getGrid().setDetailsVisibleOnClick(true);
+         crud.getGrid().setDetailsVisibleOnClick(true);
          crud.getGrid().addThemeVariants(GridVariant.LUMO_ROW_STRIPES,
                 GridVariant.MATERIAL_COLUMN_DIVIDERS, GridVariant.LUMO_COLUMN_BORDERS);
          add(crud);
@@ -83,6 +88,80 @@ public class LogbookView extends VerticalLayout implements Serializable {
 
 
     }
+
+    private static ComponentRenderer<DiveDetailsFormLayout,Dive> createDiveDetailsRenderer() {
+        return new ComponentRenderer<>(
+                DiveDetailsFormLayout::new,
+                DiveDetailsFormLayout::setDive);
+    }
+
+    private static class DiveDetailsFormLayout extends FormLayout {
+        private final TextField divesiteField = new TextField("Dive site");
+        private final TextField locationField = new TextField("Location");
+        private final TextField dateofdiveField = new TextField("Date of dive");
+        private final TextField starttimeField = new TextField("Start time");
+        private final TextField bottomtimeField = new TextField("Bottom time");
+        private final TextField endtimeField = new TextField("End time");
+        private final TextField maxdepthField = new TextField("Max. depth");
+        private final TextField avgdepthField = new TextField("Avg. depth");
+        private final TextField tankinField = new TextField("Tank pressure - start");
+        private final TextField tankoutField = new TextField("Tank pressure - end");
+        private final TextField waterconditionsField = new TextField("Water conditions");
+        private final TextField typeofdiveField = new TextField("Type of dive");
+        private final TextField airtempField = new TextField("Air temperature");
+        private final TextField watertempField = new TextField("Water temperature");
+        private final TextField weightsField = new TextField("Amount of weights");
+        private final TextField weightcomfortField = new TextField("Weight comfort");
+        private final TextField heatField = new TextField("Exposure protection");
+        private final TextField heatcomfortField = new TextField("Heat comfort");
+        private final TextField notesField = new TextField("Notes");
+        private final TextField buddyField = new TextField("Buddy");
+        private final TextField eduField = new TextField("Educational");
+        private final TextField diveclubField = new TextField("Dive club");
+        private final TextField instructorField = new TextField("Instructor");
+        private final TextField feelingField = new TextField("Feeling");
+
+        public DiveDetailsFormLayout() {
+            Stream.of(divesiteField,locationField,dateofdiveField,starttimeField,bottomtimeField,endtimeField,
+                    maxdepthField,avgdepthField,tankinField,tankoutField,waterconditionsField,typeofdiveField,
+                    airtempField,watertempField,weightsField,weightcomfortField,heatField,heatcomfortField,
+                    notesField,buddyField,eduField,diveclubField,instructorField,feelingField).forEach(field -> {
+                field.setReadOnly(true);
+                add(field);
+            });
+
+            /*setResponsiveSteps(new ResponsiveStep("0", 3));
+            setColspan(emailField, 3);
+            setColspan(phoneField, 3);
+            setColspan(streetField, 3);*/
+        }
+
+        public void setDive(Dive dive) {
+            divesiteField.setValue(dive.getDivesitedata());
+            locationField.setValue(dive.getLocationdata());
+            dateofdiveField.setValue(dive.getDateofdivedata().toString());
+            starttimeField.setValue(dive.getStarttimedata().toString());
+            bottomtimeField.setValue(dive.getBottomtimedata().toString());
+            endtimeField.setValue(dive.getEndtimedata().toString());
+            maxdepthField.setValue(dive.getMaxdepthdata());
+            avgdepthField.setValue(dive.getAvgdepthdata());
+            tankinField.setValue(dive.getTankindata());
+            tankoutField.setValue(dive.getTankoutdata());
+            waterconditionsField.setValue(dive.getWaterconditionsdata());
+            typeofdiveField.setValue(dive.getTypeofdivedata());
+            airtempField.setValue(dive.getAirtempdata());
+            watertempField.setValue(dive.getWatertempdata());
+            weightsField.setValue(dive.getWeightsdata());
+            weightcomfortField.setValue(dive.getWeightcomfortdata());
+            heatField.setValue(dive.getHeatdata());
+            heatcomfortField.setValue(dive.getHeatcomfortdata());
+            notesField.setValue(dive.getNotesdata());
+            buddyField.setValue(dive.getBuddydata());
+            eduField.setValue(dive.getEdudata());
+            diveclubField.setValue(dive.getDiveclubdata());
+            instructorField.setValue(dive.getInstructordata());
+            feelingField.setValue(dive.getFeelingdata());
+        }}
 
 
 

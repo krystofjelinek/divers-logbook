@@ -245,7 +245,7 @@ public class Dive implements Serializable {
         }
 
         public void setEdudata(String edudata) {
-            edudata = edudata;
+            this.edudata = edudata;
         }
 
         public String getDiveclubdata() {
