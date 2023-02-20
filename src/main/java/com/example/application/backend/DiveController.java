@@ -23,19 +23,21 @@ public class DiveController {
     }
 
     @PostMapping("/dives")
-    public void saveDive(@RequestBody Dive dive) {
-        diveRepository.save(dive);
+    public Dive saveDive(@RequestBody Dive dive) {
+        return diveRepository.save(dive);
     }
 
     @DeleteMapping("/dives/{id}")
-    public void deleteDivingLog(@PathVariable String id) {
+    public void deleteDive(@PathVariable String id) {
         if(!diveExists(id)){
             throw new DiveNotFoundException(id);
         }
         diveRepository.deleteById(id);
     }
-
-    //???
+   /* @DeleteMapping("/dives/{id}")
+    public void deleteDive(Dive dive) {
+        diveRepository.delete(dive);
+    }*/
 
     private boolean diveExists(final String id){
         return diveRepository.existsById(id);
