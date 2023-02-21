@@ -87,3 +87,10 @@
     color: black;
     font-weight: bold;
 }
+
+:host(.grid) [part="row"] [part~="header-cell"]{
+    padding-left: 3px;
+    color:dodgerblue;
+    background: white;
+    align-items:flex-start;
+}

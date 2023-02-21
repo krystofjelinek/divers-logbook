@@ -1,7 +1,7 @@
 package com.example.application.views;
 
 import com.example.application.views.addanewlog.AddanewlogView;
-import com.example.application.views.divesites.DivesitesView;
+import com.example.application.views.divesites.DashboardView;
 import com.example.application.views.logbook.LogbookView;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.applayout.AppLayout;
@@ -115,8 +115,8 @@ public class MainLayout extends AppLayout {
 
                 new MenuItemInfo("Add a new log", "la la-plus-circle", AddanewlogView.class), //
 
-                new MenuItemInfo("Dive sites",
-                        "la la-map-marker", DivesitesView.class), //
+                new MenuItemInfo("Dashboard",
+                        "la la-dashboard", DashboardView.class), //
 
         };
         List<RouterLink> links = new ArrayList<>();

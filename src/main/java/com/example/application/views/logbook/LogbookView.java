@@ -25,7 +25,6 @@ import java.util.stream.Stream;
 public class LogbookView extends VerticalLayout implements Serializable {
     private static final long serialVersionUID = 291333796254030283L;
 
-
     public LogbookView(@Autowired DiveController diveController) {
         addClassName("list-view");
         setSizeFull();
@@ -37,33 +36,17 @@ public class LogbookView extends VerticalLayout implements Serializable {
          crud.setUpdateOperationVisible(false);
          crud.setAddOperationVisible(false);
          crud.setClickRowToUpdate(false);
-
          crud.getGrid().setItemDetailsRenderer(createDiveDetailsRenderer());
-         /*crud.getGrid().setItemDetailsRenderer(
-                 new ComponentRenderer<>(dive -> {
-                     VerticalLayout layout = new VerticalLayout();
-                     layout.add(new Label("Date: " +
-                             dive.getDateofdivedata()));
-
-                     *//*layout.add(new Label("Year of birth: " +
-                             person.getYearOfBirth()));*//*
-                     return layout;
-                 }));*/
-
-
-
          crud.getGrid().removeAllColumns();
-         crud.getGrid().addColumn(Dive::getDateofdivedata).setHeader("Date");
-         crud.getGrid().addColumn(Dive::getMaxdepthdata).setHeader("Max. depth [m]");
-         crud.getGrid().addColumn(Dive::getDivesitedata).setHeader("Dive site");
-         crud.getGrid().addColumn(Dive::getBuddydata).setHeader("Buddy");
+         crud.getGrid().addColumn(Dive::getDateofdivedata).setHeader("Date").setAutoWidth(true);
+         crud.getGrid().addColumn(Dive::getMaxdepthdata).setHeader("Max. depth [m]").setAutoWidth(true);
+         crud.getGrid().addColumn(Dive::getBottomtimedata).setHeader("Bottom time").setAutoWidth(true);
+         crud.getGrid().addColumn(Dive::getDivesitedata).setHeader("Dive site").setAutoWidth(true);
+         crud.getGrid().addColumn(Dive::getBuddydata).setHeader("Buddy").setAutoWidth(true);
          crud.getGrid().setDetailsVisibleOnClick(true);
-         crud.getGrid().addThemeVariants(GridVariant.LUMO_ROW_STRIPES,
-                GridVariant.MATERIAL_COLUMN_DIVIDERS, GridVariant.LUMO_COLUMN_BORDERS);
+         crud.getGrid().addThemeVariants(GridVariant.LUMO_NO_BORDER);
+         crud.getGrid().setAllRowsVisible(true);
          add(crud);
-
-
-
 
         crud.setCrudListener(new CrudListener<Dive>() {
             @Override
@@ -82,11 +65,7 @@ public class LogbookView extends VerticalLayout implements Serializable {
             public void delete(Dive dive) {
                 diveController.deleteDive(dive);
             }
-
         });
-
-
-
     }
 
     private static ComponentRenderer<DiveDetailsFormLayout,Dive> createDiveDetailsRenderer() {
@@ -122,18 +101,13 @@ public class LogbookView extends VerticalLayout implements Serializable {
         private final TextField feelingField = new TextField("Feeling");
 
         public DiveDetailsFormLayout() {
-            Stream.of(divesiteField,locationField,dateofdiveField,starttimeField,bottomtimeField,endtimeField,
-                    maxdepthField,avgdepthField,tankinField,tankoutField,waterconditionsField,typeofdiveField,
-                    airtempField,watertempField,weightsField,weightcomfortField,heatField,heatcomfortField,
-                    notesField,buddyField,eduField,diveclubField,instructorField,feelingField).forEach(field -> {
+            Stream.of(divesiteField, locationField, dateofdiveField, starttimeField, bottomtimeField, endtimeField,
+                    maxdepthField, avgdepthField, tankinField, tankoutField, waterconditionsField, typeofdiveField,
+                    airtempField, watertempField, weightsField, weightcomfortField, heatField, heatcomfortField,
+                    notesField, buddyField, eduField, diveclubField, instructorField, feelingField).forEach(field -> {
                 field.setReadOnly(true);
                 add(field);
             });
-
-            /*setResponsiveSteps(new ResponsiveStep("0", 3));
-            setColspan(emailField, 3);
-            setColspan(phoneField, 3);
-            setColspan(streetField, 3);*/
         }
 
         public void setDive(Dive dive) {
@@ -161,10 +135,7 @@ public class LogbookView extends VerticalLayout implements Serializable {
             diveclubField.setValue(dive.getDiveclubdata());
             instructorField.setValue(dive.getInstructordata());
             feelingField.setValue(dive.getFeelingdata());
-        }}
-
-
-
-
+        }
+    }
 }
 

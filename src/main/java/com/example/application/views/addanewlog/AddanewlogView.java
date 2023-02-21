@@ -921,17 +921,25 @@ public class AddanewlogView extends VerticalLayout implements Serializable
                 id.setFeelingdata("-");
                 id.setInstructordata("-");
                 id.setDiveclubdata("-");
-                repository.save(id);
-                //js.setData();
+                try{
+                    repository.save(id);
+                    UI.getCurrent().navigate(LogbookView.class);
+                }
+                catch (Exception e){
+                    System.out.println("Something went wrong");
+                }
             }
             else {
                 id.setInstructordata("-");
                 id.setDiveclubdata("-");
-                repository.save(id);
-                //js.setData();
+                try{
+                    repository.save(id);
+                    UI.getCurrent().navigate(LogbookView.class);
+                }
+                catch (Exception e){
+                    System.out.println("Something went wrong");
+                }
             }
-
-            UI.getCurrent().navigate(LogbookView.class);
         });
         add(progressBar,uroven0020,uroven020,uroven20,uroven201);
     }
