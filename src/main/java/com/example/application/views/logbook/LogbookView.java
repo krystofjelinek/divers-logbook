@@ -5,7 +5,8 @@ import com.example.application.backend.DiveController;
 import com.example.application.views.MainLayout;
 import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.formlayout.FormLayout;
-import com.vaadin.flow.component.grid.GridVariant;
+import com.vaadin.flow.component.html.Paragraph;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.renderer.ComponentRenderer;
@@ -42,11 +43,15 @@ public class LogbookView extends VerticalLayout implements Serializable {
          crud.getGrid().addColumn(Dive::getMaxdepthdata).setHeader("Max. depth [m]").setAutoWidth(true);
          crud.getGrid().addColumn(Dive::getBottomtimedata).setHeader("Bottom time").setAutoWidth(true);
          crud.getGrid().addColumn(Dive::getDivesitedata).setHeader("Dive site").setAutoWidth(true);
+
          crud.getGrid().addColumn(Dive::getBuddydata).setHeader("Buddy").setAutoWidth(true);
          crud.getGrid().setDetailsVisibleOnClick(true);
-         crud.getGrid().addThemeVariants(GridVariant.LUMO_NO_BORDER);
+         //crud.getGrid().addThemeVariants(GridVariant.LUMO_NO_BORDER);
          crud.getGrid().setAllRowsVisible(true);
-         add(crud);
+         Paragraph paragraph = new Paragraph("Click on row to see details about particular dive");
+         HorizontalLayout layout = new HorizontalLayout();
+         layout.add(paragraph);
+         add(crud,layout);
 
         crud.setCrudListener(new CrudListener<Dive>() {
             @Override
@@ -117,8 +122,8 @@ public class LogbookView extends VerticalLayout implements Serializable {
             starttimeField.setValue(dive.getStarttimedata().toString());
             bottomtimeField.setValue(dive.getBottomtimedata().toString());
             endtimeField.setValue(dive.getEndtimedata().toString());
-            maxdepthField.setValue(dive.getMaxdepthdata());
-            avgdepthField.setValue(dive.getAvgdepthdata());
+            maxdepthField.setValue(dive.getMaxdepthdata().toString());
+            avgdepthField.setValue(dive.getAvgdepthdata().toString());
             tankinField.setValue(dive.getTankindata());
             tankoutField.setValue(dive.getTankoutdata());
             waterconditionsField.setValue(dive.getWaterconditionsdata());

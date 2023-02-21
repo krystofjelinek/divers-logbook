@@ -27,19 +27,8 @@ public class DiveController {
         return diveRepository.save(dive);
     }
 
-    /*@DeleteMapping("/dives/{id}")
-    public void deleteDive(@PathVariable String id) {
-        if(!diveExists(id)){
-            throw new DiveNotFoundException(id);
-        }
-        diveRepository.deleteById(id);
-    }*/
     @DeleteMapping("/dives/{id}")
     public void deleteDive(Dive dive) {
         diveRepository.delete(dive);
-    }
-
-    private boolean diveExists(final String id){
-        return diveRepository.existsById(id);
     }
 }

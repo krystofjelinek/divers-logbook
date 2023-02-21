@@ -16,6 +16,7 @@ import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.progressbar.ProgressBar;
+import com.vaadin.flow.component.textfield.NumberField;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.timepicker.TimePicker;
@@ -331,15 +332,16 @@ public class AddanewlogView extends VerticalLayout implements Serializable
         progressBar.setWidth("200px");
         Image img7 = new Image("images/MaxDepth.jpg","Failed to load image");
         img7.setHeight("350px");
-        TextField policko7 = new TextField("Depth in meters");
+        NumberField policko7 = new NumberField("Depth in meters");
         policko7.addKeyPressListener(Key.ENTER, e->{
-            if (policko7.getValue().length()>0){
-            remove(uroven7,uroven71,uroven07,progressBar);
-            id.setMaxdepthdata(policko7.getValue());
-            AverageDepth();}
+            if (policko7.isEmpty()){
+                remove(uroven7,uroven71,uroven07,progressBar);
+                id.setMaxdepthdata(0D);
+                AverageDepth();
+            }
             else {
                 remove(uroven7,uroven71,uroven07,progressBar);
-                id.setMaxdepthdata("-");
+                id.setMaxdepthdata(policko7.getValue());
                 AverageDepth();
             }
         });
@@ -350,13 +352,14 @@ public class AddanewlogView extends VerticalLayout implements Serializable
         uroven7.add(new Paragraph(new H2("Maximum depth:")), policko7);
         uroven71.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
-            if (policko7.getValue().length()>0){
+            if (policko7.isEmpty()){
                 remove(uroven7,uroven71,uroven07,progressBar);
-                id.setMaxdepthdata(policko7.getValue());
-                AverageDepth();}
+                id.setMaxdepthdata(0D);
+                AverageDepth();
+            }
             else {
                 remove(uroven7,uroven71,uroven07,progressBar);
-                id.setMaxdepthdata("-");
+                id.setMaxdepthdata(policko7.getValue());
                 AverageDepth();
             }
         });
@@ -376,15 +379,16 @@ public class AddanewlogView extends VerticalLayout implements Serializable
         progressBar.setWidth("200px");
         Image img8 = new Image("images/AvgDepth.jpg","Failed to load image");
         img8.setHeight("350px");
-        TextField policko8 = new TextField("Depth in meters");
+        NumberField policko8 = new NumberField("Depth in meters");
         policko8.addKeyPressListener(Key.ENTER, e->{
-            if (policko8.getValue().length()>0){
-            remove(uroven8,uroven81,uroven08,progressBar);
-            id.setAvgdepthdata(policko8.getValue());
-            TankIn();}
+            if (policko8.isEmpty()){
+                remove(uroven8,uroven81,uroven08,progressBar);
+                id.setAvgdepthdata(0D);
+                TankIn();
+            }
             else {
                 remove(uroven8,uroven81,uroven08,progressBar);
-                id.setAvgdepthdata("-");
+                id.setAvgdepthdata(policko8.getValue());
                 TankIn();
             }
         });
@@ -395,14 +399,14 @@ public class AddanewlogView extends VerticalLayout implements Serializable
         uroven8.add(new Paragraph(new H2("Average depth:")), policko8);
         uroven81.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
-            if (policko8.getValue().length()>0){
+            if (policko8.isEmpty()){
                 remove(uroven8,uroven81,uroven08,progressBar);
-                id.setAvgdepthdata(policko8.getValue());
+                id.setAvgdepthdata(0D);
                 TankIn();}
             else {
                 remove(uroven8,uroven81,uroven08,progressBar);
-                id.setAvgdepthdata("-");
-                TankIn();
+                id.setAvgdepthdata(policko8.getValue());
+                TankIn();;
             }
         });
         previousButton.addClickListener(buttonClickEvent -> {

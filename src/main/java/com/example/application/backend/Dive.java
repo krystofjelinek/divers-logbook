@@ -24,8 +24,8 @@ public class Dive implements Serializable {
         public LocalTime starttimedata;
         public LocalTime bottomtimedata;
         public LocalTime endtimedata;
-        public String maxdepthdata;
-        public String avgdepthdata;
+        public Double maxdepthdata;
+        public Double avgdepthdata;
         public String tankindata;
         public String tankoutdata;
         public String waterconditionsdata;
@@ -48,7 +48,7 @@ public class Dive implements Serializable {
 
 
    public Dive(String username,String divesitedata, String locationdata, LocalDate dateofdivedata, LocalTime starttimedata,
-                LocalTime bottomtimedata, LocalTime endtimedata, String maxdepthdata, String avgdepthdata,
+                LocalTime bottomtimedata, LocalTime endtimedata, Double maxdepthdata, Double avgdepthdata,
                 String tankindata, String tankoutdata, String waterconditionsdata, String typeofdivedata,
                 String airtempdata, String watertempdata, String weightsdata, String weightcomfortdata,
                 String heatdata, String heatcomfortdata, String notesdata, String buddydata, String edudata,
@@ -128,19 +128,19 @@ public class Dive implements Serializable {
             this.endtimedata = endtimedata;
         }
 
-        public String getMaxdepthdata() {
+        public Double getMaxdepthdata() {
             return maxdepthdata;
         }
 
-        public void setMaxdepthdata(String maxdepthdata) {
+        public void setMaxdepthdata(Double maxdepthdata) {
             this.maxdepthdata = maxdepthdata;
         }
 
-        public String getAvgdepthdata() {
+        public Double getAvgdepthdata() {
             return avgdepthdata;
         }
 
-        public void setAvgdepthdata(String avgdepthdata) {
+        public void setAvgdepthdata(Double avgdepthdata) {
             this.avgdepthdata = avgdepthdata;
         }
 
