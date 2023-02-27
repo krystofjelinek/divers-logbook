@@ -212,7 +212,7 @@ public class AddanewlogView extends VerticalLayout implements Serializable
             remove(progressBar,uroven03,uroven3,uroven31);
             StartTime();}
             else {
-                id.setDateofdivedata(LocalDate.now());
+                id.setDateofdivedata(LocalDate.parse("0001-01-01"));
                 remove(progressBar,uroven03,uroven3,uroven31);
                 StartTime();
             }
@@ -241,8 +241,8 @@ public class AddanewlogView extends VerticalLayout implements Serializable
         uroven4.add(new Paragraph(new H2("Start time:")), startTime);
         uroven41.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
-            if (!startTime.isEmpty()){
-                id.setStarttimedata(LocalTime.now());
+            if (startTime.isEmpty()){
+                id.setStarttimedata(LocalTime.parse("00:00"));
                 remove(uroven4,uroven41,uroven04,progressBar);
                 BottomTime();
             } else {
@@ -274,12 +274,12 @@ public class AddanewlogView extends VerticalLayout implements Serializable
         uroven5.add(new Paragraph(new H2("Bottom time:")), bottomTime);
         uroven51.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
-            if (!bottomTime.isEmpty()){
-                id.setBottomtimedata(LocalTime.now());
+            if (bottomTime.isEmpty()){
+                id.setBottomtimedata(LocalTime.parse("00:00"));
                 remove(uroven5,uroven51,uroven05,progressBar);
                 EndTime();
             } else {
-            id.setBottomtimedata(LocalTime.parse(bottomTime.getValue().toString()));
+            id.setBottomtimedata(bottomTime.getValue());
             remove(uroven5,uroven51,uroven05,progressBar);
             EndTime();}
         });
@@ -307,8 +307,8 @@ public class AddanewlogView extends VerticalLayout implements Serializable
         uroven6.add(new Paragraph(new H2("End time:")), endTime);
         uroven61.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
-            if (!endTime.isEmpty()){
-                id.setEndtimedata(LocalTime.now());
+            if (endTime.isEmpty()){
+                id.setEndtimedata(LocalTime.parse("00:00"));
                 remove(uroven6,uroven61,uroven06,progressBar);
                 MaximumDepth();
             } else {

@@ -68,7 +68,7 @@ public class MainLayout extends AppLayout {
 
         viewTitle = new H1();
         viewTitle.addClassNames("m-0", "text-l");
-        Anchor logout = new Anchor("/logout","Log out");
+        Anchor logout = new Anchor("/logout","Sign out");
         logout.addClassName("logout");
         HorizontalLayout uroven = new HorizontalLayout(new DrawerToggle(),viewTitle,logout);
         Header header = new Header(toggle, viewTitle,logout);
@@ -113,7 +113,7 @@ public class MainLayout extends AppLayout {
                 new MenuItemInfo("Logbook",
                         "la la-book", LogbookView.class), //
 
-                new MenuItemInfo("Add a new log", "la la-plus-circle", AddanewlogView.class), //
+                new MenuItemInfo("Add a new dive", "la la-plus-circle", AddanewlogView.class), //
 
                 new MenuItemInfo("Dashboard",
                         "la la-dashboard", DashboardView.class), //
@@ -149,7 +149,8 @@ public class MainLayout extends AppLayout {
     private Footer createFooter() {
         Footer layout = new Footer();
         layout.addClassNames("flex", "items-center", "my-s", "px-m", "py-xs");
-        //H3 view = new H3("Created by Kryštof Jelínek, 2023");
+        H6 view = new H6("Created by Kryštof Jelínek 2023");
+        layout.add(view);
 
         return layout;
     }

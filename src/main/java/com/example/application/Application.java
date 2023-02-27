@@ -6,7 +6,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
-import org.vaadin.artur.helpers.LaunchUtil;
 
 /**
  * The entry point of the Spring Boot application.
@@ -19,7 +18,7 @@ import org.vaadin.artur.helpers.LaunchUtil;
 public class Application extends SpringBootServletInitializer
   {
     public static void main(String[] args) {
-        LaunchUtil.launchBrowserInDevelopmentMode(SpringApplication.run(Application.class, args));
-        //SpringApplication.run(Application.class,args);
+        //LaunchUtil.launchBrowserInDevelopmentMode(SpringApplication.run(Application.class, args));
+        SpringApplication.run(Application.class,args);
     }
   }
