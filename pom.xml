@@ -12,7 +12,9 @@
     <properties>
         <java.version>11.0.6</java.version>
         <vaadin.version>14.7.3</vaadin.version>
+        <tomcat.version>9.0.45</tomcat.version>
     </properties>
+
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -154,6 +156,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.vaadin/flow-server-production-mode -->
+        <dependency>
+        <groupId>com.vaadin</groupId>
+        <artifactId>flow-server-production-mode</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-testbench</artifactId>
@@ -249,6 +256,9 @@
         <profile>
             <!-- Production mode is activated using -Pproduction -->
             <id>production</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
             <build>
                 <plugins>
                     <plugin>
@@ -295,7 +305,6 @@
                             </execution>
                         </executions>
                     </plugin>
-
                     <!-- Runs the integration tests (*IT) after the server is started -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
