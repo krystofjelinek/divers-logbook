@@ -1,9 +1,9 @@
 package com.example.application.views.addanewlog;
 
-import com.example.application.backend.ReadWriteUtilityForFile;
-import com.example.application.backend.saveList;
-import com.example.application.jsonParsing.Json;
+import com.example.application.backend.Dive;
+import com.example.application.backend.DiveRepository;
 import com.example.application.views.MainLayout;
+import com.example.application.views.logbook.LogbookView;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
@@ -16,33 +16,45 @@ import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.progressbar.ProgressBar;
+import com.vaadin.flow.component.textfield.NumberField;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.timepicker.TimePicker;
 import com.vaadin.flow.router.PageTitle;
-import com.vaadin.flow.router.PreserveOnRefresh;
 import com.vaadin.flow.router.Route;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 @PageTitle("Add a new dive")
 @Route(value = "add", layout = MainLayout.class)
 @StyleSheet("/themes/divers-logbook/styles.css")
-@PreserveOnRefresh
-public class AddanewlogView extends VerticalLayout {
+//@PreserveOnRefresh
+public class AddanewlogView extends VerticalLayout implements Serializable
+         {
+    private static final long serialVersionUID = 2121010853008479565L;
 
-    ReadWriteUtilityForFile.logdata id = new ReadWriteUtilityForFile.logdata();
-    saveList sl = new saveList();
-    Json js = new Json();
+    Dive id = new Dive();
+    @Autowired
+    private DiveRepository repository;
+    //Json js = new Json();
+
+    //Binder<Dive> binder = new Binder<>(Dive.class);
+
+
+
 
     /**
      * Ochránit vstupy (Binder)
      * stylizovat edu-buttons
+     * počítání spotřeby
      * Xml reader suunto DM5
      * Stylizovat polícka aby měla stejnou velikost
-     * save button -> přejít na LogbookView
+     * Stylizovat next a previous buttons
+     * Ochránit heatComfort a weightComfort
      * Login pro více uživatelů(user, userpass)(dodělat přihlašovací databázi)
      * Forgotten password
      */
@@ -64,6 +76,15 @@ public class AddanewlogView extends VerticalLayout {
         addButton.addClickListener(buttonClickEvent -> {
             remove(uroven0);
             DiveSite();
+           /* try{
+                 repository.save(new Dive("krystof","barbora","wdwdwih", LocalDate.parse("2022-12-12"),
+                        LocalTime.parse("12:24"), LocalTime.parse("12:24"),LocalTime.parse("12:24"),"22","2",
+                        "220", "100", "Good","Lake", "22", "12", "10",
+                        "Good", "7mm", "Good", "dobry", "vitek","Yes",
+                        "Kraken", "Eda", "Good"));}
+            catch(NullPointerException e){
+                System.out.println("Je to v pici");
+            }*/
         });
         Button importDive = new Button("Import");
         importDive.addClassName("import-button");
@@ -91,6 +112,7 @@ public class AddanewlogView extends VerticalLayout {
         policko1.addKeyPressListener(Key.ENTER, e->{
             if (policko1.getValue().length() > 0){
             remove(uroven1,uroven11,uroven01,progressBar);
+            //binder.bind(policko1, id.divesitedata);
             id.setDivesitedata(policko1.getValue());
             Location();}
             else {
@@ -190,7 +212,7 @@ public class AddanewlogView extends VerticalLayout {
             remove(progressBar,uroven03,uroven3,uroven31);
             StartTime();}
             else {
-                id.setDateofdivedata(LocalDate.now());
+                id.setDateofdivedata(LocalDate.parse("0001-01-01"));
                 remove(progressBar,uroven03,uroven3,uroven31);
                 StartTime();
             }
@@ -219,8 +241,8 @@ public class AddanewlogView extends VerticalLayout {
         uroven4.add(new Paragraph(new H2("Start time:")), startTime);
         uroven41.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
-            if (!startTime.isEmpty()){
-                id.setStarttimedata(LocalTime.now());
+            if (startTime.isEmpty()){
+                id.setStarttimedata(LocalTime.parse("00:00"));
                 remove(uroven4,uroven41,uroven04,progressBar);
                 BottomTime();
             } else {
@@ -252,8 +274,8 @@ public class AddanewlogView extends VerticalLayout {
         uroven5.add(new Paragraph(new H2("Bottom time:")), bottomTime);
         uroven51.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
-            if (!bottomTime.isEmpty()){
-                id.setBottomtimedata(LocalTime.now());
+            if (bottomTime.isEmpty()){
+                id.setBottomtimedata(LocalTime.parse("00:00"));
                 remove(uroven5,uroven51,uroven05,progressBar);
                 EndTime();
             } else {
@@ -285,8 +307,8 @@ public class AddanewlogView extends VerticalLayout {
         uroven6.add(new Paragraph(new H2("End time:")), endTime);
         uroven61.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
-            if (!endTime.isEmpty()){
-                id.setEndtimedata(LocalTime.now());
+            if (endTime.isEmpty()){
+                id.setEndtimedata(LocalTime.parse("00:00"));
                 remove(uroven6,uroven61,uroven06,progressBar);
                 MaximumDepth();
             } else {
@@ -310,15 +332,16 @@ public class AddanewlogView extends VerticalLayout {
         progressBar.setWidth("200px");
         Image img7 = new Image("images/MaxDepth.jpg","Failed to load image");
         img7.setHeight("350px");
-        TextField policko7 = new TextField("Depth in meters");
+        NumberField policko7 = new NumberField("Depth in meters");
         policko7.addKeyPressListener(Key.ENTER, e->{
-            if (policko7.getValue().length()>0){
-            remove(uroven7,uroven71,uroven07,progressBar);
-            id.setMaxdepthdata(policko7.getValue());
-            AverageDepth();}
+            if (policko7.isEmpty()){
+                remove(uroven7,uroven71,uroven07,progressBar);
+                id.setMaxdepthdata(0D);
+                AverageDepth();
+            }
             else {
                 remove(uroven7,uroven71,uroven07,progressBar);
-                id.setMaxdepthdata("-");
+                id.setMaxdepthdata(policko7.getValue());
                 AverageDepth();
             }
         });
@@ -329,13 +352,14 @@ public class AddanewlogView extends VerticalLayout {
         uroven7.add(new Paragraph(new H2("Maximum depth:")), policko7);
         uroven71.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
-            if (policko7.getValue().length()>0){
+            if (policko7.isEmpty()){
                 remove(uroven7,uroven71,uroven07,progressBar);
-                id.setMaxdepthdata(policko7.getValue());
-                AverageDepth();}
+                id.setMaxdepthdata(0D);
+                AverageDepth();
+            }
             else {
                 remove(uroven7,uroven71,uroven07,progressBar);
-                id.setMaxdepthdata("-");
+                id.setMaxdepthdata(policko7.getValue());
                 AverageDepth();
             }
         });
@@ -355,15 +379,16 @@ public class AddanewlogView extends VerticalLayout {
         progressBar.setWidth("200px");
         Image img8 = new Image("images/AvgDepth.jpg","Failed to load image");
         img8.setHeight("350px");
-        TextField policko8 = new TextField("Depth in meters");
+        NumberField policko8 = new NumberField("Depth in meters");
         policko8.addKeyPressListener(Key.ENTER, e->{
-            if (policko8.getValue().length()>0){
-            remove(uroven8,uroven81,uroven08,progressBar);
-            id.setAvgdepthdata(policko8.getValue());
-            TankIn();}
+            if (policko8.isEmpty()){
+                remove(uroven8,uroven81,uroven08,progressBar);
+                id.setAvgdepthdata(0D);
+                TankIn();
+            }
             else {
                 remove(uroven8,uroven81,uroven08,progressBar);
-                id.setAvgdepthdata("-");
+                id.setAvgdepthdata(policko8.getValue());
                 TankIn();
             }
         });
@@ -374,14 +399,14 @@ public class AddanewlogView extends VerticalLayout {
         uroven8.add(new Paragraph(new H2("Average depth:")), policko8);
         uroven81.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
-            if (policko8.getValue().length()>0){
+            if (policko8.isEmpty()){
                 remove(uroven8,uroven81,uroven08,progressBar);
-                id.setAvgdepthdata(policko8.getValue());
+                id.setAvgdepthdata(0D);
                 TankIn();}
             else {
                 remove(uroven8,uroven81,uroven08,progressBar);
-                id.setAvgdepthdata("-");
-                TankIn();
+                id.setAvgdepthdata(policko8.getValue());
+                TankIn();;
             }
         });
         previousButton.addClickListener(buttonClickEvent -> {
@@ -661,7 +686,7 @@ public class AddanewlogView extends VerticalLayout {
         uroven15.add(new Paragraph(new H2("Weight comfort:")), policko14, comfort);
         uroven151.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
-            if (policko14.getValue().length()>0 || comfort.getValue().length()>0){
+            if (policko14.getValue().length()>0 && comfort.getValue().length()>0){
             id.setWeightsdata(policko14.getValue());
             id.setWeightcomfortdata(comfort.getValue());
             remove(uroven15,uroven151,uroven015,progressBar);
@@ -700,14 +725,14 @@ public class AddanewlogView extends VerticalLayout {
         uroven16.add(new Paragraph(new H2("Heat comfort:")), thickness, comfort);
         uroven161.add(previousButton,nextButton);
         nextButton.addClickListener(buttonClickEvent -> {
-            if (thickness.getValue().length()>0 || comfort.getValue().length()>0){
+            if (thickness.getValue().length()>0 && comfort.getValue().length()>0){
             id.setHeatdata(thickness.getValue());
             id.setHeatcomfortdata(comfort.getValue());
             remove(uroven16,uroven161,uroven016,progressBar);
             Notes();}
             else {
-                id.setHeatdata(thickness.getValue());
-                id.setHeatcomfortdata(comfort.getValue());
+                id.setHeatdata("-");
+                id.setHeatcomfortdata("-");
                 remove(uroven16,uroven161,uroven016,progressBar);
                 Notes();
             }
@@ -898,14 +923,26 @@ public class AddanewlogView extends VerticalLayout {
         saveButton.addClickListener(buttonClickEvent -> {
             if (id.getFeelingdata()==null) {
                 id.setFeelingdata("-");
-                js.setData();
-                UI.getCurrent().navigate(MainLayout.class);
+                id.setInstructordata("-");
+                id.setDiveclubdata("-");
+                try{
+                    repository.save(id);
+                    UI.getCurrent().navigate(LogbookView.class);
+                }
+                catch (Exception e){
+                    System.out.println("Something went wrong");
+                }
             }
             else {
                 id.setInstructordata("-");
                 id.setDiveclubdata("-");
-                js.setData();
-                UI.getCurrent().navigate(MainLayout.class);
+                try{
+                    repository.save(id);
+                    UI.getCurrent().navigate(LogbookView.class);
+                }
+                catch (Exception e){
+                    System.out.println("Something went wrong");
+                }
             }
         });
         add(progressBar,uroven0020,uroven020,uroven20,uroven201);
@@ -1058,14 +1095,25 @@ public class AddanewlogView extends VerticalLayout {
         saveButton.addClickListener(buttonClickEvent -> {
             if (id.getFeelingdata()==null) {
                 id.setFeelingdata("-");
-                js.setData();
-                //prejit na logbookView
+                try{
+                    repository.save(id);
+                    UI.getCurrent().navigate(LogbookView.class);
+                }
+                catch (Exception e){
+                    System.out.println("Something went wrong");
+                }
             }
             else {
-                js.setData();
-                //prejit na logbookView
+                try{
+                    repository.save(id);
+                    UI.getCurrent().navigate(LogbookView.class);
+                }
+                catch (Exception e){
+                    System.out.println("Something went wrong");
+                }
             }
         });
         add(progressBar,uroven0023,uroven023,uroven23,uroven231);
     }
 }
+

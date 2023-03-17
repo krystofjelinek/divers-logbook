@@ -1,3 +1,4 @@
+
 package com.example.application.security;
 
 import com.example.application.views.login.LoginView;
@@ -25,3 +26,4 @@ public class ConfigureUIServiceInitListener implements VaadinServiceInitListener
         }
     }
 }
+

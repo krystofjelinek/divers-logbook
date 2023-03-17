@@ -1,3 +1,4 @@
+
 package com.example.application.security;
 
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
@@ -14,3 +15,4 @@ class CustomRequestCache extends HttpSessionRequestCache {
         }
     }
 }
+

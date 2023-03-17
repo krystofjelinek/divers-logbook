@@ -1,3 +1,4 @@
+
 package com.example.application.security;
 
 import org.springframework.context.annotation.Bean;
@@ -21,9 +22,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private static final String LOGIN_URL = "/login";
     private static final String LOGOUT_SUCCESS_URL = "/login";
 
-    /**
+
+/**
      * Require login to access internal pages and configure login form.
      */
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // Vaadin handles CSRF internally
@@ -33,7 +36,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .requestCache().requestCache(new CustomRequestCache())
 
                 // Restrict access to our application.
-                .and().authorizeRequests()
+                .and().authorizeRequests().antMatchers("/dives").permitAll()
 
                 // Allow all Vaadin internal requests.
                 .requestMatchers(SecurityUtils::isFrameworkInternalRequest).permitAll()
@@ -62,9 +65,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return new InMemoryUserDetailsManager(user);
     }
 
-    /**
-     * Allows access to static resources, bypassing Spring Security.
-     */
+
+
+     //Allows access to static resources, bypassing Spring Security.
+
+
     @Override
     public void configure(WebSecurity web) {
         web.ignoring().antMatchers(
@@ -91,3 +96,4 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 "/h2-console/**");
     }
 }
+

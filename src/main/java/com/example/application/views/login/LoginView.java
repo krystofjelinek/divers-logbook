@@ -1,3 +1,4 @@
+
 package com.example.application.views.login;
 
 import com.vaadin.flow.component.html.H1;
@@ -13,7 +14,8 @@ import java.util.Collections;
 
 @Route("login")
 @PageTitle("Login | Divers logbook")
-public class LoginView extends VerticalLayout implements BeforeEnterObserver {
+public class LoginView extends VerticalLayout implements BeforeEnterObserver
+ {
 
     LoginForm login = new LoginForm();
 
@@ -23,7 +25,7 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
         setJustifyContentMode(JustifyContentMode.CENTER);
         setAlignItems(Alignment.CENTER);
         login.setAction("login");
-        add(new H1("Divers logbook"),login);
+        add(new H1("Diver's logbook"),login);
 
     }
 
@@ -38,3 +40,4 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
         }
     }
 }
+

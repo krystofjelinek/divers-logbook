@@ -1,54 +1,86 @@
 
 package com.example.application.backend;
 
-import com.google.gson.Gson;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Objects;
 
 
-public class ReadWriteUtilityForFile {
+@Document(collection = "diving_logs")
+public class Dive implements Serializable {
+    private static final long serialVersionUID = -1606960938289190456L;
 
-    private static final String FileLocation = "/Users/appshah/Documents/data.txt";
-    private static final Gson gson = new Gson();
 
-    public static class logdata {
-        private static String divesitedata;
-        private static String locationdata;
-        private static LocalDate dateofdivedata;
-        private static LocalTime starttimedata;
-        private static LocalTime bottomtimedata;
-        private static LocalTime endtimedata;
-        private static String maxdepthdata;
-        private static String avgdepthdata;
-        private static String tankindata;
-        private static String tankoutdata;
-        private static String waterconditionsdata;
-        private static String typeofdivedata;
-        private static String airtempdata;
-        private static String watertempdata;
-        private static String weightsdata;
-        private static String weightcomfortdata;
-        private static String heatdata;
-        private static String heatcomfortdata;
-        private static String notesdata;
-        private static String buddydata;
-        private static String Edudata;
-        private static String diveclubdata;
-        private static String instructordata;
-        private static String feelingdata;
+    @Id
+        public String id;
+        public String username;
+        public String divesitedata;
+        public String locationdata;
+        public LocalDate dateofdivedata;
+        public LocalTime starttimedata;
+        public LocalTime bottomtimedata;
+        public LocalTime endtimedata;
+        public Double maxdepthdata;
+        public Double avgdepthdata;
+        public String tankindata;
+        public String tankoutdata;
+        public String waterconditionsdata;
+        public String typeofdivedata;
+        public String airtempdata;
+        public String watertempdata;
+        public String weightsdata;
+        public String weightcomfortdata;
+        public String heatdata;
+        public String heatcomfortdata;
+        public String notesdata;
+        public String buddydata;
+        public String edudata;
+        public String diveclubdata;
+        public String instructordata;
+        public String feelingdata;
 
-        public logdata(String divesitedata, String locationdata, LocalDate dateofdivedata, LocalTime starttimedata,
-                 LocalTime bottomtimedata, LocalTime endtimedata, String maxdepthdata, String avgdepthdata,
-                 String tankindata, String tankoutdata, String waterconditionsdata, String typeofdivedata, String airtempdata,
-                String watertempdata, String weightsdata, String weightcomfortdata, String heatdata, String heatcomfortdata,
-                String notesdata, String buddydata, String Edudata, String diveclubdata, String instructordata, String feelingdata) {
+        public Dive(){
         }
 
-        public logdata() {
 
-        }
+   public Dive(String username,String divesitedata, String locationdata, LocalDate dateofdivedata, LocalTime starttimedata,
+                LocalTime bottomtimedata, LocalTime endtimedata, Double maxdepthdata, Double avgdepthdata,
+                String tankindata, String tankoutdata, String waterconditionsdata, String typeofdivedata,
+                String airtempdata, String watertempdata, String weightsdata, String weightcomfortdata,
+                String heatdata, String heatcomfortdata, String notesdata, String buddydata, String edudata,
+                String diveclubdata, String instructordata, String feelingdata) {
+        this.divesitedata = divesitedata;
+        this.locationdata = locationdata;
+        this.dateofdivedata = dateofdivedata;
+        this.starttimedata = starttimedata;
+        this.bottomtimedata = bottomtimedata;
+        this.endtimedata = endtimedata;
+        this.maxdepthdata = maxdepthdata;
+        this.avgdepthdata = avgdepthdata;
+        this.tankindata = tankindata;
+        this.tankoutdata = tankoutdata;
+        this.waterconditionsdata = waterconditionsdata;
+        this.typeofdivedata = typeofdivedata;
+        this.airtempdata = airtempdata;
+        this.watertempdata = watertempdata;
+        this.weightsdata = weightsdata;
+        this.weightcomfortdata = weightcomfortdata;
+        this.heatdata = heatdata;
+        this.heatcomfortdata = heatcomfortdata;
+        this.notesdata = notesdata;
+        this.buddydata = buddydata;
+        this.edudata = edudata;
+        this.diveclubdata = diveclubdata;
+        this.instructordata = instructordata;
+        this.feelingdata = feelingdata;
+        this.username = username;
+    }
 
-        public String getDivesitedata() {
+    public String getDivesitedata() {
             return divesitedata;
         }
 
@@ -96,19 +128,19 @@ public class ReadWriteUtilityForFile {
             this.endtimedata = endtimedata;
         }
 
-        public String getMaxdepthdata() {
+        public Double getMaxdepthdata() {
             return maxdepthdata;
         }
 
-        public void setMaxdepthdata(String maxdepthdata) {
+        public void setMaxdepthdata(Double maxdepthdata) {
             this.maxdepthdata = maxdepthdata;
         }
 
-        public String getAvgdepthdata() {
+        public Double getAvgdepthdata() {
             return avgdepthdata;
         }
 
-        public void setAvgdepthdata(String avgdepthdata) {
+        public void setAvgdepthdata(Double avgdepthdata) {
             this.avgdepthdata = avgdepthdata;
         }
 
@@ -209,11 +241,11 @@ public class ReadWriteUtilityForFile {
         }
 
         public String getEdudata() {
-            return Edudata;
+            return edudata;
         }
 
         public void setEdudata(String edudata) {
-            Edudata = edudata;
+            this.edudata = edudata;
         }
 
         public String getDiveclubdata() {
@@ -240,12 +272,33 @@ public class ReadWriteUtilityForFile {
             this.feelingdata = feelingdata;
         }
 
-        public String getDivesitedata(logdata logdata) {
-            return logdata.toString();
+        public String getUsername() {
+            return username;
+        }
+        
+        public void setUsername(String username) {
+        this.username = username;
         }
 
-        public String setDivesitedata(logdata logdata, String s) {
-            return logdata.toString();
+        public String getId() {
+            return id;
         }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Dive dive = (Dive) o;
+        return id.equals(dive.id) && username.equals(dive.username);
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, username);
+    }
+    //???
 }
+
