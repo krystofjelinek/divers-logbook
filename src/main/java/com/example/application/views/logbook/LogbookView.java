@@ -143,4 +143,3 @@ public class LogbookView extends VerticalLayout implements Serializable {
         }
     }
 }
-
