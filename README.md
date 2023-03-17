@@ -2,6 +2,7 @@
 
 This web application (program) is an example of digitization of paper logbook for scuba diving.
 The app is running on Spring Boot. Front-end is done with Vaadin Flow (v14) framework and MongoDB is used as a database.
+This digital logbook has it's own graphics created just for this project. Notice that the applicaton is not finished.
 
 ## Running the application in Docker
 1. Pull an image of MongoDB from [Docker Hub](https://hub.docker.com/_/mongo): `docker pull mongo:5.0.3`
