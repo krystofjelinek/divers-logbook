@@ -1,0 +1,62 @@
+{
+  "compatibilityMode": false,
+  "productionMode": true,
+  "enableDevServer": false,
+  "chunks": {
+    "fallback": {
+      "jsModules": [
+        "@vaadin/vaadin-avatar/src/vaadin-avatar.js",
+        "@vaadin/vaadin-radio-button/src/vaadin-radio-group.js",
+        "@vaadin/vaadin-radio-button/src/vaadin-radio-button.js",
+        "@vaadin/vaadin-ordered-layout/vaadin-scroller.js",
+        "@vaadin/vaadin-accordion/src/vaadin-accordion.js",
+        "@vaadin/vaadin-rich-text-editor/src/vaadin-rich-text-editor.js",
+        "@vaadin/vaadin-split-layout/src/vaadin-split-layout.js",
+        "@vaadin/vaadin-crud/src/vaadin-crud.js",
+        "@vaadin/vaadin-crud/src/vaadin-crud-edit-column.js",
+        "@vaadin/vaadin-select/src/vaadin-select.js",
+        "@vaadin/vaadin-confirm-dialog/src/vaadin-confirm-dialog.js",
+        "@vaadin/vaadin-board/vaadin-board-row.js",
+        "@vaadin/vaadin-list-box/src/vaadin-list-box.js",
+        "@polymer/iron-icon/iron-icon.js",
+        "@vaadin/vaadin-charts/vaadin-chart.js",
+        "./messageListConnector.js",
+        "@vaadin/vaadin-messages/src/vaadin-message-list.js",
+        "@vaadin/vaadin-text-field/src/vaadin-integer-field.js",
+        "@vaadin/vaadin-details/src/vaadin-details.js",
+        "@vaadin/vaadin-upload/src/vaadin-upload.js",
+        "@vaadin/vaadin-custom-field/src/vaadin-custom-field.js",
+        "@vaadin/vaadin-text-field/src/vaadin-email-field.js",
+        "@vaadin/vaadin-checkbox/src/vaadin-checkbox-group.js",
+        "@vaadin/vaadin-cookie-consent/src/vaadin-cookie-consent.js",
+        "@vaadin/vaadin-login/src/vaadin-login-overlay.js",
+        "@vaadin/vaadin-grid-pro/src/vaadin-grid-pro.js",
+        "@vaadin/vaadin-grid-pro/src/vaadin-grid-pro-edit-column.js",
+        "@vaadin/flow-frontend/gridProConnector.js",
+        "./menubarConnector.js",
+        "@vaadin/vaadin-menu-bar/src/vaadin-menu-bar.js",
+        "@vaadin/vaadin-tabs/src/vaadin-tab.js",
+        "@polymer/iron-list/iron-list.js",
+        "./ironListConnector-es6.js",
+        "./ironListStyles.js",
+        "@vaadin/vaadin-messages/src/vaadin-message-input.js",
+        "@vaadin/vaadin-grid/src/vaadin-grid-tree-toggle.js",
+        "@vaadin/vaadin-date-time-picker/src/vaadin-date-time-picker.js",
+        "@vaadin/vaadin-upload/src/vaadin-upload-file.js",
+        "./vaadin-big-decimal-field.js",
+        "@vaadin/vaadin-avatar/src/vaadin-avatar-group.js",
+        "@vaadin/vaadin-tabs/src/vaadin-tabs.js",
+        "@vaadin/vaadin-board/vaadin-board.js",
+        "@vaadin/vaadin-item/src/vaadin-item.js",
+        "frontend://gridProConnector.js",
+        "frontend://vaadin-big-decimal-field.js",
+        "frontend://selectConnector.js",
+        "frontend://menubarConnector.js",
+        "frontend://ironListConnector.js"
+      ],
+      "cssImports": [
+        
+      ]
+    }
+  }
+}

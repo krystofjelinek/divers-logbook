@@ -15,7 +15,7 @@ public class Dive implements Serializable {
     private static final long serialVersionUID = -1606960938289190456L;
 
 
-    @Id
+        @Id
         public String id;
         public String username;
         public String divesitedata;

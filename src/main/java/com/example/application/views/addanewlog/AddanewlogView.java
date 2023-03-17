@@ -225,36 +225,36 @@ public class AddanewlogView extends VerticalLayout implements Serializable
     }
 
     public void StartTime(){
-        HorizontalLayout uroven04 = new HorizontalLayout();
-        HorizontalLayout uroven4 = new HorizontalLayout();
-        HorizontalLayout uroven41 = new HorizontalLayout();
-        ProgressBar progressBar = new ProgressBar();
-        progressBar.setValue(0.20);
-        progressBar.setWidth("200px");
-        Image img4 = new Image("images/StartTime.jpg","Failed to load image");
-        img4.setHeight("350px");
-        TimePicker startTime = new TimePicker("Select start time");
-        Button nextButton = new Button("Next");
-        nextButton.addClassName("next-button");
-        Button previousButton = new Button("Previous");
-        uroven04.add(img4);
-        uroven4.add(new Paragraph(new H2("Start time:")), startTime);
-        uroven41.add(previousButton,nextButton);
+        HorizontalLayout uroven04 = new HorizontalLayout(); //vytvoří první úroveň
+        HorizontalLayout uroven4 = new HorizontalLayout();  //vytvoří druhou úroveň
+        HorizontalLayout uroven41 = new HorizontalLayout(); //vytvoří třetí úroveň
+        ProgressBar progressBar = new ProgressBar();        //vytvoří progressbar (ukazatel postupu)
+        progressBar.setValue(0.20);                         //určí hodnotu, které bude nabývat ukazatel
+        progressBar.setWidth("200px");                      //určí šířku komponentu ProgressBar
+        Image img4 = new Image("images/StartTime.jpg","Failed to load image");//vytvoří obrázek z uvedného zdroje
+        img4.setHeight("350px");                            //určí výšku obrázku
+        TimePicker startTime = new TimePicker("Select start time");//vytvoří výběrník času
+        Button nextButton = new Button("Next"); //vytvoří tlačítko "Next"
+        nextButton.addClassName("next-button");      //udělí tlačitku "Next" ClassName pro další úpravu v CSS
+        Button previousButton = new Button("Previous");//vytvoří tlačítko "Previous"
+        uroven04.add(img4); //přidá obrázek do první úrovně
+        uroven4.add(new Paragraph(new H2("Start time:")), startTime);//přidá nadpis a výběrník do druhé úrovně
+        uroven41.add(previousButton,nextButton);//přidá obě tlačítka do třetí úrovně
         nextButton.addClickListener(buttonClickEvent -> {
-            if (startTime.isEmpty()){
-                id.setStarttimedata(LocalTime.parse("00:00"));
-                remove(uroven4,uroven41,uroven04,progressBar);
-                BottomTime();
-            } else {
-            id.setStarttimedata(startTime.getValue());
-            remove(uroven4,uroven41,uroven04,progressBar);
-            BottomTime();}
+            if (startTime.isEmpty()){ //Pokud je výběrník času prázdný
+                id.setStarttimedata(LocalTime.parse("00:00"));// ,tak je danému poli přiřazena výchozí hodnota
+                remove(uroven4,uroven41,uroven04,progressBar); // odstraní se všechny úrovně
+                BottomTime(); //a přejde na další pohled
+            } else { //Pokud výběrník času není prázdný,
+            id.setStarttimedata(startTime.getValue());// tak je jeho hodnota dočasně uložena v objektu Dive
+            remove(uroven4,uroven41,uroven04,progressBar);// jsou odstraněny všechny úrovně
+            BottomTime();}// a přejde se na další pohled
         });
-        previousButton.addClickListener(buttonClickEvent -> {
-            remove(uroven4,uroven41,uroven04,progressBar);
-            DateOfDive();
+        previousButton.addClickListener(buttonClickEvent -> { //Pokud uživatel klikne na tlačítko "Previous",
+            remove(uroven4,uroven41,uroven04,progressBar);// tak se odstraní všechny úrovně
+            DateOfDive();// a přejde se na předchozí pohled
         });
-        add(progressBar,uroven04,uroven4,uroven41);
+        add(progressBar,uroven04,uroven4,uroven41); // Přidá všechny úrovně i s komponenty do pohledu
     }
 
     public void BottomTime(){
@@ -1116,4 +1116,3 @@ public class AddanewlogView extends VerticalLayout implements Serializable
         add(progressBar,uroven0023,uroven023,uroven23,uroven231);
     }
 }
-
