@@ -12,6 +12,7 @@ The app is running on Spring Boot. Front-end is done with Vaadin Flow (v14) fram
    Run this command: `docker-compose up`
 
 Open http://localhost:8080 in your browser.
+Login is required. Fixed login credentials are: user (username), userpass (password)
 
 
 ## Running the application in an IDE
@@ -24,7 +25,7 @@ To do that, you have get [Docker Desktop](https://docs.docker.com/desktop/) and 
 2. Create a Docker container from the image using: `docker run -p 27017:27017 mongo:5.0.3 `
 
 Open http://localhost:8080 in your browser.
-
+Login is required. Fixed login credentials are: user (username), userpass (password)
 
 ### Useful links for learning technology used in this project
 | [Docker docs](https://docs.docker.com/)
