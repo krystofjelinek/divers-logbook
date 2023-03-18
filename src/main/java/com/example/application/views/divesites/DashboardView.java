@@ -29,19 +29,33 @@ public class DashboardView extends VerticalLayout implements Serializable {
         Image img1x = new Image("images/DiveSite.jpg","Failed to load image");
         img1x.setHeight("250px");
         img1x.setWidth("auto");
-        Dive dive = diveRepository.findFirstByOrderByMaxdepthdataDesc();
-        Double maxDepth = dive.getMaxdepthdata();
-        H2 header1 = new H2("Total dives completed: " + diveRepository.count());
-        header1.addClassName("header2");
-        layout1.add(img1x,header1);
+        if(diveRepository.findFirstByOrderByMaxdepthdataDesc()==null){
+            H2 header1 = new H2("Total dives completed: " + "0");
+            header1.addClassName("header2");
+            layout1.add(img1x,header1);
+        }
+        else {
+            H2 header1 = new H2("Total dives completed: " + diveRepository.count());
+            header1.addClassName("header2");
+            layout1.add(img1x,header1);
+        }
+
+
 
         HorizontalLayout layout2 = new HorizontalLayout();
         Image img2x = new Image("images/MaxDepth.jpg","Failed to load image");
         img2x.setHeight("250px");
         img2x.setWidth("auto");
+        Dive dive = diveRepository.findFirstByOrderByMaxdepthdataDesc();
+        if (dive==null){
+            H2 header2 = new H2("Max. depth achieved: " + "0");
+            header2.addClassName("header2");
+            layout2.add(img2x,header2);
+        } else {
+        Double maxDepth = dive.getMaxdepthdata();
         H2 header2 = new H2("Max. depth achieved: " + maxDepth);
         header2.addClassName("header2");
-        layout2.add(img2x,header2);
+        layout2.add(img2x,header2);}
         add(layout1,layout2);
     }
 }
